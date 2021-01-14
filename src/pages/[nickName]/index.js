@@ -8,7 +8,7 @@ import SummonerLeague from '../../components/SummonerLeague'
 
 import {
     Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv,  ExpBorder
-} from './styles'
+} from '../../components/nickname/styles'
 
 import champHelper from '../../helpers/champ'
 

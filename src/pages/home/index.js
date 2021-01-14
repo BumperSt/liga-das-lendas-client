@@ -5,7 +5,7 @@ import champApi from '../../api/champs'
 
 import {
     Container, Title, Input, DivInput, Top, Midle, ButtonLupa, Bottom, BottomText, DivRotation, ChampFace, DivChampFace, BackgroudImage
-} from './styles'
+} from '../../components/home/styles'
 
 import champHelper from '../../helpers/champ'
 
