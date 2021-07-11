@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+
+
 export const Container = styled.div`
     font-family: 'Tajawal', sans-serif;
     display:flex;
@@ -31,12 +33,7 @@ export const NickName = styled.h1`
     width: 100%;
 `
 
-export const ExpBorder = styled.img`
-    position:absolute;
-    margin-top:1rem;
-    width:18rem;
 
-`
 
 
 export const ProfileIcon = styled.img`

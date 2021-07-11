@@ -21,14 +21,14 @@ export default function SummonerChampion() {
 
     let gameNum = 0
 
-    function myLoop() {        
+    function loopGetMatch() {        
         setTimeout(function() {   
             gameNum++;             
             if (gameNum < champMatchs[0].length) {   
                 getMatch(champMatchs[0][gameNum].gameId)        
-                myLoop();           
+                loopGetMatch();           
             }                   
-        }, 500)
+        }, 1000)
       }
                      
 
@@ -47,21 +47,22 @@ export default function SummonerChampion() {
     useEffect(() => {
         if(champMatchs){
             console.log( champMatchs)
-            myLoop()
+            loopGetMatch()
         }
     }, [champMatchs])
 
-    const Loop = ()=>{
-        if(beginIndex+100 < totalGames){
-            beginIndex += 100
-            getChampMatch(beginIndex)
-        }else{
-            setChampMatchs(champsArrayMatch)
-        }
 
-    }
 
     const getChampMatch = () =>{
+        const Loop = ()=>{
+            if(beginIndex+100 < totalGames){
+                beginIndex += 100
+                getChampMatch(beginIndex)
+            }else{
+                setChampMatchs(champsArrayMatch)
+            }
+        }
+        
         champApi.getChampsMatch({
             encryptedAccountId: user.accountId,
             championID:Champ.key,
@@ -76,12 +77,17 @@ export default function SummonerChampion() {
                 console.log(error)
             })
     }
+
+
+
+    
     const  getMatch = (matchId) =>{
         summonerApi.getMatch({
             matchId
         })
         .then(({data}) => {
             playerTimeaux += data.gameDuration
+            setplayerTime(playerTimeaux)
         })
         .catch((error) => {
             console.log(error)

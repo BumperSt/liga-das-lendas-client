@@ -1,35 +1,35 @@
-import React, { useState , useEffect,useContext} from 'react'
+
+import React, { useState, useEffect, useContext } from 'react'
 import summonerApi from '../../api/summoner'
 import UserContext from '../../context/userContext'
 
-import {LeagueText, LeagueIcon, LeaguePdlDiv, PdlText} from './styles'
+import { LeagueText, LeagueIcon, LeaguePdlDiv, PdlText, DivLeague, Container, DivRow , WinText, LeagueName} from './styles'
 
-export default function SummonerLeague(){
+export default function SummonerLeague() {
 
     const [league, setLeague] = useState([]);
 
     const [flex, setFlex] = useState(null)
 
-    const [soloq, setSoloq] = useState(null )
+    const [soloq, setSoloq] = useState(null)
 
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
 
-    console.log('ssssssss')
 
-    useEffect(() =>{
+    useEffect(() => {
         summonerApi.getLeague({
-            encryptedSummonerId : user.id
+            encryptedSummonerId: user.id
         })
-        .then(({data}) => {
-            setLeague(data)
-            console.log(data)
-        })
-        .catch((error) => {
-            console.error(error)
-        })
-    },[user])
-    
+            .then(({ data }) => {
+                setLeague(data)
+                console.log(data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }, [user])
+
     useEffect(() => {
         if (league.length > 0) {
             for (let x in league) {
@@ -43,45 +43,62 @@ export default function SummonerLeague(){
         }
     }, [league])
 
-    return(
-        <>
+    return (
+        <Container>
             {
-                soloq?(
-                    <>
-                        <h1>SOLOQ</h1>
-                        <LeagueIcon src={`/ranked-emblems/Emblem_${soloq.tier}.png`}></LeagueIcon>
-                        <LeaguePdlDiv>
+                soloq ? (
+                    <DivLeague>
+                        <LeagueName>SOLO</LeagueName>
                         <LeagueText>{soloq.tier} {soloq.rank}</LeagueText>
-                        <PdlText>PDL {soloq.leaguePoints}</PdlText>
-                        <PdlText>(V: {soloq.wins}/D: {soloq.losses})</PdlText>
-                        </LeaguePdlDiv>
-                    </>
-                ) : (<>
+
+                        <DivRow>
+                            <PdlText>PDL {soloq.leaguePoints}</PdlText>
+                            <LeagueIcon src={`/ranked-emblems/Emblem_${soloq.tier}.png`}></LeagueIcon>
+                            <WinText>{soloq.wins}V {soloq.losses}D</WinText>
+
+                        </DivRow>
+                    </DivLeague>
+                ) : (
+                <DivLeague>
+
+                    <LeagueName>SOLO</LeagueName>
+                    
+
+                    <LeagueText>Unranked</LeagueText>
+            
+                    <DivRow>
                         <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.png`}></LeagueIcon>
-                        <LeaguePdlDiv>
-                        <LeagueText>Unranked</LeagueText>
-                        </LeaguePdlDiv>
-                </>)
+
+                    </DivRow>
+                </DivLeague>)
             }
             {
-                flex?(
-                    <>
-                        <h1>FLEX</h1>
-                        <LeagueIcon src={`/ranked-emblems/Emblem_${flex.tier}.png`}></LeagueIcon>
-                        <LeaguePdlDiv>
+                flex ? (
+                    <DivLeague>
+
+                        <LeagueName>FLEX</LeagueName>
                         <LeagueText>{flex.tier} {flex.rank}</LeagueText>
-                        <PdlText>PDL {flex.leaguePoints}</PdlText>
-                        <PdlText>(V: {flex.wins}/D: {flex.losses})</PdlText>
-                        </LeaguePdlDiv>
-                    </>
-                ): (<>
+                        <DivRow>
+                            <PdlText>PDL {flex.leaguePoints}</PdlText>
+                            <LeagueIcon src={`/ranked-emblems/Emblem_${flex.tier}.png`}></LeagueIcon>
+
+                            <WinText>{flex.wins}V {flex.losses}D</WinText>
+                        </DivRow>
+
+                    </DivLeague>
+                ) : (<DivLeague>
+
+                    <LeagueName>FLEX</LeagueName>
+
+                    <LeagueText>Unranked</LeagueText>
+
+                    <DivRow>
                         <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.png`}></LeagueIcon>
-                        <LeaguePdlDiv>
-                        <LeagueText>Unranked</LeagueText>
-                        </LeaguePdlDiv>
-                </>)
+
+                    </DivRow>
+                </DivLeague>)
             }
-        </>
+        </Container>
     )
-    
+
 }
