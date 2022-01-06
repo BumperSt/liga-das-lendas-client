@@ -86,7 +86,6 @@ export default function SummonerMatch(){
                             <h3>{matchHelper.findQueueById(match.info.queueId).description}</h3>
                             <h3>{getFormatedDate(match.info.gameCreation)}</h3>
                             <h3>{Math.trunc(match.info.gameDuration/60)} Minutos</h3>
-                            <h3>{matchHelper.findQueueById(match.info.queueId).map}</h3>
                         </ColumMatchContainer>
 
                         <ColumMatchContainer>

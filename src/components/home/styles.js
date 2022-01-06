@@ -71,6 +71,8 @@ export const Input = styled.input`
     height: 3rem;
     width: 100%;
     outline: none;
+    text-align: center;
+
 `
 
 export const ButtonLupa = styled.button`
