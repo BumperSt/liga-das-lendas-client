@@ -62,13 +62,16 @@ export default function SummonerMatch(){
         matchArray.push(matchData)
         console.log(matchData)
         if(matchArray.length == 10){
+            matchArray.sort(function(x, y){
+                return new Date(y.info.gameCreation) - new Date(x.info.gameCreation);
+            })
             setMatchs([...matchArray])
             matchArray = []
         }
     }
 
 
-    const getFormatDate = (timeStamp) => {
+    const getFormatedDate = (timeStamp) => {
         let matchDate = new Date(timeStamp)
         let date = moment(matchDate, 'DD/MM/YYYY').format()
         return date.split('T')[0]
@@ -81,7 +84,7 @@ export default function SummonerMatch(){
                     <MatchContainer key={match.info.gameId} style={{color:'white'}}>
                         <ColumMatchContainer>
                             <h3>{matchHelper.findQueueById(match.info.queueId).description}</h3>
-                            <h3>{getFormatDate(match.info.gameCreation)}</h3>
+                            <h3>{getFormatedDate(match.info.gameCreation)}</h3>
                             <h3>{Math.trunc(match.info.gameDuration/60)} Minutos</h3>
                             <h3>{matchHelper.findQueueById(match.info.queueId).map}</h3>
                         </ColumMatchContainer>
