@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import champApi from '../api/champs'
-
+import PageLoading from '../components/LoadingPage'
 import {
     Container, Title, Input, DivInput, Top, Midle, ButtonLupa, Bottom, BottomText, DivRotation, ChampFace, DivChampFace, BackgroudImage
 } from '../components/home/styles'
@@ -15,7 +15,7 @@ export default function HomePage() {
 
     const [nickName, setNickName] = useState('')
     const [champRotation, setChampRotation] = useState([])
-    const [backgroudUrl, setBackgroudUrl] = useState([])
+    const [backgroudUrl, setBackgroudUrl] = useState(null)
     const [mouseOverChamp, setMouseOverChamp] = useState('')
     
     useEffect(() => {
@@ -40,37 +40,41 @@ export default function HomePage() {
     const changeBackgroud = (champ) =>{
         setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ}_0.jpg`)
     }
-
-    return (
-        <>
-            <Container>
-                <Top>
-                    <Title>Liga das Lendas</Title>
-                </Top>
-                <Midle>
-                    <DivInput>
-                        <form method='POST' onSubmit={sendNickName}>
-                            <Input value={nickName} onChange={(evt) => setNickName(evt.target.value)} placeholder="Digite seu usuário, invocador"></Input>
-                            <ButtonLupa>
-                                <Image src="/svg/lupa.svg" width="32" height="32"></Image>
-                            </ButtonLupa>
-                        </form>
-                    </DivInput>
-                </Midle>
-                <Bottom>
-                    <BottomText>Rotação De Campeões</BottomText>
-                    <DivRotation>
-                        {
-                            champRotation.map((champ) => (
-                                <DivChampFace title={champ.name} key={champ.id} onClick={() => changeBackgroud(champ.id)} >
-                                    <ChampFace src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${champ.id}.png`} />
-                                </DivChampFace>
-                            ))
-                        }
-                    </DivRotation>
-                </Bottom>
-                <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
-            </Container>
-        </>
-    )
+    if(backgroudUrl){
+        return (
+                <Container>
+                    <Top>
+                        <Title>Liga das Lendas</Title>
+                    </Top>
+                    <Midle>
+                        <DivInput>
+                            <form method='POST' onSubmit={sendNickName}>
+                                <Input value={nickName} onChange={(evt) => setNickName(evt.target.value)} placeholder="Digite seu usuário, invocador"></Input>
+                                <ButtonLupa>
+                                    <Image src="/svg/lupa.svg" width="32" height="32"></Image>
+                                </ButtonLupa>
+                            </form>
+                        </DivInput>
+                    </Midle>
+                    <Bottom>
+                        <BottomText>Rotação De Campeões</BottomText>
+                        <DivRotation>
+                            {
+                                champRotation.map((champ) => (
+                                    <DivChampFace title={champ.name} key={champ.id} onClick={() => changeBackgroud(champ.id)} >
+                                        <ChampFace src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${champ.id}.png`} />
+                                    </DivChampFace>
+                                ))
+                            }
+                        </DivRotation>
+                    </Bottom>
+                    <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
+                </Container>
+        )
+    }else{
+        return(
+            <PageLoading/>
+        )
+    }
+   
 }
