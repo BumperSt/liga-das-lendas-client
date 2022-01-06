@@ -18,15 +18,7 @@ export default function SummonerLeague() {
 
 
     useEffect(() => {
-        summonerApi.getLeague({
-            encryptedSummonerId: user.id
-        })
-            .then(({ data }) => {
-                setLeague(data)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+        setLeague(user.leagues)
     }, [user])
 
     useEffect(() => {

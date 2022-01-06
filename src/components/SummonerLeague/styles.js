@@ -19,7 +19,7 @@ export const DivLeague = styled.div`
     flex-direction:column;
     background-color:  rgba(0,0,0,0.5);
     text-align:center;
-    width: 100%;
+    min-width: 30vw;
     padding-block-end:1rem;
     -webkit-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.75);

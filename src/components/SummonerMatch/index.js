@@ -7,7 +7,8 @@ import matchHelper from '../../helpers/match'
 import moment from 'moment'
 import MatchItems from './itensView'
 import champJson from '../../../public/champion.json'
-import { Bars , Circles} from 'react-loading-icons'
+import { Bars } from 'react-loading-icons'
+import theme from '../../../styles/theme.json'
 
 export default function SummonerMatch(){
 
@@ -90,7 +91,7 @@ export default function SummonerMatch(){
     }
 
     useEffect(() => {
-        if(matchs){
+        if(matchs.length > 0) {
             setLoadingMatchs(false)
         }
     }, [matchs])
@@ -151,7 +152,7 @@ export default function SummonerMatch(){
                             </ColumMatchContainer>
                             <ColumMatchContainer>
                                 <CharNameAndLevel>{match.kda}</CharNameAndLevel>
-                                <CharNameAndLevel>{match.kdaRatio}:1 KDA</CharNameAndLevel>
+                                <CharNameAndLevel>{match.kdaRatio} KDA</CharNameAndLevel>
                             </ColumMatchContainer>
                             <ColumMatchContainer>
                                 <MatchItems myParticipation={match.myParticipation}/>
@@ -164,8 +165,7 @@ export default function SummonerMatch(){
         {
             loadingMatchs&&
             <div style={{color:'white'}}>
-                <Circles fill="white"/>
-
+                <Bars stroke='black' fill={theme.colors.dourado}/>
             </div>
 
         }

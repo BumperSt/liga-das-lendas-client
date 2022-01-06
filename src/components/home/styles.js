@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme.json'
 
 export const Container = styled.div`
     display:flex;
@@ -66,7 +67,7 @@ export const Input = styled.input`
     font-size: 1.3rem;
     color: white;
     padding: 1rem;
-    border: #8c6c36 solid 2px;
+    border: ${theme.colors.dourado} solid 2px;
     background-color:black;
     height: 3rem;
     width: 100%;
@@ -78,7 +79,7 @@ export const Input = styled.input`
 export const ButtonLupa = styled.button`
     cursor: pointer;
     position:absolute;
-    border: #8c6c36 solid 2px;
+    border: ${theme.colors.dourado} solid 2px;
     background-color:#1a2325;
     border-radius:50%;
     height:3.5rem;
@@ -134,6 +135,6 @@ export const DivChampFace = styled.div`
 export const ChampFace = styled.img`
     width: 100%;
     border-radius: 50%;
-    border: 2px solid #8c6c36;
+    border: 2px solid ${theme.colors.dourado};
     transition: border .5s;
 `

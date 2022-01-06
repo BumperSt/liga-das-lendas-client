@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme.json'
 
 
 
@@ -24,12 +25,12 @@ export const BackgroudImage = styled.div`
     background-size: cover;
     z-index: -1;
     transition: background-image 0.5s;
+    background-color: ${theme.colors.backgroundColor};
     
 `
 
 
 export const Top = styled.header`
-    height: 25em;
     display: flex;
     flex-direction: column;
     align-items: center;

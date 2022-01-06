@@ -62,7 +62,7 @@ export default function HomePage() {
                     <DivRotation>
                         {
                             champRotation.map((champ) => (
-                                <DivChampFace key={champ.id} onClick={() => changeBackgroud(champ.id)} >
+                                <DivChampFace title={champ.name} key={champ.id} onClick={() => changeBackgroud(champ.id)} >
                                     <ChampFace src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${champ.id}.png`} />
                                 </DivChampFace>
                             ))

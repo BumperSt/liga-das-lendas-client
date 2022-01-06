@@ -48,16 +48,16 @@ export const MatchContainer = styled.div`
     flex-direction: row;
     border: 5px solid black;
     border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
-
     margin-block:.5rem;
     align-items: center;
     padding:1rem;
     @media only screen and (max-width: 900px) {
         width: 100%;
         flex-direction: column;
-
     }
-    background-color: ${props => props.win ? 'rgba(0,255,0,0.2)' :'rgba(255,0,0,0.2)'} ;
+    background-color: ${props => props.win ? 'rgba(0,255,0,0.2)' :'rgba(255,0,0,0.2)'};
+    width: 100%;
+    justify-content: center;
 
 `
 

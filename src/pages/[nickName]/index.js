@@ -1,12 +1,14 @@
 import React, {useContext, useState, useEffect} from 'react'
 import UserContext from '../../context/userContext'
 import { useRouter } from 'next/router'
-
+import LoadingPage from '../../components/LoadingPage'
 import SummonerLeague from '../../components/SummonerLeague'
 import SummonerMatch from '../../components/SummonerMatch'
-import SummonerMaestry from '../../components/SummonerMaestry'
 import SummonerExpBorder from '../../components/SummonerExpBorder'
-import { Bars } from 'react-loading-icons'
+import champApi from '../../api/champs'
+import summonerApi from '../../api/summoner'
+
+import champHelper from '../../helpers/champ'
 
 import {
     Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage
@@ -16,13 +18,12 @@ import {
 export default function Summoner() {
 
     const router = useRouter()
-    const {user} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
     const [champsMaestry, setChampsMaestry] = useState([])
     const [profileIcon, setProfileIcon] = useState('')
-    const [backgroudUrl, setBackgroudUrl] = useState([])
+    const [backgroudUrl, setBackgroudUrl] = useState(null)
     const [level, setLevel] = useState('')
     const { nickName } = router.query
-
 
     useEffect(() => {
         if(user){
@@ -31,12 +32,35 @@ export default function Summoner() {
             
             setLevel(user.summonerLevel)
             
+            champApi.getChampsMaestry({
+                encryptedSummonerId: user.id
+            })
+            .then(({data}) => {
+                let topChamp = champHelper.findChampById(data[0].championId)
+                setBackgroudUrl(`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${topChamp.id}_0.jpg`)
+                setChampsMaestry(data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })    
         }
     }, [user])
 
+    const UpdateUser = () => {
+        summonerApi.updateSummoner({
+            nickName
+        }).then((response) => {
+            console.log(response)
+            setUser(response.data)
+        }).catch((error) => {
+
+            console.log(error)
+        })
+    }
+
 
     
-    if(user){
+    if(backgroudUrl){
         return(
 
       
@@ -50,6 +74,7 @@ export default function Summoner() {
                 <UserLevel>{level}</UserLevel>
     
                 <NickName>{nickName}</NickName>
+                <button onClick={UpdateUser}>UpdateUser</button>
                 </Top>
                 
                 <LeagueDiv>
@@ -58,7 +83,6 @@ export default function Summoner() {
                     }
                     
                 </LeagueDiv>
-                <SummonerMaestry setChampsMaestry={setChampsMaestry} setBackgroudUrl={setBackgroudUrl} ></SummonerMaestry>
                 <SummonerMatch/>
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
 
@@ -66,7 +90,7 @@ export default function Summoner() {
                 )
     }else{
         return(
-            <Bars fill="black"/>
+            <LoadingPage/>
 
         )
     }
