@@ -22,7 +22,7 @@ export default function SummonerMatch(){
     
     const [matchAuxIndex, setMatchAuxIndex] = useState(0)
 
-    const [loadingMatchs, setLoadingMatchs] = useState(false)
+    const [loadingMatchs, setLoadingMatchs] = useState(true)
 
     let matchListize = 0;
 
@@ -120,7 +120,7 @@ export default function SummonerMatch(){
         <ScroolContainer onScroll={onScroll} ref={matchContainerRef}>
         {
                 matchs?.map((match) => (
-                    <MatchContainer key={match.info.gameId} style={{color:'white'}}>
+                    <MatchContainer win={match.myParticipation.win} key={match.info.gameId} style={{color:'white'}}>
                         <ColumMatchContainer>
                             <TypeTitle>{matchHelper.findQueueById(match.info.queueId).description}</TypeTitle>
                             {/* <TypeTitle>{getFormatedDate(match.info.gameCreation)}</TypeTitle>

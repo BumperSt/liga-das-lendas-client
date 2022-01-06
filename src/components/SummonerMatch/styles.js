@@ -47,7 +47,9 @@ export const MatchContainer = styled.div`
     display: flex;
     flex-direction: row;
     border: 5px solid black;
-    margin-block:1rem;
+    border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
+
+    margin-block:.5rem;
     align-items: center;
     padding:1rem;
     @media only screen and (max-width: 900px) {
@@ -55,7 +57,7 @@ export const MatchContainer = styled.div`
         flex-direction: column;
 
     }
-    background-color:  rgba(0,0,0,0.5);
+    background-color: ${props => props.win ? 'rgba(0,255,0,0.2)' :'rgba(255,0,0,0.2)'} ;
 
 `
 
