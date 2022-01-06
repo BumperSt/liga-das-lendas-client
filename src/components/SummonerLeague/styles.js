@@ -17,7 +17,7 @@ export const Container = styled.div`
 export const DivLeague = styled.div`
     display:flex;
     flex-direction:column;
-    background-color:#ffffff33;
+    background-color:  rgba(0,0,0,0.5);
     text-align:center;
     width: 100%;
     padding-block-end:1rem;
@@ -28,6 +28,8 @@ export const DivLeague = styled.div`
     @media only screen and (max-width: 600px) {
         margin: 1rem 0 1rem 0;
     }
+    color:white;
+
 `
 
 export const DivRow = styled.div`
@@ -57,7 +59,7 @@ export const LeaguePdlDiv = styled.div`
 export const LeagueName = styled.h3`
     margin:0;
     margin-top:1.5rem;
-    background-color: rgba(0,0,0,0.5);
+    background-color: #ffffff33;
 
 `
 

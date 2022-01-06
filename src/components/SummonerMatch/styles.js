@@ -16,8 +16,8 @@ export const MatchContainer = styled.div`
     padding:1rem;
     @media only screen and (max-width: 600px) {
         width: 100%;
-
     }
+    background-color:  rgba(0,0,0,0.5);
 
 `
 

@@ -88,12 +88,11 @@ export default function SummonerMatch(){
                             <h3>{Math.trunc(match.info.gameDuration/60)} Minutos</h3>
                             <h3>{matchHelper.findQueueById(match.info.queueId).map}</h3>
                         </ColumMatchContainer>
+
                         <ColumMatchContainer>
-
-                            <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner1Id).id}.png`}/>
-                            <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner2Id).id}.png`}/>
-
-
+                            {console.log(matchHelper.getRuneById(match.myParticipation.perks.styles[0].style))}
+                            <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[0].style).icon}`}/>
+                            <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[1].style).icon}`}/>
                         </ColumMatchContainer>
                         <ColumMatchContainer>
                             <h3>Nivel {match.myParticipation.champLevel}</h3>
@@ -102,9 +101,11 @@ export default function SummonerMatch(){
 
                         </ColumMatchContainer>
                         <ColumMatchContainer>
-                            {console.log(matchHelper.getRuneById(match.myParticipation.perks.styles[0].style))}
-                            <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[0].style).icon}`}/>
-                            <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[1].style).icon}`}/>
+
+                            <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner1Id).id}.png`}/>
+                            <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner2Id).id}.png`}/>
+
+
                         </ColumMatchContainer>
                         <ColumMatchContainer>
                           <h2>{match.kda}</h2>
