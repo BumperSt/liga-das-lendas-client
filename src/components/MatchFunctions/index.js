@@ -3,7 +3,6 @@ import summonerApi from '../../api/summoner'
 export default{
 
     getMatchById:  (matchId, setMatchs) => {
-        console.log(matchId)
         summonerApi.getMatch({
             matchId
         })

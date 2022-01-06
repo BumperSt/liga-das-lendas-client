@@ -5,9 +5,9 @@
 
 html,
 body, #__next {
-  
+  overflow-y: none !important;
+  max-height: 100vh !important;
   width: 100%;
-  height: 100%;
   padding: 0;
   margin: 0;
 }

@@ -4,7 +4,44 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
+    width: 100%;
+    max-height: 100vh;
+    align-self: center;
+
 `;
+
+export const ScroolContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    width: 80vw;
+    max-height: 100vh;
+    align-self: center;
+    @media only screen and (max-width: 900px) {
+        width: 100%;
+    }
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: rgba(140, 108, 54,0.8); 
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba(140, 108, 54,0.4); 
+    }
+`
 
 export const MatchContainer = styled.div`
     display: flex;

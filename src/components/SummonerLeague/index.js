@@ -23,7 +23,6 @@ export default function SummonerLeague() {
         })
             .then(({ data }) => {
                 setLeague(data)
-                console.log(data)
             })
             .catch((error) => {
                 console.error(error)

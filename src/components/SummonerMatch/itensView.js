@@ -22,9 +22,6 @@ const MatchItems = ({myParticipation}) => {
             
         });
         setArrayItems(arrayItemsTemp)
-        console.log(arrayItemsTemp)
-        console.log(localArray)
-
     }, [myParticipation])
 
     return(
@@ -34,22 +31,19 @@ const MatchItems = ({myParticipation}) => {
             <>
             <AlignItems>
                 {
-                    console.log(arrayItems)
-                }
-                {
                     arrayItems.slice(0, 3).map((item) => (
                         <>
                         {
                             item?
-                            <ItemContainer title={item.name} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${item.image.full}`}/>
+                            <ItemContainer key={item.name} title={item.name} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${item.image.full}`}/>
                             :
-                            <ItemContainer  src="/undefinedItem.png"/>
+                            <ItemContainer src="/undefinedItem.png"/>
 
                         }
                         </>
                     ))
                 }
-                <ItemContainer src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${arrayItems[6].image.full}`}/>
+                <ItemContainer  title={arrayItems[6].name} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${arrayItems[6].image.full}`}/>
 
             
             </AlignItems>
@@ -59,7 +53,7 @@ const MatchItems = ({myParticipation}) => {
                         <>
                         {
                             item?
-                            <ItemContainer title={item.name}  src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${item.image.full}`}/>
+                            <ItemContainer key={item.name} title={item.name}  src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${item.image.full}`}/>
                             :
                             <ItemContainer   src="/undefinedItem.png"/>
 
