@@ -1,9 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react'
-import {Container} from './styles'
+import {ChampIcon, ColumMatchContainer, Container, MatchContainer, SpellIncon} from './styles'
 import UserContext from '../../context/userContext'
 import summonerApi from '../../api/summoner'
 import MatchFunctions from '../MatchFunctions/index'
 import matchHelper from '../../helpers/match'
+import moment from 'moment'
+
 
 export default function SummonerMatch(){
 
@@ -13,8 +15,6 @@ export default function SummonerMatch(){
     
     const [matchs, setMatchs] = useState([])
     
-    const [particpantID, setParticipantId] = useState(null)
-
     let matchListize = 0;
 
     let matchGetSize = 10;
@@ -30,12 +30,12 @@ export default function SummonerMatch(){
 
     useEffect(() => {
         if(user){
+            console.log(user)
             summonerApi.getMatchList({
                 puuid : user.puuid
 
             })
             .then(({data}) => {
-                console.log(data)
                 setmatchList(data)
                 matchListize = data.length
             })
@@ -47,7 +47,6 @@ export default function SummonerMatch(){
     
     useEffect(() => {
         if(matchList){
-            console.log(matchList)
             while(getMatchNum < matchGetSize){
                 MatchFunctions.getMatchById(matchList[getMatchNum], addMatch)     
                 getMatchNum++
@@ -56,48 +55,59 @@ export default function SummonerMatch(){
     }, [matchList])
 
     const addMatch = (matchData) =>{
-        console.log(matchData)
+        let myParticipation = matchHelper.getParticipantID(matchData.info.participants, user.puuid)
+        let kda = `${myParticipation.kills}/${myParticipation.deaths}/${myParticipation.assists}`
+        let kdaRatio = ((myParticipation.kills +  myParticipation.assists)/myParticipation.deaths).toFixed(2)
+        matchData = {...matchData, myParticipation, kda, kdaRatio}
         matchArray.push(matchData)
+        console.log(matchData)
         if(matchArray.length == 10){
             setMatchs([...matchArray])
             matchArray = []
         }
     }
 
-    useEffect(() => {
-        console.log(matchs)
-        if(matchs){
-            matchs.map((match) => {
-                getParticipantID(match)
-            })
-        }
-    }, [matchs])
 
-    useEffect(() => {
-        console.log(particpantID)
-    },[particpantID])
-
-
-    const getParticipantID = (match) =>{
-        for(let x in match.participantIdentities){
-            if(match.participantIdentities[x].player.accountId == user.accountId){
-                participantIdArray.push(match.participantIdentities[x].participantId)
-                setParticipantId(participantIdArray)
-            }
-        }
+    const getFormatDate = (timeStamp) => {
+        let matchDate = new Date(timeStamp)
+        let date = moment(matchDate, 'DD/MM/YYYY').format()
+        return date.split('T')[0]
     }
 
     return(
         <Container>
             {
                 matchs?.map((match) => (
-                    <div key={match.info.gameId} style={{color:'white'}}>
-                        
-                        <h3>{matchHelper.findQueueById(match.info.queueId).description}</h3>
-                        <h3>{Math.trunc(match.info.gameDuration/60)} Minutos</h3>
-                        <h3>{matchHelper.findQueueById(match.info.queueId).map}</h3>
+                    <MatchContainer key={match.info.gameId} style={{color:'white'}}>
+                        <ColumMatchContainer>
+                            <h3>{matchHelper.findQueueById(match.info.queueId).description}</h3>
+                            <h3>{getFormatDate(match.info.gameCreation)}</h3>
+                            <h3>{Math.trunc(match.info.gameDuration/60)} Minutos</h3>
+                            <h3>{matchHelper.findQueueById(match.info.queueId).map}</h3>
+                        </ColumMatchContainer>
+                        <ColumMatchContainer>
 
-                    </div>
+                            <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner1Id).id}.png`}/>
+                            <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner2Id).id}.png`}/>
+
+
+                        </ColumMatchContainer>
+                        <ColumMatchContainer>
+                            <h3>Nivel {match.myParticipation.champLevel}</h3>
+                            <ChampIcon src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${matchHelper.getParticipantID(match.info.participants, user.puuid).championName}.png`}/>
+                            <h3>{match.myParticipation.championName}</h3>
+
+                        </ColumMatchContainer>
+                        <ColumMatchContainer>
+                            {console.log(matchHelper.getRuneById(match.myParticipation.perks.styles[0].style))}
+                            <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[0].style).icon}`}/>
+                            <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[1].style).icon}`}/>
+                        </ColumMatchContainer>
+                        <ColumMatchContainer>
+                          <h2>{match.kda}</h2>
+                          <h2>{match.kdaRatio}:1 KDA</h2>
+                        </ColumMatchContainer>
+                    </MatchContainer>
                 ))
             }
         </Container>

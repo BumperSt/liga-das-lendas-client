@@ -38,8 +38,9 @@ export default function Summoner() {
     
     if(user){
         return(
+
+      
             <Container>
-                <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
                 <Top >
     
                 <ProfileIcon src={profileIcon}></ProfileIcon>
@@ -59,6 +60,8 @@ export default function Summoner() {
                 </LeagueDiv>
                 <SummonerMaestry setChampsMaestry={setChampsMaestry} setBackgroudUrl={setBackgroudUrl} ></SummonerMaestry>
                 <SummonerMatch/>
+                <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
+
             </Container>
                 )
     }else{

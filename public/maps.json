@@ -65,13 +65,13 @@
     "notes": "Odyssey: Extraction map"
   },
   {
-    "mapId": 20,
-    "mapName": "Convergence",
-    "notes": "Teamfight Tactics map"
-  },
-  {
     "mapId": 21,
     "mapName": "Nexus Blitz",
     "notes": "Nexus Blitz map"
+  },
+  {
+    "mapId": 22,
+    "mapName": "Convergence",
+    "notes": "Teamfight Tactics map"
   }
 ]
