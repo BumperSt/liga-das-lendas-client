@@ -27,7 +27,7 @@ export const BackgroudImage = styled.div`
         display: flex;
         width: 100%;
         padding-top: 8rem;
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 900px) {
             padding-top: 4rem;
         }
         align-self:center;
@@ -40,7 +40,7 @@ export const Title = styled.a`
     font-size: 4rem;
     font-weight: 700;
     font-family: 'Alegreya Sans SC', sans-serif;
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 900px) {
         font-size: 4rem;
     }
     :hover {
@@ -51,7 +51,7 @@ export const Title = styled.a`
 
 export const Midle = styled.div`
     padding-top: 5rem;
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 900px) {
         padding-top: 3rem;
     }
     width: 100%;
@@ -92,7 +92,7 @@ export const ButtonLupa = styled.button`
         display:flex;
         flex-direction:column;
         margin-top: 7rem;
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 900px) {
             margin-top: 0.5rem;
         }
 

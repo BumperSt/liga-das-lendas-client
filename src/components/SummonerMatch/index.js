@@ -1,10 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react'
-import {ChampIcon, ColumMatchContainer, Container, MatchContainer, SpellIncon} from './styles'
+import {ChampIcon, CharNameAndLevel, ColumMatchContainer, Container, MatchContainer, OnlySmallScreen, SpellIncon, TypeTitle} from './styles'
 import UserContext from '../../context/userContext'
 import summonerApi from '../../api/summoner'
 import MatchFunctions from '../MatchFunctions/index'
 import matchHelper from '../../helpers/match'
 import moment from 'moment'
+import MatchItems from './itensView'
 
 
 export default function SummonerMatch(){
@@ -83,33 +84,34 @@ export default function SummonerMatch(){
                 matchs?.map((match) => (
                     <MatchContainer key={match.info.gameId} style={{color:'white'}}>
                         <ColumMatchContainer>
-                            <h3>{matchHelper.findQueueById(match.info.queueId).description}</h3>
-                            <h3>{getFormatedDate(match.info.gameCreation)}</h3>
-                            <h3>{Math.trunc(match.info.gameDuration/60)} Minutos</h3>
+                            <TypeTitle>{matchHelper.findQueueById(match.info.queueId).description}</TypeTitle>
+                            {/* <TypeTitle>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
+                            <TypeTitle>{Math.trunc(match.info.gameDuration/60)} Minutos</TypeTitle> */}
                         </ColumMatchContainer>
+                        <OnlySmallScreen>
+                            <ColumMatchContainer>
+                                {console.log(matchHelper.getRuneById(match.myParticipation.perks.styles[0].style))}
+                                <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[0].style).icon}`}/>
+                                <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[1].style).icon}`}/>
+                            </ColumMatchContainer>
+                            <ColumMatchContainer>
+                                <CharNameAndLevel>Nivel {match.myParticipation.champLevel}</CharNameAndLevel>
+                                <ChampIcon src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${matchHelper.getParticipantID(match.info.participants, user.puuid).championName}.png`}/>
+                                <CharNameAndLevel>{match.myParticipation.championName}</CharNameAndLevel>
+                            </ColumMatchContainer>
+                            <ColumMatchContainer>
+                                <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner1Id).id}.png`}/>
+                                <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner2Id).id}.png`}/>
+                            </ColumMatchContainer>
+                            <ColumMatchContainer>
+                                <CharNameAndLevel>{match.kda}</CharNameAndLevel>
+                                <CharNameAndLevel>{match.kdaRatio}:1 KDA</CharNameAndLevel>
+                            </ColumMatchContainer>
+                            <ColumMatchContainer>
+                                <MatchItems myParticipation={match.myParticipation}/>
+                            </ColumMatchContainer>
+                        </OnlySmallScreen>
 
-                        <ColumMatchContainer>
-                            {console.log(matchHelper.getRuneById(match.myParticipation.perks.styles[0].style))}
-                            <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[0].style).icon}`}/>
-                            <SpellIncon src={`https://ddragon.canisback.com/img/${matchHelper.getRuneById(match.myParticipation.perks.styles[1].style).icon}`}/>
-                        </ColumMatchContainer>
-                        <ColumMatchContainer>
-                            <h3>Nivel {match.myParticipation.champLevel}</h3>
-                            <ChampIcon src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${matchHelper.getParticipantID(match.info.participants, user.puuid).championName}.png`}/>
-                            <h3>{match.myParticipation.championName}</h3>
-
-                        </ColumMatchContainer>
-                        <ColumMatchContainer>
-
-                            <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner1Id).id}.png`}/>
-                            <SpellIncon src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${matchHelper.getSummonerSpellName(match.myParticipation.summoner2Id).id}.png`}/>
-
-
-                        </ColumMatchContainer>
-                        <ColumMatchContainer>
-                          <h2>{match.kda}</h2>
-                          <h2>{match.kdaRatio}:1 KDA</h2>
-                        </ColumMatchContainer>
                     </MatchContainer>
                 ))
             }

@@ -9,7 +9,7 @@ export const Container = styled.div`
     width:100%;
     padding:1rem;
     justify-content:space-around;
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 900px) {
         flex-direction:column;
     }
 `
@@ -25,7 +25,7 @@ export const DivLeague = styled.div`
     -moz-box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 8px 13px 0px rgba(0,0,0,0.75);
     margin: 0 1rem 0 1rem;
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 900px) {
         margin: 1rem 0 1rem 0;
     }
     color:white;

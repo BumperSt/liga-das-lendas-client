@@ -58,7 +58,7 @@ export const ProfileIcon = styled.img`
     width:10rem;
     border-radius: 50%;
     border: solid 2px;
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 900px) {
         margin-left: 0;
         align-self:center;
     }
