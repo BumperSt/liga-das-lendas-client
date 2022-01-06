@@ -6,9 +6,10 @@ import SummonerLeague from '../../components/SummonerLeague'
 import SummonerMatch from '../../components/SummonerMatch'
 import SummonerMaestry from '../../components/SummonerMaestry'
 import SummonerExpBorder from '../../components/SummonerExpBorder'
+import { Bars } from 'react-loading-icons'
 
 import {
-    Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv
+    Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage
 } from '../../components/nickname/styles'
 
 
@@ -26,7 +27,7 @@ export default function Summoner() {
     useEffect(() => {
         if(user){
             
-            setProfileIcon("https://ddragon.leagueoflegends.com/cdn/11.1.1/img/profileicon/" + user.profileIconId + ".png")
+            setProfileIcon("https://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/" + user.profileIconId + ".png")
             
             setLevel(user.summonerLevel)
             
@@ -35,30 +36,38 @@ export default function Summoner() {
 
 
     
-
-    return(
-        <Container>
-            <Top style={{ backgroundImage: `url(${backgroudUrl})` }}>
-
-            <ProfileIcon src={profileIcon}></ProfileIcon>
-            
-            <SummonerExpBorder level={level}></SummonerExpBorder>
-            
-            <UserLevel>{level}</UserLevel>
-
-            <NickName>{nickName}</NickName>
-            </Top>
-            
-            <LeagueDiv>
-                {user &&
-                    <SummonerLeague></SummonerLeague>
-                }
+    if(user){
+        return(
+            <Container>
+                <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
+                <Top >
+    
+                <ProfileIcon src={profileIcon}></ProfileIcon>
                 
-            </LeagueDiv>
-            <SummonerMaestry setChampsMaestry={setChampsMaestry} setBackgroudUrl={setBackgroudUrl} ></SummonerMaestry>
-            <SummonerMatch></SummonerMatch>
-        </Container>
-            )
-        }
+                <SummonerExpBorder level={level}></SummonerExpBorder>
+                
+                <UserLevel>{level}</UserLevel>
+    
+                <NickName>{nickName}</NickName>
+                </Top>
+                
+                <LeagueDiv>
+                    {user &&
+                        <SummonerLeague></SummonerLeague>
+                    }
+                    
+                </LeagueDiv>
+                <SummonerMaestry setChampsMaestry={setChampsMaestry} setBackgroudUrl={setBackgroudUrl} ></SummonerMaestry>
+                <SummonerMatch/>
+            </Container>
+                )
+    }else{
+        return(
+            <Bars fill="black"/>
+
+        )
+    }
+    
+    }
         
         

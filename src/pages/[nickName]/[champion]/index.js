@@ -14,6 +14,7 @@ export default function SummonerChampion() {
     const [Champ, setChamp] = useState([])
     const [champMatchs, setChampMatchs] = useState()
     const [playerTime, setplayerTime] = useState("")
+    
     let playerTimeaux = 0
     let totalGames = 0
     let beginIndex = 0
@@ -35,6 +36,8 @@ export default function SummonerChampion() {
     useEffect(() => {
         if(user){
             setChamp(champHelper.findChampByName(champion))
+            console.log(user)
+
         }       
     }, [user])
 
@@ -64,7 +67,7 @@ export default function SummonerChampion() {
         }
         
         champApi.getChampsMatch({
-            encryptedAccountId: user.accountId,
+            puuid: user.puuid,
             championID:Champ.key,
             beginIndex
         })

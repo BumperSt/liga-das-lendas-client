@@ -59,18 +59,19 @@ export default function SummonerLeague() {
                         </DivRow>
                     </DivLeague>
                 ) : (
-                <DivLeague>
+                    <DivLeague>
 
-                    <LeagueName>SOLO</LeagueName>
-                    
+                        <LeagueName>SOLO</LeagueName>
+                        
 
-                    <LeagueText>Unranked</LeagueText>
-            
-                    <DivRow>
-                        <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.png`}></LeagueIcon>
+                        <LeagueText>Unranked</LeagueText>
+                
+                        <DivRow>
+                            <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.png`}></LeagueIcon>
 
-                    </DivRow>
-                </DivLeague>)
+                        </DivRow>
+                    </DivLeague>
+                )
             }
             {
                 flex ? (
@@ -86,17 +87,19 @@ export default function SummonerLeague() {
                         </DivRow>
 
                     </DivLeague>
-                ) : (<DivLeague>
+                ) : (
+                    <DivLeague>
 
-                    <LeagueName>FLEX</LeagueName>
+                        <LeagueName>FLEX</LeagueName>
 
-                    <LeagueText>Unranked</LeagueText>
+                        <LeagueText>Unranked</LeagueText>
 
-                    <DivRow>
-                        <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.png`}></LeagueIcon>
+                        <DivRow>
+                            <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.png`}></LeagueIcon>
 
-                    </DivRow>
-                </DivLeague>)
+                        </DivRow>
+                    </DivLeague>
+                )
             }
         </Container>
     )

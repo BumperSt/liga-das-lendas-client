@@ -17,12 +17,14 @@ export default function HomePage() {
     const [champRotation, setChampRotation] = useState([])
     const [backgroudUrl, setBackgroudUrl] = useState([])
     const [mouseOverChamp, setMouseOverChamp] = useState('')
+    
     useEffect(() => {
         champApi.getChampsRotation()
             .then(({ data }) => {
                 let champs = champHelper.filterRotationChamps(data.freeChampionIds)
                 setChampRotation(champs)
-                setBackgroudUrl(`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champs[0].id}_0.jpg`)
+                console.log(champs)
+                setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champs[0].id}_0.jpg`)
             })
             .catch((error) => {
                 console.error(error)
@@ -36,7 +38,7 @@ export default function HomePage() {
 
 
     const changeBackgroud = (champ) =>{
-        setBackgroudUrl(`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ}_0.jpg`)
+        setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ}_0.jpg`)
     }
 
     return (
@@ -60,8 +62,8 @@ export default function HomePage() {
                     <DivRotation>
                         {
                             champRotation.map((champ) => (
-                                <DivChampFace key={champ.id} onClick={() => changeBackgroud(champ.id)}>
-                                    <ChampFace src={`http://ddragon.leagueoflegends.com/cdn/10.8.1/img/champion/${champ.id}.png`} />
+                                <DivChampFace key={champ.id} onClick={() => changeBackgroud(champ.id)} >
+                                    <ChampFace src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${champ.id}.png`} />
                                 </DivChampFace>
                             ))
                         }

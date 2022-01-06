@@ -11,7 +11,7 @@ export default function SummonerMatch(){
 
     const [matchList, setmatchList] = useState(null)
     
-    const [matchs, setMatchs] = useState(null)
+    const [matchs, setMatchs] = useState([])
     
     const [particpantID, setParticipantId] = useState(null)
 
@@ -23,19 +23,21 @@ export default function SummonerMatch(){
     
     let matchArray = []
 
+
     let participantIdArray = []
 
 
 
     useEffect(() => {
         if(user){
-
             summonerApi.getMatchList({
-                encryptedAccountId : user.accountId
+                puuid : user.puuid
+
             })
             .then(({data}) => {
-                setmatchList(data.matches)
-                matchListize = data.totalGames
+                console.log(data)
+                setmatchList(data)
+                matchListize = data.length
             })
             .catch((error) =>{
                 console.error(error)
@@ -47,15 +49,19 @@ export default function SummonerMatch(){
         if(matchList){
             console.log(matchList)
             while(getMatchNum < matchGetSize){
-                MatchFunctions.getMatchById(matchList[getMatchNum].gameId, addMatch)     
+                MatchFunctions.getMatchById(matchList[getMatchNum], addMatch)     
                 getMatchNum++
             }
         }
     }, [matchList])
 
     const addMatch = (matchData) =>{
+        console.log(matchData)
         matchArray.push(matchData)
-        setMatchs(matchArray.concat([matchData]))
+        if(matchArray.length == 10){
+            setMatchs([...matchArray])
+            matchArray = []
+        }
     }
 
     useEffect(() => {
@@ -85,13 +91,13 @@ export default function SummonerMatch(){
         <Container>
             {
                 matchs?.map((match) => (
-                    <>
+                    <div key={match.info.gameId} style={{color:'white'}}>
                         
-                        <h3>{matchHelper.findQueueById(match.queueId).description}</h3>
-                        <h3>{Math.trunc(match.gameDuration/60)} Minutos</h3>
-                        <h3>{matchHelper.findQueueById(match.queueId).map}</h3>
+                        <h3>{matchHelper.findQueueById(match.info.queueId).description}</h3>
+                        <h3>{Math.trunc(match.info.gameDuration/60)} Minutos</h3>
+                        <h3>{matchHelper.findQueueById(match.info.queueId).map}</h3>
 
-                    </>
+                    </div>
                 ))
             }
         </Container>

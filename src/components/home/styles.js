@@ -43,17 +43,21 @@ export const Title = styled.a`
     @media only screen and (max-width: 600px) {
         font-size: 4rem;
     }
+    :hover {
+        cursor: default;
+    }
+    
 `
 
-    export const Midle = styled.div`
-        padding-top: 5rem;
-        @media only screen and (max-width: 600px) {
-            padding-top: 3rem;
-        }
-        width: 100%;
-        display:flex;
-        justify-content:center;
-    `
+export const Midle = styled.div`
+    padding-top: 5rem;
+    @media only screen and (max-width: 600px) {
+        padding-top: 3rem;
+    }
+    width: 100%;
+    display:flex;
+    justify-content:center;
+`
 export const DivInput = styled.div`
     position:relative;
     width: 80%;
@@ -114,8 +118,16 @@ export const DivRotation = styled.div`
     justify-content: center;
 `
 export const DivChampFace = styled.div`
+    transition: all 0.5s;
     width:8rem;
     padding: 1rem;
+    :hover{
+        width: 9rem;
+        img{
+            border: 5px solid #ffa309;
+        }
+        cursor: pointer;
+    }
 `
 export const ChampFace = styled.img`
     width: 100%;

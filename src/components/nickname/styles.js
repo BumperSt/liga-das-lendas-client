@@ -10,6 +10,21 @@ export const Container = styled.div`
     padding: 0px;
 
 `
+export const BackgroudImage = styled.div`
+    -webkit-filter: brightness(60%);
+    filter: brightness(60%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    z-index: -1;
+    transition: background-image 0.5s;
+`
+
 
 export const Top = styled.header`
     height: 25em;
@@ -21,6 +36,7 @@ export const Top = styled.header`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    
 
 `
 
@@ -59,7 +75,6 @@ export const UserLevel = styled.h2`
 
 export const LeagueDiv = styled.div`
     display:flex;
-    background-color: white;
     margin: 0;
     align-items: center;
 `

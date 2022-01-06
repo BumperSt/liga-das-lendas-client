@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL:'http://lvh.me:8080/',
+    baseURL:'https://liga-das-lendas-server-6h5gx42wjq-uc.a.run.app/',
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
