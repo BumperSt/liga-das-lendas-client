@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
 import champApi from '../api/champs'
 import PageLoading from '../components/LoadingPage'
 import {
-    Container, Title, Input, DivInput, Top, Midle, ButtonLupa, Bottom, BottomText, DivRotation, ChampFace, DivChampFace, BackgroudImage
+    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, ChampFace, DivChampFace, BackgroudImage
 } from '../components/home/styles'
 
 import champHelper from '../helpers/champ'
+import SearchInput from '../components/searchInput'
 
 
 export default function HomePage() {
-    const router = useRouter()
 
-    const [nickName, setNickName] = useState('')
     const [champRotation, setChampRotation] = useState([])
     const [backgroudUrl, setBackgroudUrl] = useState(null)
-    const [mouseOverChamp, setMouseOverChamp] = useState('')
     
     useEffect(() => {
         champApi.getChampsRotation()
@@ -31,10 +27,7 @@ export default function HomePage() {
             })
     }, [])
 
-    const sendNickName = (event) => {
-        event.preventDefault()
-        router.push(nickName)
-    }
+
 
 
     const changeBackgroud = (champ) =>{
@@ -47,14 +40,7 @@ export default function HomePage() {
                         <Title>Liga das Lendas</Title>
                     </Top>
                     <Midle>
-                        <DivInput>
-                            <form method='POST' onSubmit={sendNickName}>
-                                <Input value={nickName} onChange={(evt) => setNickName(evt.target.value)} placeholder="Digite seu usuário, invocador"></Input>
-                                <ButtonLupa>
-                                    <Image src="/svg/lupa.svg" width="32" height="32"></Image>
-                                </ButtonLupa>
-                            </form>
-                        </DivInput>
+                      <SearchInput/>
                     </Midle>
                     <Bottom>
                         <BottomText>Rotação De Campeões</BottomText>

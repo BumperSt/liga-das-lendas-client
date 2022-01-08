@@ -15,9 +15,9 @@ function MyApp({ Component, pageProps }) {
   const { nickName } = router.query
 
   useEffect(() => {
-    
+    console.log("change")
   if (router.asPath !== router.route) {
-    if(!user && nickName){
+    if(nickName){
 
       summonerApi.sendNickName({
         nickName

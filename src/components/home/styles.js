@@ -55,39 +55,12 @@ export const Midle = styled.div`
     @media only screen and (max-width: 900px) {
         padding-top: 3rem;
     }
-    width: 100%;
+    width: 80%;
     display:flex;
     justify-content:center;
-`
-export const DivInput = styled.div`
-    position:relative;
-    width: 80%;
-`
-export const Input = styled.input`
-    font-size: 1.3rem;
-    color: white;
-    padding: 1rem;
-    border: ${theme.colors.dourado} solid 2px;
-    background-color:black;
-    height: 3rem;
-    width: 100%;
-    outline: none;
-    text-align: center;
-
+    align-self: center;
 `
 
-export const ButtonLupa = styled.button`
-    cursor: pointer;
-    position:absolute;
-    border: ${theme.colors.dourado} solid 2px;
-    background-color:#1a2325;
-    border-radius:50%;
-    height:3.5rem;
-    width:3.5rem;
-    top:50%;
-    transform:translate(0,-50%);
-    right:-1rem;
-`
 
     export const Bottom = styled.div`
         display:flex;

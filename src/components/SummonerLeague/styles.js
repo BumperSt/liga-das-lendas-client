@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme.json'
 
 
 
@@ -59,7 +60,7 @@ export const LeaguePdlDiv = styled.div`
 export const LeagueName = styled.h3`
     margin:0;
     margin-top:1.5rem;
-    background-color: #ffffff33;
+    background-color: ${theme.colors.dourado};
 
 `
 

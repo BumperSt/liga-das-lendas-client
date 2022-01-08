@@ -81,3 +81,11 @@ export const LeagueDiv = styled.div`
     margin: 0;
     align-items: center;
 `
+
+export const InputSerchDiv = styled.div`
+    display:flex;
+    width: 50%;
+    justify-content: center;
+    align-self: center;
+    margin-top:1rem;
+`

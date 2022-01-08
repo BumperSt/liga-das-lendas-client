@@ -7,11 +7,12 @@ import SummonerMatch from '../../components/SummonerMatch'
 import SummonerExpBorder from '../../components/SummonerExpBorder'
 import champApi from '../../api/champs'
 import summonerApi from '../../api/summoner'
+import SearchInput from '../../components/searchInput'
 
 import champHelper from '../../helpers/champ'
 
 import {
-    Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage
+    Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage, InputSerchDiv
 } from '../../components/nickname/styles'
 
 
@@ -65,8 +66,14 @@ export default function Summoner() {
 
       
             <Container>
+                <InputSerchDiv>
+                    <SearchInput/>
+
+                </InputSerchDiv>
+
+
                 <Top >
-    
+
                 <ProfileIcon src={profileIcon}></ProfileIcon>
                 
                 <SummonerExpBorder level={level}></SummonerExpBorder>
@@ -76,7 +83,7 @@ export default function Summoner() {
                 <NickName>{nickName}</NickName>
                 <button onClick={UpdateUser}>UpdateUser</button>
                 </Top>
-                
+
                 <LeagueDiv>
                     {user &&
                         <SummonerLeague></SummonerLeague>

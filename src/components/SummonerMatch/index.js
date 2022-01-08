@@ -21,17 +21,15 @@ export default function SummonerMatch(){
     
     const [matchs, setMatchs] = useState([])
     
-    const [matchAuxIndex, setMatchAuxIndex] = useState(0)
-
     const [loadingMatchs, setLoadingMatchs] = useState(true)
 
-    let matchListize = 0;
+    let matchArray = []
 
-    let matchGetSize = 10;
+    const matchGetSize = 10;
 
     let getMatchNum = 0
     
-    let matchArray = []
+    let matchAuxIndex = 0
 
 
     const callGetMatch = () => {
@@ -43,8 +41,7 @@ export default function SummonerMatch(){
         })
         .then(({data}) => {
             setmatchList(data)
-            matchListize = data.length
-            setMatchAuxIndex(matchAuxIndex + 10)
+            matchAuxIndex += 10
         })
         .catch((error) =>{
             console.error(error)
@@ -53,9 +50,12 @@ export default function SummonerMatch(){
 
     useEffect(() => {
         if(user){
-            console.log(user)
+            console.log("changeAll")
+            setmatchList(null)
+            setMatchs([])
+            matchAuxIndex = 0
             callGetMatch()            
-        
+
         }
     }, [user])
     
@@ -68,27 +68,7 @@ export default function SummonerMatch(){
         }
     }, [matchList])
 
-    const addMatch = (matchData) =>{
-        let myParticipation = matchHelper.getParticipantID(matchData.info.participants, user.puuid)
-        let kda = `${myParticipation.kills}/${myParticipation.deaths}/${myParticipation.assists}`
-        let kdaRatio = ((myParticipation.kills +  myParticipation.assists)/myParticipation.deaths).toFixed(2)
-        let spells = [matchHelper.getSummonerSpellName(myParticipation.summoner1Id), matchHelper.getSummonerSpellName(myParticipation.summoner2Id)]
-        let runes = [matchHelper.getRuneById(myParticipation.perks.styles[0].style), matchHelper.getRuneById(myParticipation.perks.styles[1].style)]
-        matchData = {...matchData, myParticipation, kda, kdaRatio, spells, runes}
-        matchArray.push(matchData)
-
-        if(matchArray.length == 10){
-            matchArray.sort(function(x, y){
-                return new Date(y.info.gameCreation) - new Date(x.info.gameCreation);
-            })
-
-            let array = matchs.concat(matchArray)
-            console.log(array)
-
-            setMatchs(array)
-            matchArray = []
-        }
-    }
+    
 
     useEffect(() => {
         if(matchs.length > 0) {
@@ -96,10 +76,34 @@ export default function SummonerMatch(){
         }
     }, [matchs])
 
-    const getFormatedDate = (timeStamp) => {
-        let matchDate = new Date(timeStamp)
-        let date = moment(matchDate, 'DD/MM/YYYY').format()
-        return date.split('T')[0]
+
+    const addMatch = (matchData) =>{
+
+        let myParticipation = matchHelper.getParticipantID(matchData.info.participants, user.puuid)
+
+        let kda = `${myParticipation.kills}/${myParticipation.deaths}/${myParticipation.assists}`
+
+        let kdaRatio = ((myParticipation.kills +  myParticipation.assists)/myParticipation.deaths).toFixed(2)
+
+        let spells = [matchHelper.getSummonerSpellName(myParticipation.summoner1Id), matchHelper.getSummonerSpellName(myParticipation.summoner2Id)]
+        
+        let runes = [matchHelper.getRuneById(myParticipation.perks.styles[0].style), matchHelper.getRuneById(myParticipation.perks.styles[1].style)]
+        
+        matchData = {...matchData, myParticipation, kda, kdaRatio, spells, runes}
+        matchArray.push(matchData)
+
+        if(matchArray.length == matchGetSize){
+
+            matchArray.sort(function(x, y){
+                return new Date(y.info.gameCreation) - new Date(x.info.gameCreation);
+            })
+
+            let array = matchs.concat(matchArray)
+
+            setMatchs(array)
+
+            matchArray = []
+        }
     }
 
     const onScroll = () => {
@@ -109,7 +113,14 @@ export default function SummonerMatch(){
             callGetMatch()            
           }
         }
-      };
+    };
+
+    const getFormatedDate = (timeStamp) => {
+        let matchDate = new Date(timeStamp)
+        let date = moment(matchDate, 'DD/MM/YYYY').format()
+        return date.split('T')[0]
+    }
+
 
     return(
 
@@ -124,8 +135,8 @@ export default function SummonerMatch(){
                     <MatchContainer win={match.myParticipation.win} key={match.info.gameId} style={{color:'white'}}>
                         <ColumMatchContainer>
                             <TypeTitle>{matchHelper.findQueueById(match.info.queueId).description}</TypeTitle>
-                            {/* <TypeTitle>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
-                            <TypeTitle>{Math.trunc(match.info.gameDuration/60)} Minutos</TypeTitle> */}
+                                <TypeTitle>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
+                            {/* <TypeTitle>{Math.trunc(match.info.gameDuration/60)} Minutos</TypeTitle> */} 
                         </ColumMatchContainer>
                         <OnlySmallScreen>
                             <ColumMatchContainer>
