@@ -46,11 +46,14 @@ export const ScroolContainer = styled.div`
 export const MatchContainer = styled.div`
     display: flex;
     flex-direction: row;
-    border: 5px solid black;
+
     border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
     margin-block:.5rem;
     align-items: center;
     padding:1rem;
+    -webkit-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
+    box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
     @media only screen and (max-width: 900px) {
         width: 100%;
         flex-direction: column;

@@ -6,12 +6,7 @@ export const Container = styled.div`
     overflow-x:hidden;
     display: flex;
     flex-direction: column;
-`
 
-export const InputSerach = styled.div`
-    width:50%;
-    align-self: center;
-    margin-bottom: 1rem;
 `
 
 export const HorizonScroll = styled.div`
@@ -36,7 +31,6 @@ export const ChampCardDiv = styled.div`
     ${props => props.active && `
         transform: scale(1.2) translateY(5%); 
         z-index:200;
-
     `
     }
     transition: all 0.3s;

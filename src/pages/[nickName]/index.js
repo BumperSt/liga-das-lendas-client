@@ -86,7 +86,7 @@ export default function Summoner() {
 
                 <LeagueDiv>
                     {user &&
-                        <SummonerLeague></SummonerLeague>
+                        <SummonerLeague/>
                     }
                     
                 </LeagueDiv>

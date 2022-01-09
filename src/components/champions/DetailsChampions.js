@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv} from "./DetailsChampionsStyle";
+import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName} from "./DetailsChampionsStyle";
 import champions_json from '../../../public/champion.json'
 import axios from "axios";
 
@@ -18,6 +18,7 @@ export default function DetailsChampions({champActive}) {
     useEffect(() => {
         console.log(spellSelected)
     }, [spellSelected])
+    
     const GetChampInfo = () => {
         axios.get(`https://ddragon.leagueoflegends.com/cdn/12.1.1/data/pt_BR/champion/${champActive}.json`).then((response) => {
             let champInfo = response.data.data[champActive]
@@ -32,11 +33,9 @@ export default function DetailsChampions({champActive}) {
 
             champInfo = {...champInfo, idFormated:champKey}
             setChampInfo(champInfo)
-            console.log(champInfo.spells[0])
             setSpellSelected({...champInfo.passive, passive:true})
-            console.log(champInfo)
         })
-    }
+    }                                                   
     return(
         <Container>
 
@@ -50,39 +49,45 @@ export default function DetailsChampions({champActive}) {
                         <ChampHistory>{champInfo.lore}</ChampHistory>
                         <ChampHistory>{champions_json.data[champActive].blurb}</ChampHistory>
                         <HabillityDiv>
-                        <CollumAlign>
-                            <HabilitysTitle>HABILIDADES</HabilitysTitle>
+                            <CollumAlign>
+                                <HabilitysTitle>HABILIDADES</HabilitysTitle>
 
-                            <SpellDiv>
-                                <SpellImg active={spellSelected?.passive} onClick={() => setSpellSelected({...champInfo.passive, passive:true})} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/passive/${champInfo.passive.image.full}`}/>
+                                <SpellDiv>
+                                    <SpellImg active={spellSelected?.passive} onClick={() => setSpellSelected({...champInfo.passive, passive:true})} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/passive/${champInfo.passive.image.full}`}/>
 
+                                    {
+                                    champInfo.spells.map((spell) => (
+                                        <SpellImg active={spellSelected == spell} onClick={() => setSpellSelected(spell)} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${spell.id}.png`}/>
+                                    ))
+                                    
+                                    }
+                                </SpellDiv>
                                 {
-                                champInfo.spells.map((spell) => (
-                                    <SpellImg active={spellSelected == spell} onClick={() => setSpellSelected(spell)} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${spell.id}.png`}/>
-                                ))
-                                
+                                    spellSelected &&
+                                    <>
+                                        {
+                                            spellSelected.passive?
+                                            <HabilityKey>Passive</HabilityKey>
+                                            :
+                                            <HabilityKey>{SkillArray[champInfo.spells.indexOf(spellSelected)]}</HabilityKey>
+                                        }
+                                        <HabilityName>{spellSelected.name}</HabilityName>
+                                        <HabilityDescreption>{spellSelected.description}</HabilityDescreption>
+                                    </>
+
+
                                 }
-                            </SpellDiv>
-                            {
-                                spellSelected &&
-                                <>
-                                    <h1>{spellSelected.name}</h1>
-                                    <h2>{spellSelected.description}</h2>
-                                </>
 
-
-                            }
-
-                        </CollumAlign>
+                            </CollumAlign>
                     
                         {
                             <HabillityVideoDiv>
                                 {
                                     spellSelected?.passive?
-                                    <VideoHability controls autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.webm`}></VideoHability>
+                                    <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.webm`}></VideoHability>
                                     :
-                                    <VideoHability controls autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.webm`}></VideoHability>
-
+                                    <VideoHability loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.webm`}></VideoHability>
+                                    
                                 }
                             </HabillityVideoDiv>
                         }
