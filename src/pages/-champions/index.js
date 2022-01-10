@@ -24,20 +24,18 @@ export default function ChampionsPage ()  {
 
     const setActive = (champ) => {
         console.log(champ)
-        if(champ.id == champActive){
-            setChampActive('')
-        }else{
-            setChampActive(champ.id)
-            let actualIndex =  championsArray.indexOf(champ)
-            console.log(actualIndex)
 
-            let calculeOffset  = (actualIndex-lastIndex)*-10
+        setChampActive(champ.id)
+        let actualIndex =  championsArray.indexOf(champ)
+        console.log(actualIndex)
 
-            setLastIndex(actualIndex)
-            setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
+        let calculeOffset  = (actualIndex-lastIndex)*-10
 
-            setOffset(offSet+calculeOffset)
-        }
+        setLastIndex(actualIndex)
+        setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
+
+        setOffset(offSet+calculeOffset)
+        
     }
     useEffect(() => {
         if(championsArray){
@@ -49,13 +47,33 @@ export default function ChampionsPage ()  {
 
     useEffect(() => {
         if(serachChampion != '' && championsArray){
-            console.log(`My search ${serachChampion}`)
-            console.log(championsArray)
+
             let actualIndex = championsArray.indexOf(serachChampion)
 
             Object.keys(championsArray).map(index => {
                 if(serachChampion.length == 1){
                     if(championsArray[index].id[0].toUpperCase() == serachChampion[0].toUpperCase()){
+                        setActive(championsArray[index])
+                    }
+                }else if(serachChampion.length == 2){
+                    if(championsArray[index].id.substring(0,2).toUpperCase() == serachChampion.substring(0,2).toUpperCase()){
+                        setActive(championsArray[index])
+                    }
+                }else if(serachChampion.length == 3){
+                    if(championsArray[index].id.substring(0,3).toUpperCase() == serachChampion.substring(0,3).toUpperCase()){
+                        setActive(championsArray[index])
+
+                    }
+                }else if(serachChampion.length == 4){
+                    if(championsArray[index].id.substring(0,4).toUpperCase() == serachChampion.substring(0,4).toUpperCase()){
+                        setActive(championsArray[index])
+                    }
+                }else if(serachChampion.length == 5){
+                    if(championsArray[index].id.substring(0,5).toUpperCase() == serachChampion.substring(0,5).toUpperCase()){
+                        setActive(championsArray[index])
+                    }
+                }else if(serachChampion.length > 0){
+                    if(championsArray[index].id.toUpperCase() == serachChampion.toUpperCase()){
                         setActive(championsArray[index])
                     }
                 }
