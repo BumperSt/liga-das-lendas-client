@@ -45,7 +45,7 @@ export const ScroolContainer = styled.div`
 export const MatchContainer = styled.div`
     display: flex;
     flex-direction: row;
-
+    min-width:80vw;
     border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
     margin-block:.5rem;
     align-items: center;
@@ -66,11 +66,9 @@ export const MatchContainer = styled.div`
 export const ColumMatchContainer = styled.div`
     display: flex;
     flex-direction:column;
-    align-items:center;
-    margin-inline:1rem;
+    margin-inline:.2rem;
     @media only screen and (max-width: 900px) {
         margin-inline:.1rem;
-
     }
 
 `

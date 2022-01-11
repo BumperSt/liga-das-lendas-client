@@ -14,6 +14,7 @@ export const AlignTeam = styled.div`
 `
 
 export const AlingChampImgAndName = styled.div`
+    min-width:10rem;
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -35,7 +36,7 @@ export const ChampImg = styled.img`
 `
 
 export const SummonerName = styled.h4`
-    max-width: 6rem;
+    max-width: 5rem;
     margin-left: .5rem;
     overflow: hidden;
     text-overflow: ellipsis; 

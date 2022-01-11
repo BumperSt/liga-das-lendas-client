@@ -51,13 +51,14 @@ function MyApp({ Component, pageProps }) {
       {
         
         !error ?
-          myUrl != '/' && myUrl != '/-champions'?
-            user ?
-            <Component {...pageProps} />
+          myUrl&&
+            myUrl != '/' && myUrl != '/-champions' && myUrl.split('/')[1] != '-item'?
+              user ?
+              <Component {...pageProps} />
+              :
+              <PageLoading/>
             :
-            <PageLoading/>
-          :
-          <Component {...pageProps} />
+            <Component {...pageProps} />
 
         :
         <HomePage/>

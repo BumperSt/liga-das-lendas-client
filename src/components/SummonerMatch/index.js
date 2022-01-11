@@ -117,9 +117,22 @@ export default function SummonerMatch(){
     };
 
     const getFormatedDate = (timeStamp) => {
-        let matchDate = new Date(timeStamp)
-        let date = moment(matchDate, 'DD/MM/YYYY').format()
-        return date.split('T')[0]
+        let matchDate = new Date(timeStamp) 
+        let now = new Date()
+        var difference = now.getTime() - matchDate.getTime();
+
+        let hoursDiference  = parseInt(Math.abs(difference) / 3600000)
+        var days = Math.ceil(difference / (1000 * 3600 * 24));
+        if(hoursDiference <= 23){
+            return `${hoursDiference} Horas atrás`
+        }else{
+            if(parseInt(days) == 1){
+                return `${days} Dia atrás`
+
+            }else{
+                return `${days} Dias atrás`
+            }
+        }
     }
 
 
@@ -135,7 +148,7 @@ export default function SummonerMatch(){
                 matchs?.map((match) => (
                     <MatchContainer win={match.myParticipation.win} key={match.info.gameId} style={{color:'white'}}>
                         <ColumMatchContainer>
-                            <TypeTitle>{matchHelper.findQueueById(match.info.queueId).description}</TypeTitle>
+                            <TypeTitle>{matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}</TypeTitle>
                                 <TypeTitle>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
                             {/* <TypeTitle>{Math.trunc(match.info.gameDuration/60)} Minutos</TypeTitle> */} 
                         </ColumMatchContainer>
