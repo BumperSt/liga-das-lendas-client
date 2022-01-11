@@ -106,8 +106,40 @@ export const HabillityVideoDiv = styled.div`
 
 `
 
+export const VideoUndefined = styled.img`
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index:0;
+`
+
+export const UndefinedTilte = styled.h1`
+    z-index: 5;
+    color:white;
+    position:absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom:25%;
+    width: 100%;
+    font-size:1.5rem;
+`
+
+export const VideoBlitz = styled.img`
+    width: 35%;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateY(-50%)  translateX(-50%);
+    z-index:0;
+`
+
+
 export const VideoHability = styled.video`
+    position: relative;
     width: 40rem;
+    z-index:10;
     @media only screen and (max-width: 1280px) {
         width: 20rem;
     }

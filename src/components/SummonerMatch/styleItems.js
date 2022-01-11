@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import theme from '../../../styles/theme.json'
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -25,5 +25,9 @@ export const ItemContainer = styled.img`
         width:1.5rem;
         height:1.5rem;
         border-radius: 6px;
+    }
+    :hover{
+        cursor: pointer;
+        border: solid 2px ${theme.colors.dourado};
     }
 `

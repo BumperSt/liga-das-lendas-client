@@ -1,11 +1,11 @@
 import react, { useEffect, useState } from "react";
-import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName} from "./DetailsChampionsStyle";
+import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName, VideoUndefined, VideoBlitz, UndefinedTilte} from "./DetailsChampionsStyle";
 import champions_json from '../../../public/champion.json'
 import axios from "axios";
 import Bars from "react-loading-icons/dist/components/bars";
 import theme from '../../../styles/theme.json'
 import useEventListener from '@use-it/event-listener'
-
+import Image from 'next/image'
 
 export default function DetailsChampions({champActive}) {
     
@@ -14,7 +14,6 @@ export default function DetailsChampions({champActive}) {
     const SkillArray = ['Q', 'W', 'E', 'R']
 
     function handler({ key }) {
-        console.log(key)
         let keyPressed = String(key).toUpperCase()
         if (keyPressed == 'Q') {
             setSpellSelected(champInfo.spells[SkillArray.indexOf(keyPressed)])
@@ -26,8 +25,9 @@ export default function DetailsChampions({champActive}) {
             setSpellSelected(champInfo.spells[SkillArray.indexOf(keyPressed)])
         }
       }
-    
-    useEventListener('keydown', handler);
+      useEventListener('keydown', handler);
+
+
 
     useEffect(() => {
         GetChampInfo()
@@ -38,6 +38,7 @@ export default function DetailsChampions({champActive}) {
         axios.get(`https://ddragon.leagueoflegends.com/cdn/12.1.1/data/pt_BR/champion/${champActive}.json`).then((response) => {
             let champInfo = response.data.data[champActive]
             let champKey = champInfo.key
+
             if(champKey.length == 1) {
                 champKey = `000${champKey}`
             }else if(champKey.length == 2) {
@@ -93,17 +94,24 @@ export default function DetailsChampions({champActive}) {
                     
                         {
                             <HabillityVideoDiv>
-                                {
+                                {   
                                     spellSelected? 
                                     spellSelected?.passive?
-                                    <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.webm`}></VideoHability>
+                                    <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.webm` || 'blitz.png'}></VideoHability>
                                     :
                                     <VideoHability loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.webm`}></VideoHability>
                                     :
-                                    <Bars stroke='black' fill={theme.colors.dourado}/>
-                                    
-
+                                    <Bars stroke='black' fill={theme.colors.dourado}/> 
                                 }
+                                {
+                                    spellSelected&&
+                                    <>
+                                        <VideoUndefined  src={'/rifts.jpg'}/>
+                                        <VideoBlitz src={'blitz.png'}/>
+                                        <UndefinedTilte>VÍDEO NÃO DISPONIVEL.</UndefinedTilte>
+                                    </>
+                                }
+                            
                             </HabillityVideoDiv>
                         }
                         
