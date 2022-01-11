@@ -2,8 +2,6 @@ import './globals.css'
 import { useRouter } from 'next/router'
 import summonerApi from '../api/summoner'
 import PageLoading from '../components/LoadingPage'
-import ErrorPage from '../components/ErrorPage'
-
 import UserContext from '../context/userContext'
 import { useEffect, useState } from 'react'
 import HomePage from '.'
