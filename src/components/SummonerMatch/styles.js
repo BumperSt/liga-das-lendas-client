@@ -16,7 +16,6 @@ export const ScroolContainer = styled.div`
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-    width: 80vw;
     max-height: 100vh;
     align-self: center;
     @media only screen and (max-width: 900px) {
@@ -107,6 +106,8 @@ export const OnlySmallScreen = styled.div`
     display:flex;
     flex-direction:row;
     align-items: center;
+    width: 100%;
+    justify-content: space-around;
 `
 
 export const TypeTitle = styled.h1`

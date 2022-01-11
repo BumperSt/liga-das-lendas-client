@@ -81,7 +81,7 @@ export default function ChampionsPage ()  {
                                     setActive(champ) 
                                     setSearchChampion('')}
                                 } src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champ.id}_0.jpg`}/>
-                                <ChampName >{champ.id}</ChampName>
+                                <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
                             </ChampCardDiv>
                         ))
                     }

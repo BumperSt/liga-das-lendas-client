@@ -55,8 +55,13 @@ export const ChampName = styled.h3`
     bottom: 0;
     left:50%;
     color:white;
+
     @media only screen and (max-width: 600px) {
         font-size:.8rem;
+    }
+    ${props => props.active && `
+        color: #ffa000; 
+    `
     }
 `
 

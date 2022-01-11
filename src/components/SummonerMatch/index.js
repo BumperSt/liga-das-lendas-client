@@ -9,6 +9,7 @@ import MatchItems from './itensView'
 import champJson from '../../../public/champion.json'
 import { Bars } from 'react-loading-icons'
 import theme from '../../../styles/theme.json'
+import { SummonersInMatchView } from './summonersInMatchView'
 
 export default function SummonerMatch(){
 
@@ -50,7 +51,6 @@ export default function SummonerMatch(){
 
     useEffect(() => {
         if(user){
-            console.log("changeAll")
             setmatchList(null)
             setMatchs([])
             matchAuxIndex = 0
@@ -72,6 +72,7 @@ export default function SummonerMatch(){
 
     useEffect(() => {
         if(matchs.length > 0) {
+            console.log(matchs)
             setLoadingMatchs(false)
         }
     }, [matchs])
@@ -168,8 +169,11 @@ export default function SummonerMatch(){
                             <ColumMatchContainer>
                                 <MatchItems myParticipation={match.myParticipation}/>
                             </ColumMatchContainer>
+                            <ColumMatchContainer>
+                                <SummonersInMatchView match={match}/>
+                            </ColumMatchContainer>
                         </OnlySmallScreen>
-
+                            
                     </MatchContainer>
                 ))
         }
