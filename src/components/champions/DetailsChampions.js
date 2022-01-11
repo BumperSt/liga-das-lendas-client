@@ -2,6 +2,8 @@ import react, { useEffect, useState } from "react";
 import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName} from "./DetailsChampionsStyle";
 import champions_json from '../../../public/champion.json'
 import axios from "axios";
+import Bars from "react-loading-icons/dist/components/bars";
+import theme from '../../../styles/theme.json'
 
 
 export default function DetailsChampions({champActive}) {
@@ -40,11 +42,9 @@ export default function DetailsChampions({champActive}) {
         <Container>
 
             {
-                champInfo &&
+                champInfo ?
                 <>
                     <MaxHeigthDiv>
-                        <ChampName>{champActive}</ChampName>
-
                         <ChampTitle>{champions_json.data[champActive].title}</ChampTitle>
                         <ChampHistory>{champInfo.lore}</ChampHistory>
                         <ChampHistory>{champions_json.data[champActive].blurb}</ChampHistory>
@@ -83,11 +83,15 @@ export default function DetailsChampions({champActive}) {
                         {
                             <HabillityVideoDiv>
                                 {
+                                    spellSelected? 
                                     spellSelected?.passive?
                                     <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.webm`}></VideoHability>
                                     :
                                     <VideoHability loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.webm`}></VideoHability>
+                                    :
+                                    <Bars stroke='black' fill={theme.colors.dourado}/>
                                     
+
                                 }
                             </HabillityVideoDiv>
                         }
@@ -96,6 +100,9 @@ export default function DetailsChampions({champActive}) {
                     </MaxHeigthDiv>
                     
                 </>
+                :
+                <Bars stroke='black' fill={theme.colors.dourado}/>
+
                 
             }
 

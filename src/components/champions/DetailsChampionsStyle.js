@@ -15,6 +15,7 @@ export const ChampHistory = styled.h2`
 
 export const ChampTitle = styled.h1`
     color:white;
+    margin-top: 3rem;
     margin-bottom: 1.5rem;
 `
 
@@ -25,7 +26,6 @@ export const ChampName = styled.h1`
 
 export const SpellImg = styled.img`
     margin-top: 2rem;
-    
     width:4rem;
     height:4rem;
     border-radius: 9px;
@@ -34,9 +34,9 @@ export const SpellImg = styled.img`
     z-index:200;
 
     transition: transform 0.5s;
-    @media only screen and (max-width: 900px) {
-        width:1.5rem;
-        height:1.5rem;
+    @media only screen and (max-width: 1280px) {
+        width:2.5rem;
+        height:2.5rem;
         border-radius: 6px;
     }
     ${props=> props.active && `
@@ -73,6 +73,12 @@ export const HabillityDiv = styled.div`
     margin-top:3rem;
     background-color:rgba(0,0,0,0.3);
     padding:5rem;
+
+    @media only screen and (max-width: 1280px) {
+        padding:1rem;
+        justify-content: center;
+        align-items: center;
+    }
     max-width: 90vw;
     display:flex;
     flex-direction: row;
@@ -83,19 +89,34 @@ export const HabillityDiv = styled.div`
     
 `
 export const HabillityVideoDiv = styled.div`
-    min-width: 10rem;
+    min-width: 40rem;
+    min-height: 28rem;
+    position: relative;
+    justify-content: center;
+    @media only screen and (max-width: 1280px) {
+        min-width: 20rem;
+        min-height: 15rem;
+
+    }
+
+
 `
 
 export const VideoHability = styled.video`
     width: 40rem;
+    @media only screen and (max-width: 1280px) {
+        width: 20rem;
+    }
+
 `
 
 export const HabilitysTitle= styled.h1`
     font-size:5rem;
-    @media only screen and (max-width: 900px) {
-        font-size:3rem;
+    @media only screen and (max-width: 1280px) {
+        font-size:2rem;
     }
     color:white;
+
 
 `
 
@@ -104,10 +125,15 @@ export const HabilityKey = styled.h1`
 `
 
 export const HabilityDescreption = styled.h1`
-    font-size:1rem;
+    font-size:1.2rem;
     align-self: center;
     overflow: hidden;
+    max-width: 90%;
+    @media only screen and (max-width: 1280px) {
+        min-width: 90%;
 
+
+    }
 
 `
 

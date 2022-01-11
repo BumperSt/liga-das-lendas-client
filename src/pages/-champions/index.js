@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import react, { useEffect, useRef, useState } from "react";
 import { ChampCardDiv, ChampionsCard, ChampName, Container, HorizonScroll, InputSerach } from "../../components/champions/stylePageChampions";
 import champions_json from '../../../public/champion.json'
 import DetailsChampions from "../../components/champions/DetailsChampions";
@@ -16,6 +16,7 @@ export default function ChampionsPage ()  {
     const [serachChampion, setSearchChampion] = useState('')
     const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
 
+    const cardDiv = useRef(null);
 
     const objectToArray = (objects) => {
         let array = Object.keys(objects).map((key) => objects[key])
@@ -23,17 +24,14 @@ export default function ChampionsPage ()  {
     }
 
     const setActive = (champ) => {
-        console.log(champ)
 
         setChampActive(champ.id)
         let actualIndex =  championsArray.indexOf(champ)
-        console.log(actualIndex)
 
         let calculeOffset  = (actualIndex-lastIndex)*-10
 
         setLastIndex(actualIndex)
         setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
-
         setOffset(offSet+calculeOffset)
         
     }
@@ -47,41 +45,15 @@ export default function ChampionsPage ()  {
 
     useEffect(() => {
         if(serachChampion != '' && championsArray){
-
-            let actualIndex = championsArray.indexOf(serachChampion)
-
-            Object.keys(championsArray).map(index => {
-                if(serachChampion.length == 1){
-                    if(championsArray[index].id[0].toUpperCase() == serachChampion[0].toUpperCase()){
-                        setActive(championsArray[index])
-                    }
-                }else if(serachChampion.length == 2){
-                    if(championsArray[index].id.substring(0,2).toUpperCase() == serachChampion.substring(0,2).toUpperCase()){
-                        setActive(championsArray[index])
-                    }
-                }else if(serachChampion.length == 3){
-                    if(championsArray[index].id.substring(0,3).toUpperCase() == serachChampion.substring(0,3).toUpperCase()){
-                        setActive(championsArray[index])
-
-                    }
-                }else if(serachChampion.length == 4){
-                    if(championsArray[index].id.substring(0,4).toUpperCase() == serachChampion.substring(0,4).toUpperCase()){
-                        setActive(championsArray[index])
-                    }
-                }else if(serachChampion.length == 5){
-                    if(championsArray[index].id.substring(0,5).toUpperCase() == serachChampion.substring(0,5).toUpperCase()){
-                        setActive(championsArray[index])
-                    }
-                }else if(serachChampion.length > 0){
-                    if(championsArray[index].id.toUpperCase() == serachChampion.toUpperCase()){
-                        setActive(championsArray[index])
+            Object.keys(championsArray).map(champIndex => {
+                for (let index = 1; index <= serachChampion.length; index++) {
+                    if(serachChampion.length == index ){
+                        if(championsArray[champIndex].id.substring(0,index).toUpperCase() == serachChampion.substring(0,index).toUpperCase()){
+                            setActive(championsArray[champIndex])
+                        }
                     }
                 }
-
-
              });
-            console.log(`My Result ${actualIndex}`)
-
         }
     }, [serachChampion])
     
@@ -100,8 +72,12 @@ export default function ChampionsPage ()  {
                 <HorizonScroll transaletX={offSet}>
                     {
                         championsArray?.map((champ) => (
-                            <ChampCardDiv active={champActive == champ.id}>
-                                <ChampionsCard  onClick={() => setActive(champ)} src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champ.id}_0.jpg`}/>
+                            <ChampCardDiv ref={cardDiv} active={champActive == champ.id}>
+                                <ChampionsCard  onClick={() => 
+                                {
+                                    setActive(champ) 
+                                    setSearchChampion('')}
+                                } src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champ.id}_0.jpg`}/>
                                 <ChampName >{champ.id}</ChampName>
                             </ChampCardDiv>
                         ))

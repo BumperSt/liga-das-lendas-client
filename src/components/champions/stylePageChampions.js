@@ -9,9 +9,10 @@ export const Container = styled.div`
 `
 
 export const InputSerach = styled.div`
-    width:50%;
+    width:80%;
     align-self: center;
     margin-bottom: 1rem;
+    margin-top: 1rem;
 `
 
 export const HorizonScroll = styled.div`
@@ -28,19 +29,24 @@ export const ChampCardDiv = styled.div`
     box-sizing: border-box;
     width: 10vw;
     :hover{
-        transform: scale(1.2) translateY(5%);
+        transform: scale(1.3) translateY(15%);
         cursor: pointer;
         z-index:205;
     }
 
     ${props => props.active && `
-        transform: scale(1.2) translateY(5%); 
+        transform: scale(1.3) translateY(15%); 
         z-index:200;
-
     `
     }
     transition: all 0.3s;
     border-bottom: solid 3px ${theme.colors.dourado};
+    @media only screen and (max-width: 1280px) {
+        width: 40vw;
+
+
+    }
+
 
 `
 
@@ -48,6 +54,8 @@ export const ChampName = styled.h3`
     position: absolute;
     transition: all 0.2s;
     bottom: 0;
+    left:50%;
+    transform: translateX(-50%);
     color:white;
 `
 
