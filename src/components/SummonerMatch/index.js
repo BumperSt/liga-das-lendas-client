@@ -11,7 +11,7 @@ import { Bars } from 'react-loading-icons'
 import theme from '../../../styles/theme.json'
 import { SummonersInMatchView } from './summonersInMatchView'
 
-export default function SummonerMatch(){
+export default function SummonerMatch({onScrollSummonerPage}){
 
 
     const matchContainerRef = useRef();
@@ -108,10 +108,11 @@ export default function SummonerMatch(){
 
     const onScroll = () => {
         if (matchContainerRef.current) {
-          const { scrollTop, scrollHeight, clientHeight } = matchContainerRef.current;
-          if (scrollTop + clientHeight === scrollHeight) {
-            callGetMatch()            
-          }
+
+            const { scrollTop, scrollHeight, clientHeight } = matchContainerRef.current;
+            if (scrollTop + clientHeight === scrollHeight) {
+                callGetMatch()            
+            }
         }
     };
 

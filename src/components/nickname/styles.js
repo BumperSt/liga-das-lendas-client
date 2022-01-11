@@ -10,7 +10,6 @@ export const Container = styled.div`
     margin: 0px;
     padding: 0px;
     max-height: auto;
-    overflow: hidden;
 `
 export const BackgroudImage = styled.div`
     -webkit-filter: brightness(60%);

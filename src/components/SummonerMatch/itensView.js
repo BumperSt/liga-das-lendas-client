@@ -35,9 +35,9 @@ const MatchItems = ({myParticipation}) => {
                         <>
                         {
                             item?
-                            <ItemContainer key={item.name} title={item.name} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${item.image.full}`}/>
+                            <ItemContainer key={item.id} title={item.name} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${item.image.full}`}/>
                             :
-                            <ItemContainer src="/undefinedItem.png"/>
+                            <ItemContainer  src="/undefinedItem.png"/>
 
                         }
                         </>
@@ -53,7 +53,7 @@ const MatchItems = ({myParticipation}) => {
                         <>
                         {
                             item?
-                            <ItemContainer key={item.name} title={item.name}  src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${item.image.full}`}/>
+                            <ItemContainer key={item.id} title={item.name}  src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/item/${item.image.full}`}/>
                             :
                             <ItemContainer   src="/undefinedItem.png"/>
 

@@ -22,7 +22,10 @@ export const AlingChampImgAndName = styled.div`
 
     :hover{
         cursor: pointer;
-        color:${theme.colors.dourado}
+        color:${theme.colors.dourado};
+        img{
+            border: 2px solid ${theme.colors.dourado};
+        }
     }
 `
 

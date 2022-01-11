@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, useRef} from 'react'
 import UserContext from '../../context/userContext'
 import { useRouter } from 'next/router'
 import LoadingPage from '../../components/LoadingPage'
@@ -18,21 +18,22 @@ import {
 
 export default function Summoner() {
 
+    const summonerPageRef = useRef()
     const router = useRouter()
     const {user, setUser} = useContext(UserContext)
     const [champsMaestry, setChampsMaestry] = useState([])
     const [profileIcon, setProfileIcon] = useState('')
     const [backgroudUrl, setBackgroudUrl] = useState(null)
+    const [nickInPage, setNickInPage] =useState('')
     const [level, setLevel] = useState('')
     const { nickName } = router.query
 
     useEffect(() => {
         if(user){
-            
+
             setProfileIcon("https://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/" + user.profileIconId + ".png")
-            
+            setNickInPage(user.name)
             setLevel(user.summonerLevel)
-            
             champApi.getChampsMaestry({
                 encryptedSummonerId: user.id
             })
@@ -42,12 +43,14 @@ export default function Summoner() {
                 setChampsMaestry(data)
             })
             .catch((error) => {
+                
                 console.error(error)
             })    
         }
     }, [user])
 
     const UpdateUser = () => {
+        console.log(nickName)
         summonerApi.updateSummoner({
             nickName
         }).then((response) => {
@@ -59,14 +62,22 @@ export default function Summoner() {
         })
     }
 
+    const onScroll = () => {
+        if (summonerPageRef.current) {
+            const { scrollTopS, scrollHeightS, clientHeightS } = summonerPageRef.current;
+            console.log(scrollTopS)
+
+        }
+    };
+
+
 
     
     if(backgroudUrl){
         return(
 
-      
-            <Container>
-                      <title>{nickName} Status</title>
+            <Container ref={summonerPageRef}>
+                      <title>{nickInPage} Status</title>
 
                 <InputSerchDiv>
                     <SearchInput/>
@@ -82,7 +93,7 @@ export default function Summoner() {
                 
                 <UserLevel>{level}</UserLevel>
     
-                <NickName>{nickName}</NickName>
+                <NickName>{nickInPage}</NickName>
                 <button onClick={UpdateUser}>UpdateUser</button>
                 </Top>
 
@@ -92,7 +103,11 @@ export default function Summoner() {
                     }
                     
                 </LeagueDiv>
-                <SummonerMatch/>
+                {
+                    summonerPageRef.current&&
+                    <SummonerMatch onScrollSummonerPage={onScroll}/>
+
+                }
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
 
             </Container>

@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }) {
     setError(false)
     if (router.asPath !== router.route) {
       setUser(null)
+      console.log(encodeURI(nickName))
       if(nickName){
         summonerApi.sendNickName({
           nickName
