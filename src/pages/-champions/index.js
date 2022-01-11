@@ -38,7 +38,6 @@ export default function ChampionsPage ()  {
     }
     useEffect(() => {
         if(championsArray){
-            console.log(championsArray[0])
             setActive(championsArray[0])
         }
     }, [championsArray])

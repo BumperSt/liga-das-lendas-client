@@ -34,9 +34,7 @@ export const SummonersInMatchView = ({match}) => {
    
     },[particpants])
 
-    useEffect(() => {
-        console.log(myTeam)
-    }, [myTeam])
+
     
 
     return(

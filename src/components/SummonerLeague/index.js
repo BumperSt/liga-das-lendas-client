@@ -18,9 +18,7 @@ export default function SummonerLeague() {
 
 
     useEffect(() => {
-        console.log(`LEAGUE ${user.leagues}`)
         if(user.leagues.length == 0){
-            console.log("VAZIA")
             setLeague([])
             setSoloq(null)
             setFlex(null)

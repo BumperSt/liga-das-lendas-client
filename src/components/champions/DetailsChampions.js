@@ -13,13 +13,9 @@ export default function DetailsChampions({champActive}) {
     const SkillArray = ['Q', 'W', 'E', 'R']
 
     useEffect(() => {
-        console.log(champActive)
         GetChampInfo()
     }, [champActive])
 
-    useEffect(() => {
-        console.log(spellSelected)
-    }, [spellSelected])
     
     const GetChampInfo = () => {
         axios.get(`https://ddragon.leagueoflegends.com/cdn/12.1.1/data/pt_BR/champion/${champActive}.json`).then((response) => {

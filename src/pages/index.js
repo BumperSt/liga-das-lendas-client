@@ -19,7 +19,6 @@ export default function HomePage() {
             .then(({ data }) => {
                 let champs = champHelper.filterRotationChamps(data.freeChampionIds)
                 setChampRotation(champs)
-                console.log(champs)
                 setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champs[0].id}_0.jpg`)
             })
             .catch((error) => {

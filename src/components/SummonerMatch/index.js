@@ -72,7 +72,6 @@ export default function SummonerMatch(){
 
     useEffect(() => {
         if(matchs.length > 0) {
-            console.log(matchs)
             setLoadingMatchs(false)
         }
     }, [matchs])

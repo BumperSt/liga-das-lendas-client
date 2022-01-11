@@ -49,7 +49,6 @@ export default function SummonerChampion() {
 
     useEffect(() => {
         if(champMatchs){
-            console.log( champMatchs)
             loopGetMatch()
         }
     }, [champMatchs])

@@ -12,17 +12,24 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter()
   const [user, setUser] = useState(null)
   const userContextValue = {user, setUser}
-  const [myUrl, setMyUrl] = useState(null)
   const { nickName } = router.query
   const [error, setError] = useState(false)
-  
+  const [userPage ,setUserPage] = useState(false)
+
+
   useEffect(() => {
-    setMyUrl(window.location.pathname)
-    console.log(window.location.pathname)
+
   },[])
 
   useEffect(() => {
-    console.log("change")
+    let myUrl = window.location.pathname
+
+    if(myUrl != '/'&& myUrl  != '/-champions' && myUrl.split('/')[1] != '-item'){
+
+      setUserPage(true)
+    }else{
+      setUserPage(false)
+    }
     setError(false)
 
     if (router.asPath !== router.route) {
@@ -49,14 +56,13 @@ function MyApp({ Component, pageProps }) {
       {
         
         !error ?
-          myUrl&&
-            myUrl != '/' && myUrl != '/-champions' && myUrl.split('/')[1] != '-item'?
-              user ?
-              <Component {...pageProps} />
-              :
-              <PageLoading/>
-            :
+          userPage?
+            user ?
             <Component {...pageProps} />
+            :
+            <PageLoading/>
+          :
+          <Component {...pageProps} />
 
         :
         <HomePage/>
