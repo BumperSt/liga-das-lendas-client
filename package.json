@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@use-it/event-listener": "^0.1.7",
     "axios": "^0.21.1",
     "moment": "^2.29.1",
     "next": "10.0.5",

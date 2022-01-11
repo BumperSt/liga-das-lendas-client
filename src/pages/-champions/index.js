@@ -24,6 +24,8 @@ export default function ChampionsPage ()  {
         return array
     }
 
+   
+
     const setActive = (champ) => {
 
         setChampActive(champ.id)
@@ -64,6 +66,8 @@ export default function ChampionsPage ()  {
     if(championsArray){
         return(
             <Container>
+                <title>{champActive} Detalhes</title>
+
                 <InputSerach>
                     <Input value={serachChampion} onChange={(evt) => setSearchChampion(evt.target.value)} placeholder="Busque um campeão"></Input>
 

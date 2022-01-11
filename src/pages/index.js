@@ -35,6 +35,8 @@ export default function HomePage() {
     if(backgroudUrl){
         return (
                 <Container>
+                    <title>Liga Das Lendas</title>
+
                     <Top>
                         <Title>Liga das Lendas</Title>
                     </Top>

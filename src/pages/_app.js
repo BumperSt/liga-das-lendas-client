@@ -23,15 +23,12 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     let myUrl = window.location.pathname
-
     if(myUrl != '/'&& myUrl  != '/-champions' && myUrl.split('/')[1] != '-item'){
-
       setUserPage(true)
     }else{
       setUserPage(false)
     }
     setError(false)
-
     if (router.asPath !== router.route) {
       setUser(null)
       if(nickName){
@@ -45,7 +42,6 @@ function MyApp({ Component, pageProps }) {
           console.error(error)
           setError(true)
         })
-
     }
   }
 

@@ -66,6 +66,8 @@ export default function Summoner() {
 
       
             <Container>
+                      <title>{nickName} Status</title>
+
                 <InputSerchDiv>
                     <SearchInput/>
 
