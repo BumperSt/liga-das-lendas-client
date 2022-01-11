@@ -44,10 +44,8 @@ export default function DetailsChampions({champActive}) {
             {
                 champInfo ?
                 <>
-                    <MaxHeigthDiv>
                         <ChampTitle>{champions_json.data[champActive].title}</ChampTitle>
                         <ChampHistory>{champInfo.lore}</ChampHistory>
-                        <ChampHistory>{champions_json.data[champActive].blurb}</ChampHistory>
                         <HabillityDiv>
                             <CollumAlign>
                                 <HabilitysTitle>HABILIDADES</HabilitysTitle>
@@ -97,7 +95,6 @@ export default function DetailsChampions({champActive}) {
                         }
                         
                         </HabillityDiv>
-                    </MaxHeigthDiv>
                     
                 </>
                 :

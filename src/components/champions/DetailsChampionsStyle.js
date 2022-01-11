@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from '../../../styles/theme.json'
 
 export const Container = styled.div`
-    margin-top: 5rem;
+    margin-top: 1rem;
     display: flex;
     text-align:center;
     justify-content:center;
@@ -11,11 +11,20 @@ export const Container = styled.div`
 
 export const ChampHistory = styled.h2`
     color:white;
+    @media only screen and (min-width: 1280px) {
+       max-width: 80%;
+
+    }
+    @media only screen and (max-width: 600px) {
+        font-size: 1.2rem;
+
+    }
+    align-self: center;
+    align-self: center;
 `
 
 export const ChampTitle = styled.h1`
     color:white;
-    margin-top: 3rem;
     margin-bottom: 1.5rem;
 `
 
@@ -32,7 +41,6 @@ export const SpellImg = styled.img`
     background-color:#ffffff33;
     margin-inline: .8rem;
     z-index:200;
-
     transition: transform 0.5s;
     @media only screen and (max-width: 1280px) {
         width:2.5rem;
@@ -40,9 +48,8 @@ export const SpellImg = styled.img`
         border-radius: 6px;
     }
     ${props=> props.active && `
-            transform: scale(1.5);
-            z-index:201;
-
+        transform: scale(1.5);
+        z-index:201;
         cursor:pointer;
         border:solid 2px ${theme.colors.dourado};
     `}
@@ -62,7 +69,8 @@ export const SpellDiv = styled.div`
 `
 
 export const MaxHeigthDiv = styled.div`
-    height:100vh;
+    text-align: center;
+    min-height:100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,19 +81,15 @@ export const HabillityDiv = styled.div`
     margin-top:3rem;
     background-color:rgba(0,0,0,0.3);
     padding:5rem;
-
-    @media only screen and (max-width: 1280px) {
-        padding:1rem;
-        justify-content: center;
-        align-items: center;
-    }
-    max-width: 90vw;
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
-    @media only screen and (max-width: 1280px) {
+    @media only screen and (max-width: 600px) {
         flex-direction: column;
     }
+    padding:1rem;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    flex-direction: row;
+
     
 `
 export const HabillityVideoDiv = styled.div`
@@ -153,7 +157,11 @@ export const CollumAlign = styled.div`
     color:white;
     position:relative;
     min-height:25rem;
-    max-height:25rem;
-    min-width:50vw;
-    max-width:50vw;
+    @media only screen and (min-width: 600px) {
+
+        max-height:25rem;
+        min-width:50vw;
+        max-width:50vw;
+
+    }
 `

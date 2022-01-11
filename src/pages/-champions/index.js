@@ -5,12 +5,13 @@ import DetailsChampions from "../../components/champions/DetailsChampions";
 import { BackgroudImage } from "../../components/nickname/styles";
 import LoadingPage from '../../components/LoadingPage'
 import { Input } from "../../components/searchInput/styleSerachInput";
+import { MaxHeigthDiv } from "../../components/champions/DetailsChampionsStyle";
 
 export default function ChampionsPage ()  {
 
     const [championsArray, setChampionsArray] = useState(null)
     const [champActive, setChampActive] = useState('')
-    const [offSet, setOffset] = useState(780)
+    const [offSet, setOffset] = useState(390)
     const [lastIndex, setLastIndex] = useState(0)
     const [backgroudUrl, setBackgroudUrl] = useState('')
     const [serachChampion, setSearchChampion] = useState('')
@@ -28,7 +29,7 @@ export default function ChampionsPage ()  {
         setChampActive(champ.id)
         let actualIndex =  championsArray.indexOf(champ)
 
-        let calculeOffset  = (actualIndex-lastIndex)*-10
+        let calculeOffset  = (actualIndex-lastIndex)*-5
 
         setLastIndex(actualIndex)
         setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
@@ -68,6 +69,8 @@ export default function ChampionsPage ()  {
                     <Input value={serachChampion} onChange={(evt) => setSearchChampion(evt.target.value)} placeholder="Busque um campeão"></Input>
 
                 </InputSerach>
+                <MaxHeigthDiv>
+
 
                 <HorizonScroll transaletX={offSet}>
                     {
@@ -85,9 +88,11 @@ export default function ChampionsPage ()  {
     
                 </HorizonScroll>
                 {
-                        champActive&&
-                        <DetailsChampions champActive={champActive}/>
-                    }
+                    champActive&&
+                    <DetailsChampions champActive={champActive}/>
+                }
+                                </MaxHeigthDiv>
+
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
             </Container>
         )
