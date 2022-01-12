@@ -52,6 +52,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <UserContext.Provider value={userContextValue}>
+      <head>
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147"crossorigin="anonymous"></script>
+      </head>
       <Header myUrl={myUrl}/>
       {
   
