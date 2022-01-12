@@ -1,6 +1,7 @@
 {
     "colors":{
         "dourado" : "#8c6c36",
+        "douradoBrilhante" : "#ffa000",
         "backgroundColor" : "#000000"
     }
 }

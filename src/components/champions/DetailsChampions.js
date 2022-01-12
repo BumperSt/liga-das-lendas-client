@@ -5,29 +5,12 @@ import axios from "axios";
 import Bars from "react-loading-icons/dist/components/bars";
 import theme from '../../../styles/theme.json'
 import useEventListener from '@use-it/event-listener'
-import Image from 'next/image'
 
 export default function DetailsChampions({champActive}) {
     
     const [champInfo, setChampInfo] = useState(null)
     const [spellSelected, setSpellSelected] = useState(null)
     const SkillArray = ['Q', 'W', 'E', 'R']
-
-    function handler({ key }) {
-        let keyPressed = String(key).toUpperCase()
-        if (keyPressed == 'Q') {
-            setSpellSelected(champInfo.spells[SkillArray.indexOf(keyPressed)])
-        }else if (keyPressed == 'W') {
-            setSpellSelected(champInfo.spells[SkillArray.indexOf(keyPressed)])
-        }else if (keyPressed == 'E') {
-            setSpellSelected(champInfo.spells[SkillArray.indexOf(keyPressed)])
-        }else if (keyPressed == 'R') {
-            setSpellSelected(champInfo.spells[SkillArray.indexOf(keyPressed)])
-        }
-      }
-      useEventListener('keydown', handler);
-
-
 
     useEffect(() => {
         GetChampInfo()

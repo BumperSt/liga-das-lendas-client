@@ -5,6 +5,7 @@ import PageLoading from '../components/LoadingPage'
 import UserContext from '../context/userContext'
 import { useEffect, useState } from 'react'
 import HomePage from '.'
+import Header from '../components/header'
 
 
 function MyApp({ Component, pageProps }) {
@@ -15,7 +16,7 @@ function MyApp({ Component, pageProps }) {
   const { nickName } = router.query
   const [error, setError] = useState(false)
   const [userPage ,setUserPage] = useState(false)
-
+  const [myUrl, setMyUrl] = useState('')
 
   useEffect(() => {
 
@@ -23,6 +24,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     let myUrl = window.location.pathname
+    setMyUrl(myUrl)
     if(myUrl != '/'&& myUrl  != '/-champions' && myUrl.split('/')[1] != '-item'){
       setUserPage(true)
     }else{
@@ -50,8 +52,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <UserContext.Provider value={userContextValue}>
+      <Header myUrl={myUrl}/>
       {
-        
+  
         !error ?
           userPage?
             user ?

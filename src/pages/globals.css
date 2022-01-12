@@ -5,7 +5,7 @@
 @import url(//db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=BeaufortforLOL-Bold);
 html,
 body, #__next {
-  overflow-y: none !important;
+  overflow: none !important;
   max-height: 100vh !important;
   width: 100%;
   padding: 0;
