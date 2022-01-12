@@ -83,7 +83,7 @@ export const LeagueDiv = styled.div`
 
 export const InputSerchDiv = styled.div`
     display:flex;
-    width: 50%;
+    width: 80%;
     justify-content: center;
     align-self: center;
     margin-top:1rem;

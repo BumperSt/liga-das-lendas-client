@@ -21,9 +21,7 @@ export const HorizonScroll = styled.div`
     transition: all 2s;
     transform: ${props => props.transaletX && `TranslateX(${props.transaletX}vw)`};
     min-height:23vh;
-    @media only screen and (max-width: 600px) {
-        margin-bottom: 2rem;
-    }
+    margin-bottom: 1rem;
     
 `
 export const ChampCardDiv = styled.div`
