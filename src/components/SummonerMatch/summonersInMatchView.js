@@ -43,7 +43,7 @@ export const SummonersInMatchView = ({match}) => {
             {
                 myTeam?.map((participant) => (
                     <AlingChampImgAndName onClick={() => router.push(participant.summonerName)}>
-                        <ChampImg title={participant.championName} src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${participant.championName}.png`}/>
+                        <ChampImg title={participant.championName} src={`/face/${participant.championName}.jpg`}/>
                         <SummonerName>{participant.summonerName}</SummonerName>
 
                     </AlingChampImgAndName>
@@ -54,7 +54,7 @@ export const SummonersInMatchView = ({match}) => {
             {
                 enemyTeam?.map((participant) => (
                     <AlingChampImgAndName onClick={() => router.push(participant.summonerName)}>
-                        <ChampImg title={participant.championName} src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${participant.championName}.png`}/>
+                        <ChampImg title={participant.championName} src={`/face/${participant.championName}.jpg`}/>
                         <SummonerName>{participant.summonerName}</SummonerName>
 
                     </AlingChampImgAndName>
