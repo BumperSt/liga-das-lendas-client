@@ -109,8 +109,12 @@ export default function SummonerMatch({onScrollSummonerPage}){
     const onScroll = () => {
         if (matchContainerRef.current) {
 
+
             const { scrollTop, scrollHeight, clientHeight } = matchContainerRef.current;
-            if (scrollTop + clientHeight === scrollHeight) {
+            console.log(scrollTop)
+            console.log(scrollTop + clientHeight)
+            console.log(scrollHeight)
+            if (scrollTop + clientHeight >= scrollHeight - 10) {
                 callGetMatch()            
             }
         }
