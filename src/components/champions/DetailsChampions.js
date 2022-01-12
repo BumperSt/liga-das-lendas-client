@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName, VideoUndefined, VideoBlitz, UndefinedTilte} from "./DetailsChampionsStyle";
+import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName, VideoUndefined, VideoBlitz, UndefinedTilte, HabilityDescreptionDiv} from "./DetailsChampionsStyle";
 import champions_json from '../../../public/champion.json'
 import axios from "axios";
 import Bars from "react-loading-icons/dist/components/bars";
@@ -59,7 +59,7 @@ export default function DetailsChampions({champActive}) {
                                 </SpellDiv>
                                 {
                                     spellSelected &&
-                                    <>
+                                    <HabilityDescreptionDiv>
                                         {
                                             spellSelected.passive?
                                             <HabilityKey>Passive</HabilityKey>
@@ -68,7 +68,7 @@ export default function DetailsChampions({champActive}) {
                                         }
                                         <HabilityName>{spellSelected.name}</HabilityName>
                                         <HabilityDescreption>{spellSelected.description}</HabilityDescreption>
-                                    </>
+                                    </HabilityDescreptionDiv>
 
 
                                 }

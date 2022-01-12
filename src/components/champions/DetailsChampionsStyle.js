@@ -63,8 +63,8 @@ export const SpellImg = styled.img`
 export const SpellDiv = styled.div`
     display: flex;
     flex-direction: row;
-    align-self: center;
     margin-bottom: 2rem;
+    
 
 `
 
@@ -156,15 +156,22 @@ export const HabilitysTitle= styled.h1`
 
 `
 
+export const HabilityDescreptionDiv = styled.div`
+
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+`
+
 export const HabilityKey = styled.h1`
     color:${theme.colors.dourado};
 `
 
 export const HabilityDescreption = styled.h1`
     font-size:1.2rem;
-    align-self: center;
     overflow: hidden;
-    max-width: 90%;
+    max-width: 100%;
     @media only screen and (max-width: 1280px) {
         min-width: 90%;
 
@@ -176,7 +183,6 @@ export const HabilityDescreption = styled.h1`
 export const HabilityName = styled.h1`
     font-size:2rem;
     max-width: 50%;
-    align-self: center;
     @media only screen and (max-width: 1280px) {
         font-size:1rem;
 
@@ -187,6 +193,8 @@ export const CollumAlign = styled.div`
     display:flex;
     flex-direction: column;
     color:white;
+    text-align: left;
+
     position:relative;
     min-height:25rem;
     @media only screen and (min-width: 600px) {
