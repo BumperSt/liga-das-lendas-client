@@ -14,6 +14,10 @@ export const Container = styled.div`
 
 export const ButtonHeader = styled.button`
     font-size: 1.5rem;
+    @media only screen and (max-width: 600px) {
+        font-size: 1rem;
+
+    }
     transition: all .5s;
     color:white;
     background-color:transparent;
