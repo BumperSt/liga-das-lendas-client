@@ -157,7 +157,7 @@ export const HabilitysTitle= styled.h1`
 `
 
 export const HabilityDescreptionDiv = styled.div`
-
+    min-width: 100%;
     align-self: center;
     display: flex;
     flex-direction: column;
