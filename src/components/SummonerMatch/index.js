@@ -164,13 +164,13 @@ export default function SummonerMatch({onScrollSummonerPage}){
                             </ColumMatchContainer>
                             <ColumMatchContainer>
                                 <CharNameAndLevel>Nivel {match.myParticipation.champLevel}</CharNameAndLevel>
-                                <ChampIcon title={champJson.data[match.myParticipation.championName].title} src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${match.myParticipation.championName}.png`}/>
+                                <ChampIcon title={champJson.data[match.myParticipation.championName].title} src={`/face/${match.myParticipation.championName}.jpg`}/>
                                 <CharNameAndLevel>{match.myParticipation.championName}</CharNameAndLevel>
                             </ColumMatchContainer>
                             <ColumMatchContainer>
                                 {   
                                     match.spells.map((spell) => (
-                                        <SpellIncon key={spell.id} title={spell.name} src={`https://ddragon.leagueoflegends.com/cdn/12.1.1/img/spell/${spell.id}.png`}/>
+                                        <SpellIncon key={spell.id} title={spell.name} src={`/spell/${spell.id}.png`}/>
 
                                     ))
                                 }

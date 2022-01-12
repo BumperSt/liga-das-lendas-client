@@ -30,7 +30,7 @@ export default function Summoner() {
 
     useEffect(() => {
         if(user){
-            setProfileIcon("https://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/" + user.profileIconId + ".png")
+            setProfileIcon("/profileicon/" + user.profileIconId + ".png")
             setNickInPage(user.name)
             setLevel(user.summonerLevel)
             champApi.getChampsMaestry({
