@@ -6,6 +6,7 @@ import UserContext from '../context/userContext'
 import { useEffect, useState } from 'react'
 import HomePage from '.'
 import Header from '../components/header'
+import * as gtag from '../lib/gtag'
 
 
 function MyApp({ Component, pageProps }) {
@@ -19,7 +20,12 @@ function MyApp({ Component, pageProps }) {
   const [myUrl, setMyUrl] = useState('')
 
   useEffect(() => {
-
+    var ads = document.getElementsByClassName("adsbygoogle").length;
+      for (var i = 0; i < ads; i++) {
+        try {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) { }
+      }
   },[])
 
   useEffect(() => {
@@ -50,11 +56,38 @@ function MyApp({ Component, pageProps }) {
 
   }, [router])
 
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
+
+
   return (
     <UserContext.Provider value={userContextValue}>
       <head>
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147"crossorigin="anonymous"></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147"crossorigin="anonymous"></script>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}></script>
+        <script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${gtag.GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
       </head>
+     
       <Header myUrl={myUrl}/>
       {
   
