@@ -19,7 +19,7 @@ export default function HomePage() {
             .then(({ data }) => {
                 let champs = champHelper.filterRotationChamps(data.freeChampionIds)
                 setChampRotation(champs)
-                setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champs[0].id}_0.jpg`)
+                setBackgroudUrl(`/splash/${champs[0].id}.jpg`)
             })
             .catch((error) => {
                 console.error(error)
@@ -30,7 +30,7 @@ export default function HomePage() {
 
 
     const changeBackgroud = (champ) =>{
-        setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ}_0.jpg`)
+        setBackgroudUrl(`/splash/${champ}.jpg`)
     }
     return (
         
@@ -50,7 +50,7 @@ export default function HomePage() {
                     {
                         champRotation.map((champ) => (
                             <DivChampFace title={champ.name} key={champ.id} onClick={() => changeBackgroud(champ.id)} >
-                                <ChampFace src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${champ.id}.png`} />
+                                <ChampFace src={`/face/${champ.id}.jpg`} />
                             </DivChampFace>
                         ))
                     }

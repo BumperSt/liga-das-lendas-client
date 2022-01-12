@@ -34,7 +34,7 @@ export default function ChampionsPage ()  {
         let calculeOffset  = (actualIndex-lastIndex)*-5
 
         setLastIndex(actualIndex)
-        setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_0.jpg`)
+        setBackgroudUrl(`/splash/${champ.id}.jpg`)
         setOffset(offSet+calculeOffset)
         
     }
@@ -83,7 +83,7 @@ export default function ChampionsPage ()  {
                                 {
                                     setActive(champ) 
                                     setSearchChampion('')}
-                                } src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champ.id}_0.jpg`}/>
+                                } src={`loading/${champ.id}.jpg`}/>
                                 <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
                             </ChampCardDiv>
                         ))

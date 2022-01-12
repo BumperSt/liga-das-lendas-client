@@ -38,7 +38,7 @@ export default function Summoner() {
             })
             .then(({data}) => {
                 let topChamp = champHelper.findChampById(data[0].championId)
-                setBackgroudUrl(`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${topChamp.id}_0.jpg`)
+                setBackgroudUrl(`/splash/${topChamp.id}.jpg`)
                 setChampsMaestry(data)
             })
             .catch((error) => {
