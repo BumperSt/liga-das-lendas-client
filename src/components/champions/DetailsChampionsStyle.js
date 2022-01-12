@@ -148,10 +148,11 @@ export const VideoHability = styled.video`
 
 export const HabilitysTitle= styled.h1`
     font-size:5rem;
+    color:${theme.colors.dourado};
+
     @media only screen and (max-width: 1280px) {
         font-size:2rem;
     }
-    color:white;
 
 
 `

@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import theme from '../../../styles/theme.json'
 export const Container = styled.div`
-    height:100vh;
-    overflow:hidden;
     display: flex;
+    overflow:hidden;
     flex-direction: column;
     margin-top:1rem;
 `
