@@ -67,7 +67,7 @@ export default function DetailsChampions({champActive}) {
                                             <HabilityKey>{SkillArray[champInfo.spells.indexOf(spellSelected)]}</HabilityKey>
                                         }
                                         <HabilityName>{spellSelected.name}</HabilityName>
-                                        <HabilityDescreption>{spellSelected.description}</HabilityDescreption>
+                                        <HabilityDescreption>{spellSelected.description.replaceAll(/<[^>]*>/g, "")}</HabilityDescreption>
                                     </HabilityDescreptionDiv>
 
 
