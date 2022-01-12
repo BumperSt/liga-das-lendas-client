@@ -30,7 +30,6 @@ export default function Summoner() {
 
     useEffect(() => {
         if(user){
-
             setProfileIcon("https://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/" + user.profileIconId + ".png")
             setNickInPage(user.name)
             setLevel(user.summonerLevel)
@@ -50,7 +49,6 @@ export default function Summoner() {
     }, [user])
 
     const UpdateUser = () => {
-        console.log(nickName)
         summonerApi.updateSummoner({
             nickName
         }).then((response) => {
@@ -66,7 +64,6 @@ export default function Summoner() {
         if (summonerPageRef.current) {
             const { scrollTopS, scrollHeightS, clientHeightS } = summonerPageRef.current;
             console.log(scrollTopS)
-
         }
     };
 

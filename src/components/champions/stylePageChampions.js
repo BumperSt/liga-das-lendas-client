@@ -5,6 +5,7 @@ export const Container = styled.div`
     overflow:hidden;
     display: flex;
     flex-direction: column;
+    margin-top:1rem;
 `
 
 export const InputSerach = styled.div`

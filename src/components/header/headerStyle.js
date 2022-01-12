@@ -2,18 +2,18 @@ import styled from "styled-components";
 import theme from '../../../styles/theme.json'
 
 export const Container = styled.div`
+    width: 100%;
+
     display:flex;
-    justify-content:center;
-    background-color:rgba(0,0,0,0.5);
-    border-bottom: 5px solid black;
+    background-color:rgba(0,0,0,0.8);
+    border-bottom: 1px solid ${theme.colors.douradoBrilhante};
     padding: 1rem;
-    position: relative;
 
 `
 
 
 export const ButtonHeader = styled.button`
-    font-size: 1rem;
+    font-size: 1.5rem;
     transition: all .5s;
     color:white;
     background-color:transparent;

@@ -8,7 +8,6 @@ export const Container = styled.div`
     padding: 0px;
     height: 100%;
 
-
 `
 export const BackgroudImage = styled.div`
     -webkit-filter: brightness(60%);

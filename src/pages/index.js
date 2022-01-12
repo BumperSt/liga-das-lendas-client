@@ -32,36 +32,36 @@ export default function HomePage() {
     const changeBackgroud = (champ) =>{
         setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ}_0.jpg`)
     }
-    if(backgroudUrl){
-        return (
-                <Container>
-                    <title>Liga Das Lendas</title>
+    return (
+        
+        backgroudUrl ?
+            <Container>
+            <title>Liga Das Lendas</title>
 
-                    <Top>
-                        <Title>Liga das Lendas</Title>
-                    </Top>
-                    <Midle>
-                      <SearchInput/>
-                    </Midle>
-                    <Bottom>
-                        <BottomText>Rotação De Campeões</BottomText>
-                        <DivRotation>
-                            {
-                                champRotation.map((champ) => (
-                                    <DivChampFace title={champ.name} key={champ.id} onClick={() => changeBackgroud(champ.id)} >
-                                        <ChampFace src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${champ.id}.png`} />
-                                    </DivChampFace>
-                                ))
-                            }
-                        </DivRotation>
-                    </Bottom>
-                    <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
-                </Container>
-        )
-    }else{
-        return(
-            <PageLoading/>
-        )
-    }
-   
+            <Top>
+                <Title>Liga das Lendas</Title>
+            </Top>
+            <Midle>
+                <SearchInput/>
+            </Midle>
+            <Bottom>
+                <BottomText>Rotação De Campeões</BottomText>
+                <DivRotation>
+                    {
+                        champRotation.map((champ) => (
+                            <DivChampFace title={champ.name} key={champ.id} onClick={() => changeBackgroud(champ.id)} >
+                                <ChampFace src={`http://ddragon.leagueoflegends.com/cdn/12.1.1/img/champion/${champ.id}.png`} />
+                            </DivChampFace>
+                        ))
+                    }
+                </DivRotation>
+            </Bottom>
+            <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
+        </Container>
+        :
+        <PageLoading/>
+
+      
+    )
+
 }
