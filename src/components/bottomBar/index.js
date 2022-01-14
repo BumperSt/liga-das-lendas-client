@@ -7,7 +7,7 @@ export default function BottomBar(){
             <a href="https://twitter.com/_ligadaslendas"  target="_blank">
 
             <IconDiv>
-                <Image width="32" height="32" src={'/twitter.png'}></Image>
+                <Image width="32" height="32" src={'/twitter.webp'}></Image>
             </IconDiv>
             </a>
         </Container>
