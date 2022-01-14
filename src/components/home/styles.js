@@ -7,7 +7,7 @@ export const Container = styled.div`
     margin: 0px;
     padding: 0px;
     height: 100%;
-    
+    position: relative;
 
 `
 export const BackgroudImage = styled.div`
