@@ -4,11 +4,9 @@ import theme from '../../../styles/theme.json'
 export const Container = styled.div`
     display:flex;
     flex-direction:column;
+    position: relative;
     margin: 0px;
     padding: 0px;
-    height: 100%;
-    position: relative;
-
 `
 export const BackgroudImage = styled.div`
     -webkit-filter: brightness(60%);
