@@ -47,7 +47,7 @@ export const MatchContainer = styled.div`
     margin-block:.5rem;
     padding:.5rem;
     width: 100%;
-    @media only screen and (max-width: 900px) {
+    @media only screen and (max-width: 600px) {
         flex-direction: column;
     }
     border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
@@ -67,8 +67,19 @@ export const ColumMatchContainer = styled.div`
 `
 
 export const HeaderMatch = styled(ColumMatchContainer)`
-    @media only screen and (max-width: 900px) {
+    @media only screen and (max-width: 600px) {
         width: 100%;
+        flex-direction: row;
+        justify-content:flex-start;
+        margin-inline:0px;
+    }
+`
+
+
+export const AlingRowSmallSizeScreen = styled.div`
+
+    @media only screen and (max-width: 600px) {
+        display:flex;
         flex-direction: row;
     }
 `
@@ -78,7 +89,7 @@ export const ChampIcon = styled.img`
     margin-block: .5rem;
     border-radius: 50%;
     border: solid 2px;
-    @media only screen and (max-width: 900px) {
+    @media only screen and (max-width: 600px) {
         margin-left: 0;
         align-self:center;
         width:4rem;
@@ -91,7 +102,7 @@ export const SpellIncon = styled.img`
     width:2rem;
     border-radius: 50%;
     border: solid 2px;
-    @media only screen and (max-width: 900px) {
+    @media only screen and (max-width: 600px) {
         margin-left: 0;
         align-self:center;
         width:1rem;
@@ -104,24 +115,23 @@ export const OnlySmallScreen = styled.div`
     flex-direction:row;
     align-items: center;
     width: 100%;
-    justify-content: space-around;
+    
 `
 
 export const TypeTitle = styled.h1`
     font-size:1rem;
-    max-width: 5rem;
-    white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-    @media only screen and (max-width: 900px) {
-        font-size:1rem;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 0.8rem;
+        margin-left: 1rem;
+
     }
 `
 export const CharNameAndLevel = styled.h1`
     
     font-size:1.2rem;
-    @media only screen and (max-width: 900px) {
-        font-size:1rem;
+    @media only screen and (max-width: 600px) {
+        font-size: 0.8rem;
     }
     text-align: center;
 `
@@ -131,10 +141,10 @@ export const CharKill = styled.span`
 `
 
 export const SummonerMarch = styled.h1`
-    margin-top:1rem;
     font-size:.8rem;
     text-align: center;
     padding:.1rem;
     background-color:red;
     border-radius: 10px;
+    width: 100%;
 `

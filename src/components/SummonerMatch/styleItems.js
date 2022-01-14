@@ -7,14 +7,17 @@ export const Container = styled.div`
     border-radius:6px;
     align-self: center;
     justify-self: center;
-
+    @media (max-width: 900px) {
+    }
 `
 
 export const AlignItems = styled.div`
     display: flex;
     flex-direction: row;
     padding: .4rem;
-
+    @media (max-width: 900px) {
+        padding: 0.1rem;
+    }
 `
 
 export const ItemContainer = styled.img`

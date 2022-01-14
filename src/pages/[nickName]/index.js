@@ -11,7 +11,7 @@ import summonerApi from '../../api/summoner'
 import champHelper from '../../helpers/champ'
 
 import {
-    Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage, RowAlign, ContainerProfileInfo
+    Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage, RowAlign, ContainerProfileInfo, UpdateUserButton
 } from '../../components/nickname/styles'
 import Head from 'next/head'
 
@@ -29,6 +29,8 @@ export default function Summoner() {
     const { nickName } = router.query
     const [matchsWins, setMatchsWins] = useState(0)
     const [matchsLosts, setMatchsLosts] = useState(0)
+    const [error, setError] = useState(false)
+
 
     useEffect(() => {
         if(user){
@@ -56,8 +58,8 @@ export default function Summoner() {
         }).then((response) => {
             setUser(response.data)
         }).catch((error) => {
-
-            console.log(error)
+            setError(error.response.data.error)
+            console.log(error.response.data)
         })
     }
 
@@ -75,8 +77,6 @@ export default function Summoner() {
 
     const SetPreferencePositions  = (positions) => {
         console.log(positions)
-
-
     }
 
 
@@ -99,7 +99,10 @@ export default function Summoner() {
                 <UserLevel>{level}</UserLevel>
     
                 <NickName>{nickInPage}</NickName>
-                <button onClick={UpdateUser}>UpdateUser</button>
+                <UpdateUserButton onClick={UpdateUser}>Atualizar</UpdateUserButton>
+                {error&&
+                    <h1>{error}</h1>
+                }
                 </Top>
 
                 <LeagueDiv>

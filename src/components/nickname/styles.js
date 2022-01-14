@@ -91,3 +91,18 @@ export const LeagueDiv = styled.div`
     margin: 0;
     align-items: center;
 `
+
+export const UpdateUserButton = styled.div`
+    margin-top:.5rem;
+    padding:0.5rem;
+    background-color:rgba(0,0,0,0.5);
+    border:${theme.colors.dourado} solid 2px;
+    :hover{
+        transform:scale(1.2);
+        border: ${theme.colors.douradoBrilhante} solid 2px;
+        transition: all .2s;        
+        cursor: pointer;
+    }
+    border-radius: 6px;
+    color:white;
+`
