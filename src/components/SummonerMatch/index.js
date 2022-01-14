@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect, useRef} from 'react'
-import {ChampIcon, CharKill, CharNameAndLevel, ColumMatchContainer, Container, MatchContainer, OnlySmallScreen, ScroolContainer, SpellIncon, SummonerMarch, TypeTitle} from './styles'
+import {ChampIcon, CharKill, CharNameAndLevel, ColumMatchContainer, Container, HeaderMatch, MatchContainer, OnlySmallScreen, ScroolContainer, SpellIncon, SummonerMarch, TypeTitle} from './styles'
 import UserContext from '../../context/userContext'
 import summonerApi from '../../api/summoner'
 import MatchFunctions from '../MatchFunctions/index'
@@ -209,11 +209,11 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
         {
                 matchs?.map((match) => (
                     <MatchContainer key={match.info.gameId} win={match.myParticipation.win} style={{color:'white'}}>
-                        <ColumMatchContainer center={true}>
+                        <HeaderMatch center={true}>
                             <TypeTitle title={matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}>{matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}</TypeTitle>
                             <TypeTitle title={getFormatedDate(match.info.gameCreation)}>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
                             <TypeTitle title={match.gameDuration}>{match.gameDuration} Minutos</TypeTitle> 
-                        </ColumMatchContainer>
+                        </HeaderMatch>
                         <OnlySmallScreen>
                             <ColumMatchContainer center={true} marginInline={'0px'}>
                             {   

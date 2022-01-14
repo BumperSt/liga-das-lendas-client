@@ -5,7 +5,6 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-    width: 50%;
     max-height: 100vh;
     align-self: center;
     align-self: flex-end;
@@ -47,8 +46,8 @@ export const MatchContainer = styled.div`
     flex-direction: row;
     margin-block:.5rem;
     padding:.5rem;
+    width: 100%;
     @media only screen and (max-width: 900px) {
-        width: 100%;
         flex-direction: column;
     }
     border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
@@ -56,7 +55,6 @@ export const MatchContainer = styled.div`
         -webkit-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
     box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
-    width: 100%;
 `
 
 
@@ -66,7 +64,13 @@ export const ColumMatchContainer = styled.div`
     min-height:100%;
     margin-inline: ${props => props.marginInline ? `${props.marginInline}` : '.5rem'};
     ${props => props.center && `justify-content:center;`}
-    
+`
+
+export const HeaderMatch = styled(ColumMatchContainer)`
+    @media only screen and (max-width: 900px) {
+        width: 100%;
+        flex-direction: row;
+    }
 `
 
 export const ChampIcon = styled.img`

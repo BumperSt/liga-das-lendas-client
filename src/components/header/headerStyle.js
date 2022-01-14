@@ -43,4 +43,7 @@ export const InputSerchDiv = styled.div`
     background-color:red;
     justify-self: center;
     align-self: center;
+    @media only screen and (max-width: 900px) {
+        display: none;
+    }
 `
