@@ -5,6 +5,8 @@ export const Container = styled.div`
     flex-direction: column;
     background-color:rgba(0,0,0,0.3);
     border-radius:6px;
+    align-self: center;
+    justify-self: center;
 
 `
 
@@ -16,8 +18,8 @@ export const AlignItems = styled.div`
 `
 
 export const ItemContainer = styled.img`
-    width:3rem;
-    height:3rem;
+    width:2rem;
+    height:2rem;
     border-radius: 9px;
     background-color:#ffffff33;
     margin-inline: .2rem;

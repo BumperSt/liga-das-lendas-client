@@ -7,13 +7,13 @@ import SummonerMatch from '../../components/SummonerMatch'
 import SummonerExpBorder from '../../components/SummonerExpBorder'
 import champApi from '../../api/champs'
 import summonerApi from '../../api/summoner'
-import SearchInput from '../../components/searchInput'
 
 import champHelper from '../../helpers/champ'
 
 import {
-    Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage, InputSerchDiv
+    Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage, RowAlign, ContainerProfileInfo
 } from '../../components/nickname/styles'
+import Head from 'next/head'
 
 
 export default function Summoner() {
@@ -27,10 +27,12 @@ export default function Summoner() {
     const [nickInPage, setNickInPage] =useState('')
     const [level, setLevel] = useState('')
     const { nickName } = router.query
+    const [matchsWins, setMatchsWins] = useState(0)
+    const [matchsLosts, setMatchsLosts] = useState(0)
 
     useEffect(() => {
         if(user){
-            setProfileIcon("/profileicon/" + user.profileIconId + ".png")
+            setProfileIcon("/profileicon/" + user.profileIconId + ".webp")
             setNickInPage(user.name)
             setLevel(user.summonerLevel)
             champApi.getChampsMaestry({
@@ -38,7 +40,7 @@ export default function Summoner() {
             })
             .then(({data}) => {
                 let topChamp = champHelper.findChampById(data[0].championId)
-                setBackgroudUrl(`/splash/${topChamp.id}.jpg`)
+                setBackgroudUrl(`/splash/${topChamp.id}.webp`)
                 setChampsMaestry(data)
             })
             .catch((error) => {
@@ -52,7 +54,6 @@ export default function Summoner() {
         summonerApi.updateSummoner({
             nickName
         }).then((response) => {
-            console.log(response)
             setUser(response.data)
         }).catch((error) => {
 
@@ -63,9 +64,20 @@ export default function Summoner() {
     const onScroll = () => {
         if (summonerPageRef.current) {
             const { scrollTopS, scrollHeightS, clientHeightS } = summonerPageRef.current;
-            console.log(scrollTopS)
         }
     };
+
+    const SetWinsAndLostsValue = (wins, losts) => {
+        setMatchsWins(matchsWins + wins)
+        setMatchsLosts(matchsLosts + losts)
+    }
+
+
+    const SetPreferencePositions  = (positions) => {
+        console.log(positions)
+
+
+    }
 
 
 
@@ -74,14 +86,10 @@ export default function Summoner() {
         return(
 
             <Container ref={summonerPageRef}>
-                      <title>{nickInPage} Status</title>
-
-                <InputSerchDiv>
-                    <SearchInput/>
-
-                </InputSerchDiv>
-
-
+                <title>{nickInPage} Status</title>
+                <Head>
+                    <meta name="description" content={`${nickInPage}/ / Lv.${level}`} />
+                </Head>
                 <Top >
 
                 <ProfileIcon src={profileIcon}></ProfileIcon>
@@ -100,11 +108,19 @@ export default function Summoner() {
                     }
                     
                 </LeagueDiv>
-                {
-                    summonerPageRef.current&&
-                    <SummonerMatch onScrollSummonerPage={onScroll}/>
+                <RowAlign>
+                    {/* <ContainerProfileInfo>
+                        <h1>Total de partidas:{matchsWins + matchsLosts}</h1>
+                        <h1>{matchsWins}</h1>
+                        <h1>{matchsLosts}</h1>
+                    </ContainerProfileInfo> */}
+                    {
+                        summonerPageRef.current&&
+                        <SummonerMatch onScrollSummonerPage={onScroll} setWinsAndLostsValue={SetWinsAndLostsValue} SetPreferencePositions={SetPreferencePositions}/>
 
-                }
+                    }
+                </RowAlign>
+            
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
 
             </Container>

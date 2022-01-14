@@ -84,30 +84,40 @@ export const BottomText = styled.h1`
     font-size: 2.5rem;
 
 `
+export const AlignColum = styled.div`
+    display:flex;
+    flex-direction:column;
+`
 
 export const DivRotation = styled.div`  
-    width: 80%;
     display:flex;
     flex-direction: row;
     flex-flow: row wrap;
     flex-wrap: wrap; 
     justify-content: center;
+    max-width: 60%;
+    @media (max-width: 768px) {
+        max-width: 80%;
+    }
 `
 export const DivChampFace = styled.div`
     transition: all 0.5s;
-    width:8rem;
-    padding: 1rem;
+    padding: .5rem;
+    span{
+        border: 2px solid ${theme.colors.dourado} !important;
+        border-radius: 50%;
+    }
     :hover{
-        width: 9rem;
-        img{
-            border: 5px solid #ffa309;
+        transform: scale(1.2);
+        span{
+            border: 2px solid #ffa309 !important;
         }
         cursor: pointer;
     }
 `
 export const ChampFace = styled.img`
-    width: 100%;
     border-radius: 50%;
     border: 2px solid ${theme.colors.dourado};
     transition: border .5s;
+    width:5rem;
 `

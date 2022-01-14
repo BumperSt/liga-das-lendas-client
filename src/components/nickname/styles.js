@@ -28,6 +28,17 @@ export const BackgroudImage = styled.div`
     
 `
 
+export const RowAlign = styled.div`
+    display:flex;
+    justify-content: center;
+`
+
+export const ContainerProfileInfo = styled.div`
+    display:flex;
+    flex-direction: column;
+    color:white;
+`
+
 
 export const Top = styled.header`
     display: flex;
@@ -79,12 +90,4 @@ export const LeagueDiv = styled.div`
     display:flex;
     margin: 0;
     align-items: center;
-`
-
-export const InputSerchDiv = styled.div`
-    display:flex;
-    width: 80%;
-    justify-content: center;
-    align-self: center;
-    margin-top:1rem;
 `

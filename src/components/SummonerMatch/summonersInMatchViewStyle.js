@@ -14,12 +14,10 @@ export const AlignTeam = styled.div`
 `
 
 export const AlingChampImgAndName = styled.div`
-    min-width:10rem;
     display:flex;
     flex-direction:row;
     align-items:center;
     margin-block: .2rem;
-
     :hover{
         cursor: pointer;
         color:${theme.colors.dourado};
@@ -30,8 +28,8 @@ export const AlingChampImgAndName = styled.div`
 `
 
 export const ChampImg = styled.img`
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     @media (max-width: 800px){
         width:1rem;
         height: 1rem;

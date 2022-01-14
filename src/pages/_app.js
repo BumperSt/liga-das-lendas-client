@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import HomePage from '.'
 import Header from '../components/header'
 import * as gtag from '../lib/gtag'
+import Analytics from '../components/analytics/analystics'
+import Head from 'next/head'
 
 
 function MyApp({ Component, pageProps }) {
@@ -19,14 +21,14 @@ function MyApp({ Component, pageProps }) {
   const [userPage ,setUserPage] = useState(false)
   const [myUrl, setMyUrl] = useState('')
 
-  useEffect(() => {
-    var ads = document.getElementsByClassName("adsbygoogle").length;
-      for (var i = 0; i < ads; i++) {
-        try {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) { }
-      }
-  },[])
+  // useEffect(() => {
+  //   var ads = document.getElementsByClassName("adsbygoogle").length;
+  //     for (var i = 0; i < ads; i++) {
+  //       try {
+  //         (adsbygoogle = window.adsbygoogle || []).push({});
+  //       } catch (e) { }
+  //     }
+  // },[])
 
   useEffect(() => {
     let myUrl = window.location.pathname
@@ -66,28 +68,27 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
 
+  useEffect(() => {
+    var ads = document.getElementsByClassName("adsbygoogle").length;
+    for (var i = 0; i < ads; i++) {
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) { }
+    }
+  }, []);
+
 
   return (
+    <html lang='pt-br'>
+
     <UserContext.Provider value={userContextValue}>
-      <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147"crossorigin="anonymous"></script>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}></script>
-        <script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${gtag.GA_TRACKING_ID}', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
-      </head>
-     
+      {/* <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147" crossorigin="anonymous"></script>        
+      </head> */}
+      <Head>
+        <meta name="keywords" content="LOL Campeões, Repetição, Resultados, Gráficos, lol mundial, Calculadora, lol brasil, LolKing, LOLNexus"/>
+        <meta name="description" content="Perfil LoL - Verifique seus KDA, Resultados dos jogos, Estatísticas, Campeões, Perfil e mais. Busca seu nome de invocadores agora!" />
+      </Head>
       <Header myUrl={myUrl}/>
       {
   
@@ -103,8 +104,11 @@ function MyApp({ Component, pageProps }) {
         :
         <HomePage/>
       }
+      <Analytics/>
     </UserContext.Provider>
-    )
+   
+    </html>
+ )
 }
 
 export default MyApp

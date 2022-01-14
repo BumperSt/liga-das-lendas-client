@@ -18,8 +18,8 @@ export default function SearchInput() {
         <DivInput>
             <form method='POST' onSubmit={sendNickName}>
                 <Input name="ligaDasLendasSearch" value={nickName} onChange={(evt) => setNickName(evt.target.value)} placeholder="Digite seu usuário, invocador"></Input>
-                <ButtonLupa>
-                    <Image src="/svg/lupa.svg" width="32" height="32"></Image>
+                <ButtonLupa name="search">
+                    <Image alt="lupa" src="/svg/lupa.svg" width="32" height="32"></Image>
                 </ButtonLupa>
             </form>
         </DivInput>

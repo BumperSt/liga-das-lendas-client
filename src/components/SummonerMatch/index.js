@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect, useRef} from 'react'
-import {ChampIcon, CharNameAndLevel, ColumMatchContainer, Container, MatchContainer, OnlySmallScreen, ScroolContainer, SpellIncon, TypeTitle} from './styles'
+import {ChampIcon, CharKill, CharNameAndLevel, ColumMatchContainer, Container, MatchContainer, OnlySmallScreen, ScroolContainer, SpellIncon, SummonerMarch, TypeTitle} from './styles'
 import UserContext from '../../context/userContext'
 import summonerApi from '../../api/summoner'
 import MatchFunctions from '../MatchFunctions/index'
@@ -11,7 +11,7 @@ import { Bars } from 'react-loading-icons'
 import theme from '../../../styles/theme.json'
 import { SummonersInMatchView } from './summonersInMatchView'
 
-export default function SummonerMatch({onScrollSummonerPage}){
+export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsValue, SetPreferencePositions}){
 
 
     const matchContainerRef = useRef();
@@ -24,25 +24,32 @@ export default function SummonerMatch({onScrollSummonerPage}){
     
     const [loadingMatchs, setLoadingMatchs] = useState(true)
 
+    const [matchAuxIndex, setMatchAuxIndex] = useState(0)
+
+    const [CallingMatch, setCallingMatch] = useState(false)
+
+    const [preferencePositions, setPreferencePositions] = useState([])
+
     let matchArray = []
 
     const matchGetSize = 10;
 
     let getMatchNum = 0
     
-    let matchAuxIndex = 0
-
+    let preferencePosition = {}
+    let wins = 0
+    let losts = 0
 
     const callGetMatch = () => {
         setLoadingMatchs(true)
-
         summonerApi.getMatchList({
             puuid : user.puuid,
             startIndex: matchAuxIndex
         })
         .then(({data}) => {
+            setCallingMatch(false)
             setmatchList(data)
-            matchAuxIndex += 10
+            setMatchAuxIndex( matchAuxIndex + 10)
         })
         .catch((error) =>{
             console.error(error)
@@ -53,11 +60,13 @@ export default function SummonerMatch({onScrollSummonerPage}){
         if(user){
             setmatchList(null)
             setMatchs([])
-            matchAuxIndex = 0
-            callGetMatch()            
-
         }
     }, [user])
+
+    useEffect(() => {
+        callGetMatch()            
+
+    }, [])
     
     useEffect(() => {
         if(matchList){
@@ -67,8 +76,6 @@ export default function SummonerMatch({onScrollSummonerPage}){
             }
         }
     }, [matchList])
-
-    
 
     useEffect(() => {
         if(matchs.length > 0) {
@@ -81,18 +88,68 @@ export default function SummonerMatch({onScrollSummonerPage}){
 
         let myParticipation = matchHelper.getParticipantID(matchData.info.participants, user.puuid)
 
-        let kda = `${myParticipation.kills}/${myParticipation.deaths}/${myParticipation.assists}`
+        let kda = `${myParticipation.kills}${myParticipation.deaths}${myParticipation.assists}`
 
         let kdaRatio = ((myParticipation.kills +  myParticipation.assists)/myParticipation.deaths).toFixed(2)
 
         let spells = [matchHelper.getSummonerSpellName(myParticipation.summoner1Id), matchHelper.getSummonerSpellName(myParticipation.summoner2Id)]
         
         let runes = [matchHelper.getRuneById(myParticipation.perks.styles[0].style), matchHelper.getRuneById(myParticipation.perks.styles[1].style)]
+
+        let killedMinions = myParticipation.neutralMinionsKilled + myParticipation.totalMinionsKilled
         
-        matchData = {...matchData, myParticipation, kda, kdaRatio, spells, runes}
+        let gameDuration = Math.trunc(matchData.info.gameDuration/60)
+
+        let killedMinionsPorMin = (killedMinions/gameDuration).toFixed(1)
+
+        let killsSequences = myParticipation.pentaKills >= 1 && 'Penta Kill' || myParticipation.quadraKills >= 1 && 'Quadra Kill'  ||  myParticipation.tripleKills >= 1 && 'Triple Kill'  || myParticipation.doubleKills >= 1 && 'Double Kill' 
+
+
+        if(preferencePosition[myParticipation.individualPosition]){
+            if(myParticipation.win){
+                preferencePosition[myParticipation.individualPosition] = {
+                    value:(preferencePosition[myParticipation.individualPosition].value+1),
+                    win:preferencePosition[myParticipation.individualPosition].win+1,
+                    lost:preferencePosition[myParticipation.individualPosition].lost
+                }
+            }else{
+                preferencePosition[myParticipation.individualPosition] = {
+                    value:(preferencePosition[myParticipation.individualPosition].value+1),
+                    win:preferencePosition[myParticipation.individualPosition].win,
+                    lost:preferencePosition[myParticipation.individualPosition].lost+1
+                }
+            }
+        }else{
+            if(myParticipation.win){
+                preferencePosition[myParticipation.individualPosition] = {
+                    value:1,
+                    win:1,
+                    lost:0
+                }
+            }else{
+                preferencePosition[myParticipation.individualPosition] = {
+                    value:1,
+                    win:0,
+                    lost:1
+                }
+            }
+
+        }
+        if(myParticipation.win){
+            wins += 1;
+        }else{
+            losts += 1;
+        }
+
+        matchData = {...matchData, myParticipation, kda, kdaRatio, spells, runes, gameDuration,killedMinions, killedMinionsPorMin, killsSequences}
         matchArray.push(matchData)
 
+        
         if(matchArray.length == matchGetSize){
+
+            console.log(`Vitorias Derrotas ${wins}: ${losts}`)
+            SetPreferencePositions(preferencePosition)
+            setWinsAndLostsValue(wins, losts)
 
             matchArray.sort(function(x, y){
                 return new Date(y.info.gameCreation) - new Date(x.info.gameCreation);
@@ -111,11 +168,12 @@ export default function SummonerMatch({onScrollSummonerPage}){
 
 
             const { scrollTop, scrollHeight, clientHeight } = matchContainerRef.current;
-            console.log(scrollTop)
-            console.log(scrollTop + clientHeight)
-            console.log(scrollHeight)
             if (scrollTop + clientHeight >= scrollHeight - 10) {
-                callGetMatch()            
+                if(!CallingMatch){
+                    callGetMatch()            
+                    setCallingMatch(true)
+
+                }
             }
         }
     };
@@ -150,14 +208,14 @@ export default function SummonerMatch({onScrollSummonerPage}){
         <ScroolContainer onScroll={onScroll} ref={matchContainerRef}>
         {
                 matchs?.map((match) => (
-                    <MatchContainer win={match.myParticipation.win} key={match.info.gameId} style={{color:'white'}}>
-                        <ColumMatchContainer>
-                            <TypeTitle>{matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}</TypeTitle>
-                                <TypeTitle>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
-                            {/* <TypeTitle>{Math.trunc(match.info.gameDuration/60)} Minutos</TypeTitle> */} 
+                    <MatchContainer key={match.info.gameId} win={match.myParticipation.win} style={{color:'white'}}>
+                        <ColumMatchContainer center={true}>
+                            <TypeTitle title={matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}>{matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}</TypeTitle>
+                            <TypeTitle title={getFormatedDate(match.info.gameCreation)}>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
+                            <TypeTitle title={match.gameDuration}>{match.gameDuration} Minutos</TypeTitle> 
                         </ColumMatchContainer>
                         <OnlySmallScreen>
-                            <ColumMatchContainer>
+                            <ColumMatchContainer center={true} marginInline={'0px'}>
                             {   
                                     match.runes.map((rune) => (
                                         <SpellIncon key={rune.id} title={rune.name} src={`https://ddragon.canisback.com/img/${rune.icon}`}/>
@@ -166,24 +224,31 @@ export default function SummonerMatch({onScrollSummonerPage}){
                                 }
                             
                             </ColumMatchContainer>
-                            <ColumMatchContainer>
+                            <ColumMatchContainer center={true}>
                                 <CharNameAndLevel>Nivel {match.myParticipation.champLevel}</CharNameAndLevel>
-                                <ChampIcon title={champJson.data[match.myParticipation.championName].title} src={`/face/${match.myParticipation.championName}.jpg`}/>
+                                <ChampIcon title={champJson.data[match.myParticipation.championName].title} src={`/face/${match.myParticipation.championName}.webp`}/>
                                 <CharNameAndLevel>{match.myParticipation.championName}</CharNameAndLevel>
                             </ColumMatchContainer>
-                            <ColumMatchContainer>
+                            <ColumMatchContainer center={true}  marginInline={'0px'}>
                                 {   
                                     match.spells.map((spell) => (
-                                        <SpellIncon key={spell.id} title={spell.name} src={`/spell/${spell.id}.png`}/>
+                                        <SpellIncon key={spell.id} title={spell.name} src={`/spell/${spell.id}.webp`}/>
 
                                     ))
                                 }
                             </ColumMatchContainer>
-                            <ColumMatchContainer>
-                                <CharNameAndLevel>{match.kda}</CharNameAndLevel>
+                            <ColumMatchContainer center={true}>
+                                <CharNameAndLevel>{match.kda[0]}/<CharKill>{match.kda[1]}</CharKill>/{match.kda[2]}</CharNameAndLevel>
                                 <CharNameAndLevel>{match.kdaRatio} KDA</CharNameAndLevel>
+                                <CharNameAndLevel>{match.killedMinionsPorMin} ({match.killedMinions}) CS</CharNameAndLevel>
+                                <CharNameAndLevel>Control Wards {match.myParticipation.visionWardsBoughtInGame}</CharNameAndLevel>
+
+                                {
+                                    match.killsSequences&&
+                                    <SummonerMarch>{match.killsSequences}</SummonerMarch>
+                                }
                             </ColumMatchContainer>
-                            <ColumMatchContainer>
+                            <ColumMatchContainer center={true}>
                                 <MatchItems myParticipation={match.myParticipation}/>
                             </ColumMatchContainer>
                             <ColumMatchContainer>

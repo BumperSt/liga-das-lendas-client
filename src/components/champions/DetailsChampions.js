@@ -48,11 +48,11 @@ export default function DetailsChampions({champActive}) {
                                 <HabilitysTitle>HABILIDADES</HabilitysTitle>
 
                                 <SpellDiv>
-                                    <SpellImg active={spellSelected?.passive} onClick={() => setSpellSelected({...champInfo.passive, passive:true})} src={`/passive/${champInfo.passive.image.full}`}/>
+                                    <SpellImg active={spellSelected?.passive} onClick={() => setSpellSelected({...champInfo.passive, passive:true})} src={`/passive/${champInfo.passive.image.full.replace('png', 'webp')}`}/>
 
                                     {
                                     champInfo.spells.map((spell) => (
-                                        <SpellImg active={spellSelected == spell} onClick={() => setSpellSelected(spell)} src={`/spell/${spell.id}.png`}/>
+                                        <SpellImg key={spell.id} active={spellSelected == spell} onClick={() => setSpellSelected(spell)} src={`/spell/${spell.id}.webp`}/>
                                     ))
                                     
                                     }
@@ -80,17 +80,17 @@ export default function DetailsChampions({champActive}) {
                                 {   
                                     spellSelected? 
                                     spellSelected?.passive?
-                                    <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.webm` || 'blitz.png'}></VideoHability>
+                                    <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.mp4` || 'blitz.webp'}></VideoHability>
                                     :
-                                    <VideoHability loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.webm`}></VideoHability>
+                                    <VideoHability loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.mp4`}></VideoHability>
                                     :
                                     <Bars stroke='black' fill={theme.colors.dourado}/> 
                                 }
                                 {
                                     spellSelected&&
                                     <>
-                                        <VideoUndefined  src={'/rifts.jpg'}/>
-                                        <VideoBlitz src={'blitz.png'}/>
+                                        <VideoUndefined  src={'/rifts.webp'}/>
+                                        <VideoBlitz src={'blitz.webp'}/>
                                         <UndefinedTilte>VÍDEO NÃO DISPONIVEL.</UndefinedTilte>
                                     </>
                                 }

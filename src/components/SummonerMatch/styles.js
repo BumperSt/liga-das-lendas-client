@@ -5,10 +5,10 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-    width: 100%;
+    width: 50%;
     max-height: 100vh;
     align-self: center;
-
+    align-self: flex-end;
 `;
 
 export const ScroolContainer = styled.div`
@@ -45,36 +45,32 @@ export const ScroolContainer = styled.div`
 export const MatchContainer = styled.div`
     display: flex;
     flex-direction: row;
-    min-width:80vw;
-    border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
     margin-block:.5rem;
-    align-items: center;
-    padding:1rem;
-    -webkit-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
-    box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
+    padding:.5rem;
     @media only screen and (max-width: 900px) {
         width: 100%;
         flex-direction: column;
     }
+    border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
     background-color: ${props => props.win ? 'rgba(0,255,0,0.2)' :'rgba(255,0,0,0.2)'};
+        -webkit-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
+    box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
     width: 100%;
-    justify-content: center;
-
 `
+
 
 export const ColumMatchContainer = styled.div`
     display: flex;
     flex-direction:column;
-    margin-inline:.2rem;
-    @media only screen and (max-width: 900px) {
-        margin-inline:.1rem;
-    }
-
+    min-height:100%;
+    margin-inline: ${props => props.marginInline ? `${props.marginInline}` : '.5rem'};
+    ${props => props.center && `justify-content:center;`}
+    
 `
 
 export const ChampIcon = styled.img`
-    width:8rem;
+    width:6rem;
     margin-block: .5rem;
     border-radius: 50%;
     border: solid 2px;
@@ -88,14 +84,13 @@ export const ChampIcon = styled.img`
 
 export const SpellIncon = styled.img`
     margin-block:.3rem;
-
-    width:3rem;
+    width:2rem;
     border-radius: 50%;
     border: solid 2px;
     @media only screen and (max-width: 900px) {
         margin-left: 0;
         align-self:center;
-        width:2rem;
+        width:1rem;
 
     }
 `
@@ -109,16 +104,33 @@ export const OnlySmallScreen = styled.div`
 `
 
 export const TypeTitle = styled.h1`
-    font-size:1.5rem;
+    font-size:1rem;
+    max-width: 5rem;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
     @media only screen and (max-width: 900px) {
         font-size:1rem;
     }
 `
 export const CharNameAndLevel = styled.h1`
-    font-size:1.5rem;
+    
+    font-size:1.2rem;
     @media only screen and (max-width: 900px) {
         font-size:1rem;
     }
     text-align: center;
+`
 
+export const CharKill = styled.span`
+    color:#ff6e6e;
+`
+
+export const SummonerMarch = styled.h1`
+    margin-top:1rem;
+    font-size:.8rem;
+    text-align: center;
+    padding:.1rem;
+    background-color:red;
+    border-radius: 10px;
 `

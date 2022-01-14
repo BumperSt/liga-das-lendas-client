@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import champApi from '../api/champs'
 import PageLoading from '../components/LoadingPage'
 import {
-    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, ChampFace, DivChampFace, BackgroudImage
+    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, ChampFace, DivChampFace, BackgroudImage, AlignColum
 } from '../components/home/styles'
-
 import champHelper from '../helpers/champ'
 import SearchInput from '../components/searchInput'
-
+import Image from 'next/image'
 
 export default function HomePage() {
 
@@ -19,7 +18,7 @@ export default function HomePage() {
             .then(({ data }) => {
                 let champs = champHelper.filterRotationChamps(data.freeChampionIds)
                 setChampRotation(champs)
-                setBackgroudUrl(`/splash/${champs[0].id}.jpg`)
+                setBackgroudUrl(`/splash/${champs[0].id}.webp`)
             })
             .catch((error) => {
                 console.error(error)
@@ -30,14 +29,12 @@ export default function HomePage() {
 
 
     const changeBackgroud = (champ) =>{
-        setBackgroudUrl(`/splash/${champ}.jpg`)
+        setBackgroudUrl(`/splash/${champ}.webp`)
     }
     return (
-        
         backgroudUrl ?
-            <Container>
+        <Container>
             <title>Liga Das Lendas</title>
-
             <Top>
                 <Title>Liga das Lendas</Title>
             </Top>
@@ -49,9 +46,11 @@ export default function HomePage() {
                 <DivRotation>
                     {
                         champRotation.map((champ) => (
-                            <DivChampFace title={champ.name} key={champ.id} onClick={() => changeBackgroud(champ.id)} >
-                                <ChampFace src={`/face/${champ.id}.jpg`} />
+                        
+                            <DivChampFace key={champ.key}  title={champ.name} onClick={() => changeBackgroud(champ.id)} >
+                                <Image alt={champ.name} width="80" height="80" src={`/face/${champ.id}.webp`} />
                             </DivChampFace>
+                            
                         ))
                     }
                 </DivRotation>

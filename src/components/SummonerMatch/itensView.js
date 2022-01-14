@@ -19,7 +19,6 @@ const MatchItems = ({myParticipation}) => {
         localArray.forEach(element => {
             let item = itens_json.data[element]
             arrayItemsTemp.push(item)
-            
         });
         setArrayItems(arrayItemsTemp)
     }, [myParticipation])
@@ -31,34 +30,32 @@ const MatchItems = ({myParticipation}) => {
             <>
             <AlignItems>
                 {
-                    arrayItems.slice(0, 3).map((item) => (
-                        <>
-                        {
-                            item?
-                            <ItemContainer key={item.id} title={item.name} src={`/item/${item.image.full}`}/>
-                            :
-                            <ItemContainer  src="/undefinedItem.png"/>
+                    arrayItems.slice(0, 3).map((item, index) => (
+                        
+                      
+                        item?
+                        <ItemContainer key={index} title={item.name} src={`/item/${item.image.full.replace("png", "webp")}`}/>
+                        :
+                        <ItemContainer key={index} src="/undefinedItem.webp"/>
 
-                        }
-                        </>
+                      
+                       
                     ))
                 }
-                <ItemContainer  title={arrayItems[6].name} src={`/item/${arrayItems[6].image.full}`}/>
+                <ItemContainer  title={arrayItems[6].name} src={`/item/${arrayItems[6].image.full.replace("png", "webp")}`}/>
 
             
             </AlignItems>
             <AlignItems>
             {
-                    arrayItems.slice(3, 6).map((item) => (
-                        <>
-                        {
-                            item?
-                            <ItemContainer key={item.id} title={item.name}  src={`/item/${item.image.full}`}/>
-                            :
-                            <ItemContainer   src="/undefinedItem.png"/>
+                    arrayItems.slice(3, 6).map((item, index) => (
+                
+                        item?
+                        <ItemContainer key={index} title={item.name}  src={`/item/${item.image.full.replace("png", "webp")}`}/>
+                        :
+                        <ItemContainer key={index}   src="/undefinedItem.webp"/>
 
-                        }
-                        </>
+                 
 
                     ))
                 }

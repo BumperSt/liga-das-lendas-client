@@ -6,6 +6,7 @@ import { BackgroudImage } from "../../components/nickname/styles";
 import LoadingPage from '../../components/LoadingPage'
 import { Input } from "../../components/searchInput/styleSerachInput";
 import { MaxHeigthDiv } from "../../components/champions/DetailsChampionsStyle";
+import Head from "next/head";
 
 export default function ChampionsPage ()  {
 
@@ -34,7 +35,7 @@ export default function ChampionsPage ()  {
         let calculeOffset  = (actualIndex-lastIndex)*-5
 
         setLastIndex(actualIndex)
-        setBackgroudUrl(`/splash/${champ.id}.jpg`)
+        setBackgroudUrl(`/splash/${champ.id}.webp`)
         setOffset(offSet+calculeOffset)
         
     }
@@ -66,8 +67,11 @@ export default function ChampionsPage ()  {
     if(championsArray){
         return(
             <Container>
+                
                 <title>{champActive}Detalhes</title>
-
+                <Head>
+                    <meta name="description" content={"League Of Legends, Habilidades Campeões, Skills Campeões"} />
+                </Head>
                 <InputSerach>
                     <Input value={serachChampion} onChange={(evt) => setSearchChampion(evt.target.value)} placeholder="Busque um campeão"></Input>
 
@@ -78,12 +82,12 @@ export default function ChampionsPage ()  {
                 <HorizonScroll transaletX={offSet}>
                     {
                         championsArray?.map((champ) => (
-                            <ChampCardDiv ref={cardDiv} active={champActive == champ.id}>
+                            <ChampCardDiv key={champ.key} ref={cardDiv} active={champActive == champ.id}>
                                 <ChampionsCard  onClick={() => 
                                 {
                                     setActive(champ) 
                                     setSearchChampion('')}
-                                } src={`loading/${champ.id}.jpg`}/>
+                                } src={`loading/${champ.id}.webp`}/>
                                 <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
                             </ChampCardDiv>
                         ))

@@ -36,7 +36,6 @@ export default function SummonerChampion() {
     useEffect(() => {
         if(user){
             setChamp(champHelper.findChampByName(champion))
-            console.log(user)
 
         }       
     }, [user])

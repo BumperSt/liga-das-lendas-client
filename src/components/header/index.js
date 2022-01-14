@@ -1,6 +1,7 @@
-import { ButtonHeader, Container } from "./headerStyle";
+import { ButtonDiv, ButtonHeader, Container, InputSerchDiv } from "./headerStyle";
 import react, { useEffect, useState } from "react"
 import { useRouter } from "next/router";
+import SearchInput from '../../components/searchInput'
 
 export default function Header({myUrl}){  
     const router = useRouter()
@@ -22,13 +23,24 @@ export default function Header({myUrl}){
             backgroundColor: 'black'
         }}>
             <Container>
+                <ButtonDiv>
                 {
                     buttons.map((button) => (
-                        <ButtonHeader onClick={() => router.push(button.Url)} key={button.key} active={myUrl == button.Url}>{button.name}</ButtonHeader>
+                        <ButtonHeader  key={button.id}  onClick={() => router.push(button.Url)} active={myUrl == button.Url}>{button.name}</ButtonHeader>
                     ))
                 }   
                 <ButtonHeader active={myUrl != '/' && myUrl != '/-champions'} onClick={() => ClickSummoner()}>Summoner</ButtonHeader>
+                </ButtonDiv>
+            
+                {
+                    myUrl != '/' && myUrl != '/-champions' &&
+                
+                    <InputSerchDiv>
+                        <SearchInput/>
 
+                    </InputSerchDiv>
+
+                }
             </Container>
         </div>
     )

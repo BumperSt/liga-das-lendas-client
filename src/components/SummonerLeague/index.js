@@ -52,7 +52,7 @@ export default function SummonerLeague() {
 
                         <DivRow>
                             <PdlText>PDL {soloq.leaguePoints}</PdlText>
-                            <LeagueIcon src={`/ranked-emblems/Emblem_${soloq.tier[0].toUpperCase() + soloq.tier.substr(1).toLowerCase()}.png`}></LeagueIcon>
+                            <LeagueIcon src={`/ranked-emblems/Emblem_${soloq.tier[0].toUpperCase() + soloq.tier.substr(1).toLowerCase()}.webp`}></LeagueIcon>
                             <WinText>{soloq.wins}V {soloq.losses}D</WinText>
 
                         </DivRow>
@@ -66,7 +66,7 @@ export default function SummonerLeague() {
                         <LeagueText>Unranked</LeagueText>
                 
                         <DivRow>
-                            <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.png`}></LeagueIcon>
+                            <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.webp`}></LeagueIcon>
 
                         </DivRow>
                     </DivLeague>
@@ -80,7 +80,7 @@ export default function SummonerLeague() {
                         <LeagueText>{flex.tier} {flex.rank}</LeagueText>
                         <DivRow>
                             <PdlText>PDL {flex.leaguePoints}</PdlText>
-                            <LeagueIcon src={`/ranked-emblems/Emblem_${flex.tier[0].toUpperCase() + flex.tier.substr(1).toLowerCase()}.png`}></LeagueIcon>
+                            <LeagueIcon src={`/ranked-emblems/Emblem_${flex.tier[0].toUpperCase() + flex.tier.substr(1).toLowerCase()}.webp`}></LeagueIcon>
 
                             <WinText>{flex.wins}V {flex.losses}D</WinText>
                         </DivRow>
@@ -94,7 +94,7 @@ export default function SummonerLeague() {
                         <LeagueText>Unranked</LeagueText>
 
                         <DivRow>
-                            <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.png`}></LeagueIcon>
+                            <LeagueIcon src={`/ranked-emblems/Emblem_Unranked.webp`}></LeagueIcon>
 
                         </DivRow>
                     </DivLeague>

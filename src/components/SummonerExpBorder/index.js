@@ -33,6 +33,6 @@ export default function SummonerExpBorder({level}){
 
 
     return(
-        <ExpBorder src={`/exp-emblems/${expBorderLevel}.png`}></ExpBorder>
+        <ExpBorder src={`/exp-emblems/${expBorderLevel}.webp`}></ExpBorder>
     )
 }
