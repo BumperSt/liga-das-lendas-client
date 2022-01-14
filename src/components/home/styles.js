@@ -69,7 +69,7 @@ export const Midle = styled.div`
         @media only screen and (max-width: 900px) {
             margin-top: 0.5rem;
         }
-
+        margin-bottom: 3rem;
         justify-content:flex-start;
         align-items:center;
         width: 100%;
