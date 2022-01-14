@@ -9,21 +9,12 @@ import SearchInput from '../components/searchInput'
 import Image from 'next/image'
 import BottomBar from '../components/bottomBar'
 
-export default function HomePage() {
+export default function HomePage({champs}) {
 
-    const [champRotation, setChampRotation] = useState([])
     const [backgroudUrl, setBackgroudUrl] = useState(null)
     
     useEffect(() => {
-        champApi.getChampsRotation()
-            .then(({ data }) => {
-                let champs = champHelper.filterRotationChamps(data.freeChampionIds)
-                setChampRotation(champs)
-                setBackgroudUrl(`/splash/${champs[0].id}.webp`)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+        setBackgroudUrl(`/splash/${champs[0].id}.webp`)
     }, [])
 
 
@@ -46,7 +37,7 @@ export default function HomePage() {
                 <BottomText>Rotação De Campeões</BottomText>
                 <DivRotation>
                     {
-                        champRotation.map((champ) => (
+                        champs.map((champ) => (
                         
                             <DivChampFace key={champ.key}  title={champ.name} onClick={() => changeBackgroud(champ.id)} >
                                 <Image alt={champ.name} width="80" height="80" src={`/face/${champ.id}.webp`} />
@@ -67,3 +58,15 @@ export default function HomePage() {
     )
 
 }
+
+export async function getStaticProps(context) {
+
+    let {data} = await champApi.getChampsRotation()
+    
+    let champs = champHelper.filterRotationChamps(data.freeChampionIds)
+    
+    return {
+        revalidate:3600,
+        props: {champs}, // will be passed to the page component as props
+    }
+  }
