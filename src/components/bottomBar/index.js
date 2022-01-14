@@ -4,10 +4,14 @@ import { Container, IconDiv } from "./bottomBarStyled";
 export default function BottomBar(){
     return(
         <Container>
-            <a href="https://twitter.com/_ligadaslendas"  target="_blank">
+            <a 
+                rel='noreferrer'
+                href="https://twitter.com/_ligadaslendas"  
+                target="_blank"
+            >
 
             <IconDiv>
-                <Image width="32" height="32" src={'/twitter.webp'}></Image>
+                <Image title="Ícone do twitter" alt='Abrir twitter' width="32" height="32" src={'/twitter.webp'}></Image>
             </IconDiv>
             </a>
         </Container>

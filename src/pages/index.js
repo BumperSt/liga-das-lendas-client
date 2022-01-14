@@ -8,6 +8,7 @@ import champHelper from '../helpers/champ'
 import SearchInput from '../components/searchInput'
 import Image from 'next/image'
 import BottomBar from '../components/bottomBar'
+import Head from 'next/head'
 
 export default function HomePage({champs}) {
 
@@ -26,7 +27,9 @@ export default function HomePage({champs}) {
     return (
         backgroudUrl ?
         <Container>
-            <title>Liga Das Lendas</title>
+            <Head>
+                <title>Liga Das Lendas</title>
+            </Head>
             <Top>
                 <Title>Liga das Lendas</Title>
             </Top>
@@ -66,7 +69,7 @@ export async function getStaticProps(context) {
     let champs = champHelper.filterRotationChamps(data.freeChampionIds)
     
     return {
-        revalidate:3600,
+        revalidate:3600*24,
         props: {champs}, // will be passed to the page component as props
     }
   }

@@ -34,7 +34,7 @@ export const BackgroudImage = styled.div`
         text-align: center;
     `
 
-export const Title = styled.a`
+export const Title = styled.h1`
     color: white;
     font-size: 4rem;
     font-weight: 700;

@@ -9,6 +9,7 @@ import Header from '../components/header'
 import * as gtag from '../lib/gtag'
 import Analytics from '../components/analytics/analystics'
 import Head from 'next/head'
+import { Html } from 'next/document'
 
 
 function MyApp({ Component, pageProps }) {
@@ -79,36 +80,35 @@ function MyApp({ Component, pageProps }) {
 
 
   return (
-    <html lang='pt-br'>
-
-    <UserContext.Provider value={userContextValue}>
-      {/* <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147" crossorigin="anonymous"></script>        
-      </head> */}
-      <Head>
-        <link rel="icon" href="logo.webp"/>
-        <meta name="keywords" content="LOL Campeões, Repetição, Resultados, Gráficos, lol mundial, Calculadora, lol brasil, LolKing, LOLNexus"/>
-        <meta name="description" content="Perfil LoL - Verifique seus KDA, Resultados dos jogos, Estatísticas, Campeões, Perfil e mais. Busca seu nome de invocadores agora!" />
-      </Head>
-      <Header myUrl={myUrl}/>
-      {
-  
-        !error ?
-          userPage?
-            user ?
-            <Component {...pageProps} />
+    
+      <UserContext.Provider value={userContextValue}>
+        {/* <head>
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147" crossorigin="anonymous"></script>        
+        </head> */}
+        <Head>
+          <html lang='pt-br' />
+          <link rel="icon" href="logo.webp"/>
+          <meta name="keywords" content="LOL Campeões, Repetição, Resultados, Gráficos, lol mundial, Calculadora, lol brasil, LolKing, LOLNexus"/>
+          <meta name="description" content="Perfil LoL - Verifique seus KDA, Resultados dos jogos, Estatísticas, Campeões, Perfil e mais. Busca seu nome de invocadores agora!" />
+        </Head>
+        <Header myUrl={myUrl}/>
+        {
+    
+          !error ?
+            userPage?
+              user ?
+              <Component {...pageProps} />
+              :
+              <PageLoading/>
             :
-            <PageLoading/>
-          :
-          <Component {...pageProps} />
+            <Component {...pageProps} />
 
-        :
-        <HomePage/>
-      }
-      <Analytics/>
-    </UserContext.Provider>
-   
-    </html>
+          :
+          <HomePage/>
+        }
+        <Analytics/>
+      </UserContext.Provider>
+    
  )
 }
 
