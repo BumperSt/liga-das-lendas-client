@@ -7,6 +7,7 @@ import {
 import champHelper from '../helpers/champ'
 import SearchInput from '../components/searchInput'
 import Image from 'next/image'
+import BottomBar from '../components/bottomBar'
 
 export default function HomePage() {
 
@@ -56,6 +57,8 @@ export default function HomePage() {
                 </DivRotation>
             </Bottom>
             <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
+            <BottomBar/>
+
         </Container>
         :
         <PageLoading/>

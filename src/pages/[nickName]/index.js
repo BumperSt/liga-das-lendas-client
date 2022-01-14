@@ -14,6 +14,7 @@ import {
     Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage, RowAlign, ContainerProfileInfo, UpdateUserButton
 } from '../../components/nickname/styles'
 import Head from 'next/head'
+import BottomBar from '../../components/bottomBar'
 
 
 export default function Summoner() {
@@ -125,6 +126,7 @@ export default function Summoner() {
                 </RowAlign>
             
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
+                <BottomBar/>
 
             </Container>
                 )

@@ -86,6 +86,7 @@ function MyApp({ Component, pageProps }) {
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147" crossorigin="anonymous"></script>        
       </head> */}
       <Head>
+        <link rel="icon" href="logo.png"/>
         <meta name="keywords" content="LOL Campeões, Repetição, Resultados, Gráficos, lol mundial, Calculadora, lol brasil, LolKing, LOLNexus"/>
         <meta name="description" content="Perfil LoL - Verifique seus KDA, Resultados dos jogos, Estatísticas, Campeões, Perfil e mais. Busca seu nome de invocadores agora!" />
       </Head>

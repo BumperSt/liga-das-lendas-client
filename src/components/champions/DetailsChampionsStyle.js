@@ -13,8 +13,9 @@ export const ChampHistory = styled.h2`
     color:white;
     @media only screen and (max-width: 600px) {
         font-size: 1.2rem;
-        max-width:90vw;
     }
+    max-width:90vw;
+
     align-self: center;
     align-self: center;
 `
@@ -173,11 +174,8 @@ export const HabilityKey = styled.h1`
 export const HabilityDescreption = styled.h1`
     font-size:1.2rem;
     overflow: hidden;
-    max-width: 100%;
-    @media (max-width: 1600px){
-        font-size:.8rem;
+    max-width: 90%;
 
-    }
 
     @media (max-width: 768px){
         font-size:.8rem;

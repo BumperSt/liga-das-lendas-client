@@ -17,6 +17,8 @@ export const ScroolContainer = styled.div`
     overflow-y: auto;
     max-height: 100vh;
     align-self: center;
+    overflow-x: hidden;
+
     @media only screen and (max-width: 900px) {
         width: 100%;
     }

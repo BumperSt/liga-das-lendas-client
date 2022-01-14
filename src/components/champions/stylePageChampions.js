@@ -5,6 +5,7 @@ export const Container = styled.div`
     overflow:hidden;
     flex-direction: column;
     margin-top:1rem;
+    position: relative;
 `
 
 export const InputSerach = styled.div`
@@ -55,6 +56,7 @@ export const ChampName = styled.h3`
 
     @media only screen and (max-width: 600px) {
         font-size:.8rem;
+        margin-bottom: 1rem;
     }
     ${props => props.active && `
         color: #ffa000; 
@@ -62,13 +64,15 @@ export const ChampName = styled.h3`
     }
 `
 
-export const ChampionsCard = styled.img`
-    background-color:blue;
+export const ChampionsCard = styled.div`
     margin-inline:0.2rem;
     width: 5vw;
     @media only screen and (max-width: 600px) {
         width: 20vw;
     }
-    border-bottom: solid 3px ${theme.colors.dourado};
+    span:first-child{
+        border-bottom: solid 3px ${theme.colors.dourado} !important;
+    }
+    
 
 `

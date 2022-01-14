@@ -5,8 +5,12 @@ import DetailsChampions from "../../components/champions/DetailsChampions";
 import { BackgroudImage } from "../../components/nickname/styles";
 import LoadingPage from '../../components/LoadingPage'
 import { Input } from "../../components/searchInput/styleSerachInput";
+
 import { MaxHeigthDiv } from "../../components/champions/DetailsChampionsStyle";
 import Head from "next/head";
+import BottomBar from "../../components/bottomBar";
+import Image from "next/image";
+import useWindowDimensions from "../../helpers/screenSize";
 
 export default function ChampionsPage ()  {
 
@@ -17,22 +21,38 @@ export default function ChampionsPage ()  {
     const [backgroudUrl, setBackgroudUrl] = useState('')
     const [serachChampion, setSearchChampion] = useState('')
     const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+    const { height, width } = useWindowDimensions();
+    const [firstLoad, setFirstLoad] = useState(true)
 
     const cardDiv = useRef(null);
 
     const objectToArray = (objects) => {
         let array = Object.keys(objects).map((key) => objects[key])
         return array
-    }
+    }  
 
-   
+    useEffect(() => {
+        if(firstLoad){
+            if(width <= 600){
+                setOffset(offSet*4)
+            }
+            setFirstLoad(false)
+        }
+      
+    }, [width])
+
 
     const setActive = (champ) => {
 
         setChampActive(champ.id)
         let actualIndex =  championsArray.indexOf(champ)
-
-        let calculeOffset  = (actualIndex-lastIndex)*-5
+        let value = 0
+        if(width <= 600){
+            value = 20
+        }else{
+            value = 5
+        }
+        let calculeOffset  = (actualIndex-lastIndex)*-value
 
         setLastIndex(actualIndex)
         setBackgroudUrl(`/splash/${champ.id}.webp`)
@@ -87,7 +107,9 @@ export default function ChampionsPage ()  {
                                 {
                                     setActive(champ) 
                                     setSearchChampion('')}
-                                } src={`loading/${champ.id}.webp`}/>
+                                }>
+                                    <Image width="310" height="560" src={`/loading/${champ.id}.webp`}></Image>
+                                </ChampionsCard>
                                 <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
                             </ChampCardDiv>
                         ))
@@ -101,6 +123,7 @@ export default function ChampionsPage ()  {
                                 </MaxHeigthDiv>
 
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
+                <BottomBar/>
             </Container>
         )
     }else{

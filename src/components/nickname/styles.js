@@ -9,6 +9,7 @@ export const Container = styled.div`
     flex-direction:column;
     margin: 0px;
     padding: 0px;
+    position: relative;
     max-height: auto;
 `
 export const BackgroudImage = styled.div`
@@ -31,6 +32,7 @@ export const BackgroudImage = styled.div`
 export const RowAlign = styled.div`
     display:flex;
     justify-content: center;
+    margin-bottom: 3.5rem;
 `
 
 export const ContainerProfileInfo = styled.div`
