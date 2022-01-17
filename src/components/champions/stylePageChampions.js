@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import theme from '../../../styles/theme.json'
+import ScrollContainer from 'react-indiana-drag-scroll'
+
 export const Container = styled.div`
     display: flex;
     overflow:hidden;
@@ -21,7 +23,7 @@ export const HorizonScroll = styled.div`
     align-self: center;
     transition: all 2s;
     transform: ${props => props.transaletX && `TranslateX(${props.transaletX}vw)`};
-    min-height:23vh;
+    min-height:25vh;
     margin-bottom: 1rem;
     
 `
@@ -31,7 +33,6 @@ export const ChampCardDiv = styled.div`
     text-align: center;
     width: 5vw;
     :hover{
-        
         transform: scale(1.3) translateY(8%);
         cursor: pointer;
         z-index:205;

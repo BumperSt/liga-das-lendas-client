@@ -7,6 +7,7 @@ export default{
             matchId
         })
         .then(({data}) => {
+            console.log(data)
             setMatchs(data)
         })
         .catch((error) => {

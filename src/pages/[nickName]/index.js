@@ -87,8 +87,8 @@ export default function Summoner() {
         return(
 
             <Container ref={summonerPageRef}>
-                <title>{nickInPage} Status</title>
                 <Head>
+                    <title>{nickInPage} Status</title>
                     <meta name="description" content={`${nickInPage}/ / Lv.${level}`} />
                 </Head>
                 <Top >

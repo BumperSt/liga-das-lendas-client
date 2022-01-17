@@ -25,6 +25,7 @@ export default function ChampionsPage ()  {
     const [firstLoad, setFirstLoad] = useState(true)
 
     const cardDiv = useRef(null);
+    const horizonScrollRef = useRef(null);
 
     const objectToArray = (objects) => {
         let array = Object.keys(objects).map((key) => objects[key])
@@ -53,7 +54,6 @@ export default function ChampionsPage ()  {
             value = 5
         }
         let calculeOffset  = (actualIndex-lastIndex)*-value
-
         setLastIndex(actualIndex)
         setBackgroudUrl(`/splash/${champ.id}.webp`)
         setOffset(offSet+calculeOffset)
@@ -65,6 +65,22 @@ export default function ChampionsPage ()  {
         }
     }, [championsArray])
 
+    const mouseMouve = (evt) => {
+        let mousePosX = evt.pageX
+        if(mousePosX <= 50){
+            setInterval(() => {
+
+            }, 500)
+            console.log("Voltar")
+        }else if(mousePosX >= (width-50)){
+            setInterval(() => {
+
+            }, 500)
+            console.log("Avançar")
+        }
+        console.log(width)
+        console.log(evt.pageX)
+    }
 
     useEffect(() => {
         if(serachChampion != '' && championsArray){
@@ -88,8 +104,9 @@ export default function ChampionsPage ()  {
         return(
             <Container>
                 
-                <title>{champActive}Detalhes</title>
                 <Head>
+                    <title>{champActive} Detalhes</title>
+
                     <meta name="description" content={"League Of Legends, Habilidades Campeões, Skills Campeões"} />
                 </Head>
                 <InputSerach>
@@ -99,7 +116,7 @@ export default function ChampionsPage ()  {
                 <MaxHeigthDiv>
 
 
-                <HorizonScroll transaletX={offSet}>
+                <HorizonScroll  onMouseMove={(e) => mouseMouve(e)} transaletX={offSet}>
                     {
                         championsArray?.map((champ) => (
                             <ChampCardDiv key={champ.key} ref={cardDiv} active={champActive == champ.id}>

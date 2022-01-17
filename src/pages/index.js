@@ -18,12 +18,10 @@ export default function HomePage({champs}) {
         setBackgroudUrl(`/splash/${champs[0].id}.webp`)
     }, [])
 
-
-
-
     const changeBackgroud = (champ) =>{
         setBackgroudUrl(`/splash/${champ}.webp`)
     }
+    
     return (
         backgroudUrl ?
         <Container>
