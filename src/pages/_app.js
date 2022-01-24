@@ -87,7 +87,7 @@ function MyApp({ Component, pageProps }) {
         </head> */}
         <Head>
           <html lang='pt-br' />
-          <link rel="icon" href="logo.webp"/>
+          <link rel="icon" href="/logo.ico"/>
           <meta name="keywords" content="LOL Campeões, Repetição, Resultados, Gráficos, lol mundial, Calculadora, lol brasil, LolKing, LOLNexus"/>
           <meta name="description" content="Perfil LoL - Verifique seus KDA, Resultados dos jogos, Estatísticas, Campeões, Perfil e mais. Busca seu nome de invocadores agora!" />
         </Head>

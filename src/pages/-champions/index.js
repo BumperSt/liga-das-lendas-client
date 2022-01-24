@@ -106,7 +106,6 @@ export default function ChampionsPage ()  {
                 
                 <Head>
                     <title>{champActive} Detalhes</title>
-
                     <meta name="description" content={"League Of Legends, Habilidades Campeões, Skills Campeões"} />
                 </Head>
                 <InputSerach>

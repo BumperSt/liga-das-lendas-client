@@ -49,7 +49,7 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
         .then(({data}) => {
             setCallingMatch(false)
             setmatchList(data)
-            setMatchAuxIndex( matchAuxIndex + 10)
+            setMatchAuxIndex( matchAuxIndex + matchGetSize)
         })
         .catch((error) =>{
             console.error(error)
@@ -65,7 +65,6 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
 
     useEffect(() => {
         callGetMatch()            
-
     }, [])
     
     useEffect(() => {
@@ -218,7 +217,7 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                             <ColumMatchContainer center={true} marginInline={'0px'}>
                             {   
                                     match.runes.map((rune) => (
-                                        <SpellIncon key={rune.id} title={rune.name} src={`https://ddragon.canisback.com/img/${rune.icon}`}/>
+                                        <SpellIncon key={rune.id} title={rune.name} src={`/${rune.icon.replace('png', 'webp')}`}/>
 
                                     ))
                                 }

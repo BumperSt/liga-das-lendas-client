@@ -7,6 +7,7 @@ import SummonerMatch from '../../components/SummonerMatch'
 import SummonerExpBorder from '../../components/SummonerExpBorder'
 import champApi from '../../api/champs'
 import summonerApi from '../../api/summoner'
+import { Circles  } from 'react-loading-icons'
 
 import champHelper from '../../helpers/champ'
 
@@ -31,7 +32,7 @@ export default function Summoner() {
     const [matchsWins, setMatchsWins] = useState(0)
     const [matchsLosts, setMatchsLosts] = useState(0)
     const [error, setError] = useState(false)
-
+    const [updateUser, setUpdateUser] = useState(false)
 
     useEffect(() => {
         if(user){
@@ -54,13 +55,19 @@ export default function Summoner() {
     }, [user])
 
     const UpdateUser = () => {
+        setUpdateUser(true)
+        setError(false)
         summonerApi.updateSummoner({
             nickName
         }).then((response) => {
+            setUser(null)
             setUser(response.data)
+            setUpdateUser(false)
+
         }).catch((error) => {
             setError(error.response.data.error)
-            console.log(error.response.data)
+            setUpdateUser(false)
+
         })
     }
 
@@ -101,6 +108,10 @@ export default function Summoner() {
     
                 <NickName>{nickInPage}</NickName>
                 <UpdateUserButton onClick={UpdateUser}>Atualizar</UpdateUserButton>
+                {
+                    updateUser &&
+                    <Circles speed={.75} stroke='#8c6c36' fill='black'  fillOpacity='0.8'/>
+                }
                 {error&&
                     <h1>{error}</h1>
                 }
