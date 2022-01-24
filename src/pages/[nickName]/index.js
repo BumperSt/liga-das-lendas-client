@@ -31,6 +31,7 @@ export default function Summoner() {
     const { nickName } = router.query
     const [matchsWins, setMatchsWins] = useState(0)
     const [matchsLosts, setMatchsLosts] = useState(0)
+    const [preferencePosition, setPreferencePositionsValue] = useState()
     const [error, setError] = useState(false)
     const [updateUser, setUpdateUser] = useState(false)
 
@@ -84,7 +85,21 @@ export default function Summoner() {
 
 
     const SetPreferencePositions  = (positions) => {
+        // let temp = {...positions, preferencePosition}
+        // setPreferencePositionsValue(temp)
+
+
+
+        
         console.log(positions)
+
+       
+        let temp = {positions}
+        if(preferencePosition){
+            temp = {positions, ...preferencePosition}
+        }
+        setPreferencePositionsValue(temp)
+
     }
 
 
@@ -124,11 +139,16 @@ export default function Summoner() {
                     
                 </LeagueDiv>
                 <RowAlign>
-                    {/* <ContainerProfileInfo>
-                        <h1>Total de partidas:{matchsWins + matchsLosts}</h1>
-                        <h1>{matchsWins}</h1>
-                        <h1>{matchsLosts}</h1>
-                    </ContainerProfileInfo> */}
+                    {
+                        matchsWins!=0 &&
+                        <ContainerProfileInfo>
+                            <h1>Total de partidas:{matchsWins + matchsLosts}</h1>
+                            <h1>Vitorias: {matchsWins}</h1>
+                            <h1>Derrotas: {matchsLosts}</h1>
+                            <h1>WinRate: {((matchsWins/(matchsWins + matchsLosts))*100).toFixed(2)}%</h1>
+                        </ContainerProfileInfo>
+                    }
+
                     {
                         summonerPageRef.current&&
                         <SummonerMatch onScrollSummonerPage={onScroll} setWinsAndLostsValue={SetWinsAndLostsValue} SetPreferencePositions={SetPreferencePositions}/>

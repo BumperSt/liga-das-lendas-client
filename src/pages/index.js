@@ -15,6 +15,7 @@ export default function HomePage({champs}) {
     const [backgroudUrl, setBackgroudUrl] = useState(null)
     
     useEffect(() => {
+        console.log(champs)
         setBackgroudUrl(`/splash/${champs[0].id}.webp`)
     }, [])
 

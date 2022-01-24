@@ -28,7 +28,6 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
 
     const [CallingMatch, setCallingMatch] = useState(false)
 
-    const [preferencePositions, setPreferencePositions] = useState([])
 
     let matchArray = []
 

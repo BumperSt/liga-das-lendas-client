@@ -64,7 +64,11 @@ export const ColumMatchContainer = styled.div`
     display: flex;
     flex-direction:column;
     min-height:100%;
+
     margin-inline: ${props => props.marginInline ? `${props.marginInline}` : '.5rem'};
+    @media only screen and (max-width: 600px) {
+        margin-inline: .1rem;
+    }
     ${props => props.center && `justify-content:center;`}
 `
 

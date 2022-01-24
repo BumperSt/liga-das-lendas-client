@@ -31,14 +31,24 @@ export const BackgroudImage = styled.div`
 
 export const RowAlign = styled.div`
     display:flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-bottom: 3.5rem;
+    width: 100%;
+    align-self: center;
+    @media only screen and (max-width: 600px) {
+        flex-direction:column;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+
+    }
 `
 
 export const ContainerProfileInfo = styled.div`
     display:flex;
     flex-direction: column;
     color:white;
+    margin-top: 5rem;
 `
 
 
