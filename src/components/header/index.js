@@ -33,7 +33,7 @@ export default function Header({myUrl}){
                 </ButtonDiv>
             
                 {
-                    myUrl != '/' && myUrl != '/-champions' &&
+                    myUrl != '/' &&
                 
                     <InputSerchDiv>
                         <SearchInput/>

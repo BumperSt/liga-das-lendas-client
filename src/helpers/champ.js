@@ -1,4 +1,4 @@
-import champ_json from '../../public/champion.json'
+import champ_json from '../../public/championFull.json'
 
 const objectToArray = (objects) => {
     let array = Object.keys(objects).map((key) => objects[key])

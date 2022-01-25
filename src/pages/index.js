@@ -2,26 +2,30 @@ import React, { useState, useEffect } from 'react'
 import champApi from '../api/champs'
 import PageLoading from '../components/LoadingPage'
 import {
-    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, ChampFace, DivChampFace, BackgroudImage, AlignColum
+    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, DescreptionDiv, DivChampFace, BackgroudImage, AlignColum, ChampLore
 } from '../components/home/styles'
 import champHelper from '../helpers/champ'
 import SearchInput from '../components/searchInput'
 import Image from 'next/image'
 import BottomBar from '../components/bottomBar'
 import Head from 'next/head'
-
 export default function HomePage({champs}) {
 
     const [backgroudUrl, setBackgroudUrl] = useState(null)
-    
+    const [activeChamp, setActiveChamp] = useState(null)
+
     useEffect(() => {
         console.log(champs)
-        setBackgroudUrl(`/splash/${champs[0].id}.webp`)
+        setActiveChamp(champs[0].id)
     }, [])
 
-    const changeBackgroud = (champ) =>{
-        setBackgroudUrl(`/splash/${champ}.webp`)
-    }
+    useEffect(() => {
+        if(activeChamp != ''){
+            setBackgroudUrl(`/splash/${activeChamp}.webp`)
+        }
+
+    }, [activeChamp])
+
     
     return (
         backgroudUrl ?
@@ -41,16 +45,20 @@ export default function HomePage({champs}) {
                     {
                         champs.map((champ) => (
                         
-                            <DivChampFace key={champ.key}  title={champ.name} onClick={() => changeBackgroud(champ.id)} >
+                            <DivChampFace active={activeChamp === champ.id} key={champ.key}  title={champ.name} onClick={() => setActiveChamp(champ.id)} >
                                 <Image alt={champ.name} width="80" height="80" src={`/face/${champ.id}.webp`} />
                             </DivChampFace>
                             
                         ))
                     }
                 </DivRotation>
+                <DescreptionDiv>
+                   
+                    <ChampLore> {
+champHelper.findChampByName(activeChamp).blurb                    }</ChampLore>
+                </DescreptionDiv>
             </Bottom>
             <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
-            <BottomBar/>
 
         </Container>
         :

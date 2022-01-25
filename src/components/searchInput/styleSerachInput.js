@@ -26,6 +26,11 @@ export const Input = styled.input`
         -webkit-text-fill-color: white;
 
     }
+    @media only screen and (max-width: 600px) {
+        height: 1rem;
+
+
+    }
 
 `
 
@@ -40,4 +45,8 @@ export const ButtonLupa = styled.button`
     top:50%;
     transform:translate(0,-50%);
     right:-1rem;
+    @media only screen and (max-width: 600px) {
+        height:2.5rem;
+        width:2.5rem;
+    }
 `

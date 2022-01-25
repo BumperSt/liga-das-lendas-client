@@ -97,6 +97,7 @@ export const DivRotation = styled.div`
     @media (max-width: 768px) {
         max-width: 80%;
     }
+    margin-top: 1rem;
 `
 export const DivChampFace = styled.div`
     transition: all 0.5s;
@@ -105,6 +106,13 @@ export const DivChampFace = styled.div`
         border: 2px solid ${theme.colors.dourado} !important;
         border-radius: 50%;
     }
+    ${({active}) => active && `
+        transform: scale(1.2);
+        span{
+            border: 2px solid #ffa309 !important;
+        }
+        cursor: pointer;
+    `}
     :hover{
         transform: scale(1.2);
         span{
@@ -118,4 +126,21 @@ export const ChampFace = styled.img`
     border: 2px solid ${theme.colors.dourado};
     transition: border .5s;
     width:5rem;
+`
+
+export const DescreptionDiv = styled.div`
+    background-color: rgba(0,0,0,0.5);
+    width: 50%;
+    justify-self: center;
+    text-align: center;
+    justify-content: center;
+    display:flex;
+    margin-top: 1rem;
+    padding: 1rem;
+`
+
+export const ChampLore = styled.h1`
+    color:white;
+    font-size: 1.5rem;
+    max-width: 80%;
 `

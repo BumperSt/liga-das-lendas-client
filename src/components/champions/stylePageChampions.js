@@ -25,6 +25,7 @@ export const HorizonScroll = styled.div`
     transform: ${props => props.transaletX && `TranslateX(${props.transaletX}vw)`};
     min-height:25vh;
     margin-bottom: 1rem;
+    z-index:99;
     
 `
 export const ChampCardDiv = styled.div`

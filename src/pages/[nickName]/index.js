@@ -157,7 +157,6 @@ export default function Summoner() {
                 </RowAlign>
             
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
-                <BottomBar/>
 
             </Container>
                 )

@@ -11,12 +11,15 @@ import Head from "next/head";
 import BottomBar from "../../components/bottomBar";
 import Image from "next/image";
 import useWindowDimensions from "../../helpers/screenSize";
+import { useSpring, animated } from '@react-spring/web'
+import { useDrag } from '@use-gesture/react'
+
 
 export default function ChampionsPage ()  {
 
     const [championsArray, setChampionsArray] = useState(null)
     const [champActive, setChampActive] = useState('')
-    const [offSet, setOffset] = useState(390)
+    const [offSet, setOffset] = useState(393)
     const [lastIndex, setLastIndex] = useState(0)
     const [backgroudUrl, setBackgroudUrl] = useState('')
     const [serachChampion, setSearchChampion] = useState('')
@@ -66,20 +69,20 @@ export default function ChampionsPage ()  {
     }, [championsArray])
 
     const mouseMouve = (evt) => {
-        let mousePosX = evt.pageX
-        if(mousePosX <= 50){
-            setInterval(() => {
+        // let mousePosX = evt.pageX
+        // if(mousePosX <= 50){
+        //     setInterval(() => {
 
-            }, 500)
-            console.log("Voltar")
-        }else if(mousePosX >= (width-50)){
-            setInterval(() => {
+        //     }, 500)
+        //     console.log("Voltar")
+        // }else if(mousePosX >= (width-50)){
+        //     setInterval(() => {
 
-            }, 500)
-            console.log("Avançar")
-        }
-        console.log(width)
-        console.log(evt.pageX)
+        //     }, 500)
+        //     console.log("Avançar")
+        // }
+        // console.log(width)
+        // console.log(evt.pageX)
     }
 
     useEffect(() => {
@@ -99,6 +102,13 @@ export default function ChampionsPage ()  {
     useEffect(() => {
         setChampionsArray(objectToArray(champions_json.data))
     }, [])
+
+    const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
+
+    const bind = useDrag(({ down, movement: [mx, my] }) => {
+        console.log(mx)
+        api.start({ x: down ? mx : 0, y: down ? my : 0, immediate: down })
+    })
     
     if(championsArray){
         return(
@@ -115,7 +125,13 @@ export default function ChampionsPage ()  {
                 <MaxHeigthDiv>
 
 
-                <HorizonScroll  onMouseMove={(e) => mouseMouve(e)} transaletX={offSet}>
+
+                    
+                
+                <HorizonScroll  {...bind()} style={{
+                    transform: `transaletX(${x})`
+                }} onMouseMove={(e) => mouseMouve(e)} transaletX={offSet}>
+                    
                     {
                         championsArray?.map((champ) => (
                             <ChampCardDiv key={champ.key} ref={cardDiv} active={champActive == champ.id}>
@@ -139,7 +155,6 @@ export default function ChampionsPage ()  {
                                 </MaxHeigthDiv>
 
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
-                <BottomBar/>
             </Container>
         )
     }else{

@@ -9,12 +9,25 @@ export const Container = styled.div`
     border-bottom: 1px solid ${theme.colors.douradoBrilhante};
     padding: 1rem;
     position: relative;
+    justify-content: space-between;
+    padding-inline:10rem;
+
+    @media only screen and (max-width: 600px) {
+        padding-inline:0rem;
+        justify-content: center;
+        flex-direction:column;
+
+    }
 `
 
 
 export const ButtonDiv = styled.div`
     display:flex;
     justify-self: flex-start;
+    @media only screen and (max-width: 600px) {
+        justify-content: center;
+
+    }
 `
 export const ButtonHeader = styled.button`
     font-size: 1rem;
@@ -44,6 +57,8 @@ export const InputSerchDiv = styled.div`
     justify-self: center;
     align-self: center;
     @media only screen and (max-width: 900px) {
-        display: none;
+        width: 80%;
+        margin-top: 1rem;
+
     }
 `
