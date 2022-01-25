@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import champApi from '../api/champs'
 import PageLoading from '../components/LoadingPage'
 import {
-    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, DescreptionDiv, DivChampFace, BackgroudImage, AlignColum, ChampLore, ChampName
+    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, DescreptionDiv, DivChampFace, BackgroudImage, AlignColum, ChampLore, ChampName, ChampTitle
 } from '../components/home/styles'
 import champHelper from '../helpers/champ'
 import SearchInput from '../components/searchInput'
@@ -59,13 +59,18 @@ export default function HomePage({champs}) {
                         ))
                     }
                 </DivRotation>
-                <ChampName>{activeChamp}</ChampName>
+                {activeChampObject &&
+                    <>
+                        <ChampName>{activeChamp}</ChampName>
+                        <ChampTitle >{activeChampObject.title}</ChampTitle>
 
-                <DescreptionDiv>
-                   {activeChampObject &&
-                    <ChampLore> {activeChampObject.lore}</ChampLore>
-                   }
-                </DescreptionDiv>
+                        <DescreptionDiv>
+                        
+                            <ChampLore> {activeChampObject.lore}</ChampLore>
+                        
+                        </DescreptionDiv>
+                    </>
+                  }
             </Bottom>
             <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
 

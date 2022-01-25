@@ -88,7 +88,7 @@ export const AlignColum = styled.div`
 `
 
 export const DivRotation = styled.div`  
-    margin-top: .5rem;
+    margin-block: .5rem;
 
     display:flex;
     flex-direction: row;
@@ -139,16 +139,25 @@ export const DescreptionDiv = styled.div`
     display:flex;
     flex-direction: column;
     padding: 1rem;
+    border: 2px solid ${theme.colors.dourado};
 
     overflow-y: auto;
 `
 
 export const ChampName = styled.h1`
-    margin-top: 1rem;
     color:white;
     font-size: 1.5rem;
     font-weight: 700;
-    color:${theme.colors.douradoBrilhante}
+    color:${theme.colors.douradoBrilhante};
+`
+
+export const ChampTitle = styled(ChampName)`
+    background-color: rgba(0,0,0,0.5);
+    padding-inline:1rem;
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+    border: 2px solid ${theme.colors.dourado};
+    border-bottom:0px;
 `
 
 export const ChampLore = styled.h1`
