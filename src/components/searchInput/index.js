@@ -13,6 +13,7 @@ export default function SearchInput({inputStyle}) {
     const sendNickName = (event) => {
         event.preventDefault()
         router.push(nickName)
+        setNickName('')
     }
     return(
         <DivInput>

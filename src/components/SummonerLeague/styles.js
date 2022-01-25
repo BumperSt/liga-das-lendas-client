@@ -56,6 +56,10 @@ export const LeaguePdlDiv = styled.div`
   
 
 `
+export const AlingCollum = styled.div`
+    display: flex;
+    flex-direction: column;
+`
 
 export const LeagueName = styled.h3`
     margin:0;
@@ -68,4 +72,8 @@ export const PdlText = styled.h3`
 `
 
 export const WinText = styled.h3`
+`
+
+export const WinRate = styled.h3`
+    color:${({value}) => value < 50 ? '#ff0808' : 'rgb(0 169 0)'}
 `

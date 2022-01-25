@@ -4,14 +4,14 @@ import theme from '../../../styles/theme.json'
 export const Container = styled.div`
     width: 100%;
     display:flex;
+    position: sticky;
     flex-direction:row;
     background-color:rgba(0,0,0,0.8);
     border-bottom: 1px solid ${theme.colors.douradoBrilhante};
     padding: 1rem;
-    position: relative;
     justify-content: space-between;
     padding-inline:3rem;
-    min-height:4.3rem;
+    min-height:8vh;
     @media only screen and (max-width: 600px) {
         padding-inline:0rem;
         justify-content: center;

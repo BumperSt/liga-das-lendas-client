@@ -25,7 +25,7 @@ export const BackgroudImage = styled.div`
 export const Top = styled.div`
     display: flex;
     width: 100%;
-    padding-top: 8rem;
+    margin-top: 3rem;
     @media only screen and (max-width: 900px) {
         padding-top: 4rem;
     }

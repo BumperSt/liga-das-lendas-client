@@ -3,10 +3,14 @@ import theme from '../../../styles/theme.json'
 
 export const Container = styled.div`
    height:92vh;
-   justify-content:center;
    display :flex;
    align-items:center;
-   background-color:${theme.colors.backgroundColor};
    overflow:hidden;
+   display:flex;
+   flex-direction:column;
+   padding-block:10rem;
+`
 
+export const NotFoundMessage = styled.h1`
+   color:${theme.colors.douradoBrilhante};
 `

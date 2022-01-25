@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import summonerApi from '../../api/summoner'
 import UserContext from '../../context/userContext'
 
-import { LeagueText, LeagueIcon, LeaguePdlDiv, PdlText, DivLeague, Container, DivRow , WinText, LeagueName} from './styles'
+import { LeagueText, LeagueIcon, LeaguePdlDiv, PdlText, DivLeague, Container, DivRow , WinText, LeagueName, AlingCollum, WinRate} from './styles'
 
 export default function SummonerLeague() {
 
@@ -54,8 +54,11 @@ export default function SummonerLeague() {
                             <PdlText>PDL {soloq.leaguePoints}</PdlText>
                             <LeagueIcon src={`/ranked-emblems/Emblem_${soloq.tier[0].toUpperCase() + soloq.tier.substr(1).toLowerCase()}.webp`}></LeagueIcon>
                             <WinText>{soloq.wins}V {soloq.losses}D</WinText>
+                            
 
                         </DivRow>
+                        <WinRate value={((soloq.wins/( soloq.wins+soloq.losses))*100).toFixed(2)}>Winrate {((soloq.wins/( soloq.wins+soloq.losses))*100).toFixed(2)}%</WinRate>
+
                     </DivLeague>
                 ) : (
                     <DivLeague>
@@ -83,7 +86,9 @@ export default function SummonerLeague() {
                             <LeagueIcon src={`/ranked-emblems/Emblem_${flex.tier[0].toUpperCase() + flex.tier.substr(1).toLowerCase()}.webp`}></LeagueIcon>
 
                             <WinText>{flex.wins}V {flex.losses}D</WinText>
+
                         </DivRow>
+                        <WinRate value={((flex.wins/( flex.wins+flex.losses))*100).toFixed(2)}>Winrate {((flex.wins/( flex.wins+flex.losses))*100).toFixed(2)}%</WinRate>
 
                     </DivLeague>
                 ) : (
