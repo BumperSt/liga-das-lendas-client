@@ -22,17 +22,17 @@ export const BackgroudImage = styled.div`
     z-index: -1;
     transition: background-image 0.5s;
 `
-    export const Top = styled.div`
-        display: flex;
-        width: 100%;
-        padding-top: 8rem;
-        @media only screen and (max-width: 900px) {
-            padding-top: 4rem;
-        }
-        align-self:center;
-        justify-content:center;
-        text-align: center;
-    `
+export const Top = styled.div`
+    display: flex;
+    width: 100%;
+    padding-top: 8rem;
+    @media only screen and (max-width: 900px) {
+        padding-top: 4rem;
+    }
+    align-self:center;
+    justify-content:center;
+    text-align: center;
+`
 
 export const Title = styled.h1`
     color: white;

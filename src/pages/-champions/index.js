@@ -140,7 +140,7 @@ export default function ChampionsPage ()  {
                                     setActive(champ) 
                                     setSearchChampion('')}
                                 }>
-                                    <Image width="310" height="560" src={`/loading/${champ.id}.webp`}></Image>
+                                    <Image priority={champActive == champ.id} width="310" height="560" src={`/loading/${champ.id}.webp`}></Image>
                                 </ChampionsCard>
                                 <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
                             </ChampCardDiv>

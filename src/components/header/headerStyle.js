@@ -10,8 +10,8 @@ export const Container = styled.div`
     padding: 1rem;
     position: relative;
     justify-content: space-between;
-    padding-inline:10rem;
-
+    padding-inline:3rem;
+    min-height:4.3rem;
     @media only screen and (max-width: 600px) {
         padding-inline:0rem;
         justify-content: center;
@@ -30,10 +30,9 @@ export const ButtonDiv = styled.div`
     }
 `
 export const ButtonHeader = styled.button`
-    font-size: 1rem;
+    font-size: 1.2rem;
     @media only screen and (max-width: 600px) {
         font-size: .7rem;
-
     }
     transition: all .5s;
     color:white;
@@ -41,7 +40,7 @@ export const ButtonHeader = styled.button`
     border: 0px;
     :hover{
         cursor:pointer;
-        transform: scale(1.5);
+        transform: scale(1.3);
     }
     margin-inline:1rem;
     ${props => props.active && `

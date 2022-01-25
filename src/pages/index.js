@@ -16,9 +16,7 @@ export default function HomePage({champs}) {
     const [activeChampObject, setActiveChampObject] = useState(null)
 
     useEffect(() => {
-        console.log(champs)
         setActiveChamp(champs[0].id)
-        setActiveChampObject(champHelper.findChampByName(champs[0].id))
     }, [])
 
     useEffect(() => {
