@@ -60,19 +60,19 @@ export const Midle = styled.div`
 `
 
 
-    export const Bottom = styled.div`
-        display:flex;
-        flex-direction:column;
-        margin-top: 7rem;
-        @media only screen and (max-width: 900px) {
-            margin-top: 0.5rem;
-        }
-        margin-bottom: 3rem;
-        justify-content:flex-start;
-        align-items:center;
-        width: 100%;
-        height: 100%;
-    `
+export const Bottom = styled.div`
+    display:flex;
+    flex-direction:column;
+    margin-top: 5rem;
+    @media only screen and (max-width: 900px) {
+        margin-top: 0.5rem;
+    }
+    margin-bottom: 3rem;
+    justify-content:flex-start;
+    align-items:center;
+    width: 100%;
+    height: 100%;
+`
 
 export const BottomText = styled.h1`
     text-align: center;
@@ -88,16 +88,17 @@ export const AlignColum = styled.div`
 `
 
 export const DivRotation = styled.div`  
+    margin-top: .5rem;
+
     display:flex;
     flex-direction: row;
     flex-flow: row wrap;
     flex-wrap: wrap; 
     justify-content: center;
-    max-width: 60%;
+    max-width: 70%;
     @media (max-width: 768px) {
         max-width: 80%;
     }
-    margin-top: 1rem;
 `
 export const DivChampFace = styled.div`
     transition: all 0.5s;
@@ -109,14 +110,14 @@ export const DivChampFace = styled.div`
     ${({active}) => active && `
         transform: scale(1.2);
         span{
-            border: 2px solid #ffa309 !important;
+            border: 2px solid ${theme.colors.douradoBrilhante}  !important;
         }
         cursor: pointer;
     `}
     :hover{
         transform: scale(1.2);
         span{
-            border: 2px solid #ffa309 !important;
+            border: 2px solid ${theme.colors.douradoBrilhante} !important;
         }
         cursor: pointer;
     }
@@ -130,17 +131,29 @@ export const ChampFace = styled.img`
 
 export const DescreptionDiv = styled.div`
     background-color: rgba(0,0,0,0.5);
-    width: 50%;
+    width: 90%;
     justify-self: center;
     text-align: center;
+    align-items: center;
     justify-content: center;
     display:flex;
-    margin-top: 1rem;
+    flex-direction: column;
     padding: 1rem;
+
+    overflow-y: auto;
+`
+
+export const ChampName = styled.h1`
+    margin-top: 1rem;
+    color:white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color:${theme.colors.douradoBrilhante}
 `
 
 export const ChampLore = styled.h1`
     color:white;
     font-size: 1.5rem;
-    max-width: 80%;
+    max-width: 90%;
+    
 `

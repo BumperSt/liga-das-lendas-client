@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import champApi from '../api/champs'
 import PageLoading from '../components/LoadingPage'
 import {
-    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, DescreptionDiv, DivChampFace, BackgroudImage, AlignColum, ChampLore
+    Container, Title, Top, Midle, Bottom, BottomText, DivRotation, DescreptionDiv, DivChampFace, BackgroudImage, AlignColum, ChampLore, ChampName
 } from '../components/home/styles'
 import champHelper from '../helpers/champ'
 import SearchInput from '../components/searchInput'
@@ -13,18 +13,25 @@ export default function HomePage({champs}) {
 
     const [backgroudUrl, setBackgroudUrl] = useState(null)
     const [activeChamp, setActiveChamp] = useState(null)
+    const [activeChampObject, setActiveChampObject] = useState(null)
 
     useEffect(() => {
         console.log(champs)
         setActiveChamp(champs[0].id)
+        setActiveChampObject(champHelper.findChampByName(champs[0].id))
     }, [])
 
     useEffect(() => {
         if(activeChamp != ''){
             setBackgroudUrl(`/splash/${activeChamp}.webp`)
+            setActiveChampObject(champHelper.findChampByName(activeChamp))
         }
-
     }, [activeChamp])
+
+
+    useEffect(() => {
+        console.log(activeChampObject)
+    }, [activeChampObject])
 
     
     return (
@@ -52,10 +59,12 @@ export default function HomePage({champs}) {
                         ))
                     }
                 </DivRotation>
+                <ChampName>{activeChamp}</ChampName>
+
                 <DescreptionDiv>
-                   
-                    <ChampLore> {
-champHelper.findChampByName(activeChamp).blurb                    }</ChampLore>
+                   {activeChampObject &&
+                    <ChampLore> {activeChampObject.lore}</ChampLore>
+                   }
                 </DescreptionDiv>
             </Bottom>
             <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>

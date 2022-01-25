@@ -32,7 +32,6 @@ export const BackgroudImage = styled.div`
 export const RowAlign = styled.div`
     display:flex;
     justify-content: space-around;
-    margin-bottom: 3.5rem;
     width: 100%;
     align-self: center;
     @media only screen and (max-width: 600px) {
