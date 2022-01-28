@@ -59,7 +59,7 @@ const ListAllItems = () => {
                 <ListItemsDiv>
                     {
                         allItems?.map((item, index) => (
-                            <ItemDiv active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
+                            <ItemDiv key={`${index} item`} active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
                                 <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
                                 <ItemPrice>${item.gold.total}</ItemPrice>
                             </ItemDiv>
@@ -74,8 +74,8 @@ const ListAllItems = () => {
                         <BuildsIntoTitle>Pode construir:</BuildsIntoTitle>
                         <BuildIntosAlign>
                             {
-                                activeItemInto.map((item) => (
-                                    <ItemDiv onClick={() => setActiveItem(item)} title={item.name}>
+                                activeItemInto.map((item, index) => (
+                                    <ItemDiv key={`${index} active`} onClick={() => setActiveItem(item)} title={item.name}>
                                         <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
                                     </ItemDiv>
                                 ))
@@ -95,16 +95,16 @@ const ListAllItems = () => {
                         </ItemDiv>
                         <AlignRow>
                             {
-                                activeItemFrom?.map((item) => (
-                                    <ItemFromDiv>
+                                activeItemFrom?.map((item, index) => (
+                                    <ItemFromDiv key={`${index} from`}>
                                         <ItemDiv onClick={() => setActiveItem(item)} title={item.name}>
                                             <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
                                         </ItemDiv>
                                         <AlignRow>
                                             {
                                                 item.from &&
-                                                items.getByIds(item.from).map((item) => (
-                                                    <ItemDiv onClick={() => setActiveItem(item)} title={item.name}>
+                                                items.getByIds(item.from).map((item, index) => (
+                                                    <ItemDiv key={`${index} from2`} onClick={() => setActiveItem(item)} title={item.name}>
                                                         <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
                                                     </ItemDiv>
                                                 ))
@@ -125,8 +125,8 @@ const ListAllItems = () => {
                         </ActiveItemInformations>
                         <ItemDescriptionDiv>
                             {
-                                activeItemDescription?.map((str) => (
-                                    <ActiveItemDescption>{str}</ActiveItemDescption>
+                                activeItemDescription?.map((str, index) => (
+                                    <ActiveItemDescption key={`${index} descreption`}>{str}</ActiveItemDescption>
                                 ))
                             }
                         </ItemDescriptionDiv>

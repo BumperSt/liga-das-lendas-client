@@ -8,7 +8,7 @@ export default function Header({myUrl}){
     const buttons = [
         {'name': 'Home', 'Url': '/', 'id' : 1},
         {'name' : 'Campeões', 'Url': '/champions', 'id' : 2},
-        {'name' : 'Items', 'Url' : '/items', 'id' : 2},
+        {'name' : 'Items', 'Url' : '/items', 'id' : 3},
     ]
 
     const ClickSummoner = () => {
