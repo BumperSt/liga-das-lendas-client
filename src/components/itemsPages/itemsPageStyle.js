@@ -33,12 +33,18 @@ export const Container = styled.div`
 export const ListItemContainer = styled.div`
     display:flex;
     flex-direction:row;
+    @media only screen and (max-width: 600px) {
+        flex-direction:column;
+    }
 `
 
 export const ListItemByCategory = styled.div`
     display:flex;
     flex-direction:column;
     max-width: 60%;
+    @media only screen and (max-width: 600px) {
+        max-width: 100%;
+    }
     max-height: 100vh;
 
 `
@@ -51,6 +57,11 @@ export const ListItemsDiv = styled.div`
     display:flex;
     flex-direction:row;
     padding: 1rem;
+    @media only screen and (max-width: 600px) {
+        justify-content: center;
+        padding: .5rem;
+
+    }
     flex-wrap: wrap;
     overflow-y: auto;
     height: 100%;
@@ -94,6 +105,12 @@ export const ActiveItemContainer = styled.div`
     min-width: 40vw;
     max-width: 40vw;
     padding-inline: 3rem;
+    
+    @media only screen and (max-width: 600px) {
+        max-width: 100vw;
+        padding-inline: 1rem;
+
+    }
 
 `
 
@@ -128,7 +145,7 @@ export const ItemTreeContainer = styled.div`
 export const ItemFromDiv = styled.div`
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:flex-end;
     align-items:center;
 `
 
@@ -137,6 +154,9 @@ export const AlignRow = styled.div`
     flex-direction:row;
     justify-content:space-around; 
     width:70%;
+    @media only screen and (max-width: 600px) {
+        width:100%;
+    }
     align-self: center;
 `
 
@@ -147,6 +167,9 @@ export const ActiveItemInformations = styled.div`
     align-items: center;
     border-bottom: solid 1px ${theme.colors.douradoBrilhante};
     width: 80%;
+    @media only screen and (max-width: 600px) {
+        width:100%;
+    }
     align-self: center;
 `
 
