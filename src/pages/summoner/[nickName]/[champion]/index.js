@@ -1,8 +1,8 @@
 import React, {useContext, useState, useEffect} from 'react'
-import UserContext from '../../../context/userContext'
-import champHelper from '../../../helpers/champ'
-import champApi from '../../../api/champs'
-import summonerApi from '../../../api/summoner'
+import UserContext from '../../../../context/userContext'
+import champHelper from '../../../../helpers/champ'
+import champApi from '../../../../api/champs'
+import summonerApi from '../../../../api/summoner'
 
 import { useRouter } from 'next/router'
 
