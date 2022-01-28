@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, ListItemByCategory, ActiveItemContainer, BuildsIntoDiv, BuildsIntoTitle, BuildIntosAlign, ItemFromDiv, ItemTreeContainer, AlignRow, ActiveItemInformations, ActiveItemName, ActiveItemPrice, AlignColum, ActiveItemDescption, ItemDescriptionDiv } from "./itemsPageStyle"
+import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, ListItemByCategory,StyledLine,ActiveItemContainer, BuildsIntoDiv, BuildsIntoTitle, BuildIntosAlign, ItemFromDiv, ItemTreeContainer, AlignRow, ActiveItemInformations, ActiveItemName, ActiveItemPrice, AlignColum, ActiveItemDescption, ItemDescriptionDiv } from "./itemsPageStyle"
 import items from '../../helpers/items'
 import { useEffect, useState } from "react"
 import LoadingPage from '../../components/LoadingPage'
@@ -18,7 +18,7 @@ const ListAllItems = () => {
     useEffect(() => {
         if(allItems){
             console.log(allItems)
-            setActiveItem(allItems[158])
+            setActiveItem(allItems[180])
         }
     },[allItems])
 
@@ -90,33 +90,52 @@ const ListAllItems = () => {
                     {
                         activeItem &&
                         <ItemTreeContainer>
-                            <ItemDiv style={{
-                                alignSelf:'center'
-                                
-                            }}title={activeItem.name}>
+                            <ItemDiv style={{alignSelf:'center'}}title={activeItem.name}>
                                 <Image src={`/item/${activeItem.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                            </ItemDiv>
-                            <AlignRow>
                                 {
-                                    activeItemFrom?.map((item, index) => (
+                                    activeItem.from &&
+                                    activeItem.from.length > 1  &&
+                                    <StyledLine/>
+
+                                }
+
+                            </ItemDiv>
+                            {
+                             activeItemFrom&&   
+                             <AlignRow border={activeItemFrom.length > 1}>
+                                {
+                                    activeItemFrom.map((item, index) => (
                                         <ItemFromDiv key={`${index} from`}>
-                                            <ItemDiv onClick={() => setActiveItem(item)} title={item.name}>
-                                                <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                            </ItemDiv>
-                                            <AlignRow>
-                                                {
+                                                <ItemDiv onClick={() => setActiveItem(item)} title={item.name}>
+                                                    <StyledLine/>
+                                                    <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                                    {
                                                     item.from &&
-                                                    items.getByIds(item.from).map((item, index) => (
-                                                        <ItemDiv key={`${index} from2`} onClick={() => setActiveItem(item)} title={item.name}>
-                                                            <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                                        </ItemDiv>
-                                                    ))
-                                                }
-                                            </AlignRow>
+                                                        items.getByIds(item.from).map((item, index) => (
+                                                            <>
+                                                                <StyledLine/>
+                                                                <Image  src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                                            </>
+                                                        ))
+                                                    }
+                                                </ItemDiv>
+                                                
                                         </ItemFromDiv>
                                     ))
                                 }
                             </AlignRow>
+                            }
+                           
+                           
+
+
+
+
+
+
+
+
+
                             <ActiveItemInformations>
                                 <ItemDiv>
                                     <Image src={`/item/${activeItem.image.full.replace('png', 'webp')}`} width="64" height="64"/>

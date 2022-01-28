@@ -71,13 +71,14 @@ export const ListItemsDiv = styled.div`
 export const ItemDiv = styled.div`
     transition: all 0.2s;
     display:flex;
+    position: relative;
     flex-direction:column;
     span{
         border: 2px solid ${theme.colors.douradoBrilhante} !important;
         transition:  all .2s ease-in-out;
-
+        z-index:99;
     }
-    padding: 1rem;
+    padding-inline: 1rem;
     :hover{
         cursor:pointer;
     }
@@ -137,7 +138,7 @@ export const ItemTreeContainer = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:center;
-    border-top: 2px solid ${theme.colors.douradoBrilhante};
+    margin-top: 1rem;
 
 `
 
@@ -145,20 +146,27 @@ export const ItemTreeContainer = styled.div`
 export const ItemFromDiv = styled.div`
     display:flex;
     flex-direction:column;
-    justify-content:flex-end;
     align-items:center;
+    
 `
 
 export const AlignRow = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-around; 
-    width:70%;
-    @media only screen and (max-width: 600px) {
-        width:100%;
-    }
     align-self: center;
+    position: relative;
+    ${({border})    => border && `
+        border-top: 3px solid ${theme.colors.douradoBrilhante};
+    `}
+    width: 70%;
+    @media (max-width:600px){
+        width: 100%;
+    }
+
 `
+
+
 
 export const ActiveItemInformations = styled.div`
     display:flex;
@@ -176,7 +184,6 @@ export const ActiveItemInformations = styled.div`
 export const AlignColum = styled.div`
     display:flex;
     flex-direction:column;
-    margin-left: 1rem;
 `
 
 export const ActiveItemName = styled.h1`
@@ -204,4 +211,14 @@ export const ActiveItemDescption = styled.p`
     color:white;
     font-family: "Cormorant SC",serif;
 
+`
+
+export const StyledLine = styled.hr`
+    height:2em;
+    color:${theme.colors.douradoBrilhante};
+    background-color:${theme.colors.douradoBrilhante};
+    margin-left: 50%;
+    width:3px;
+    z-index:0;
+    border: none;
 `
