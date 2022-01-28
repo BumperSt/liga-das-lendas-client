@@ -2,6 +2,8 @@ import Image from "next/image"
 import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, ListItemByCategory, ActiveItemContainer, BuildsIntoDiv, BuildsIntoTitle, BuildIntosAlign, ItemFromDiv, ItemTreeContainer, AlignRow, ActiveItemInformations, ActiveItemName, ActiveItemPrice, AlignColum, ActiveItemDescption, ItemDescriptionDiv } from "./itemsPageStyle"
 import items from '../../helpers/items'
 import { useEffect, useState } from "react"
+import LoadingPage from '../../components/LoadingPage'
+
 const ListAllItems = () => {
 
     const [allItems, setAllItems] = useState(null)
@@ -52,89 +54,96 @@ const ListAllItems = () => {
         }
     }, [activeItem])
 
-    return(
-        <ListItemContainer>
-            <ListItemByCategory>
-                <ListItemName>Todos os items</ListItemName>
-                <ListItemsDiv>
+    if(allItems){
+        return(
+            <ListItemContainer>
+                <ListItemByCategory>
+                    <ListItemName>Todos os items</ListItemName>
+                    <ListItemsDiv>
+                        {
+                            allItems?.map((item, index) => (
+                                <ItemDiv key={`${index} item`} active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
+                                    <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                    <ItemPrice>${item.gold.total}</ItemPrice>
+                                </ItemDiv>
+                            ))
+                        }
+                    </ListItemsDiv>
+                </ListItemByCategory>
+                <ActiveItemContainer>
                     {
-                        allItems?.map((item, index) => (
-                            <ItemDiv key={`${index} item`} active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
-                                <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                <ItemPrice>${item.gold.total}</ItemPrice>
-                            </ItemDiv>
-                        ))
-                    }
-                </ListItemsDiv>
-            </ListItemByCategory>
-            <ActiveItemContainer>
-                {
-                    activeItemInto &&
-                    <BuildsIntoDiv>
-                        <BuildsIntoTitle>Pode construir:</BuildsIntoTitle>
-                        <BuildIntosAlign>
-                            {
-                                activeItemInto.map((item, index) => (
-                                    <ItemDiv key={`${index} active`} onClick={() => setActiveItem(item)} title={item.name}>
-                                        <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                    </ItemDiv>
-                                ))
-                            }
-
-                        </BuildIntosAlign>
-                    </BuildsIntoDiv>
-                }            
-                {
-                    activeItem &&
-                    <ItemTreeContainer>
-                        <ItemDiv style={{
-                            alignSelf:'center'
-                            
-                        }}title={activeItem.name}>
-                            <Image src={`/item/${activeItem.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                        </ItemDiv>
-                        <AlignRow>
-                            {
-                                activeItemFrom?.map((item, index) => (
-                                    <ItemFromDiv key={`${index} from`}>
-                                        <ItemDiv onClick={() => setActiveItem(item)} title={item.name}>
+                        activeItemInto &&
+                        <BuildsIntoDiv>
+                            <BuildsIntoTitle>Pode construir:</BuildsIntoTitle>
+                            <BuildIntosAlign>
+                                {
+                                    activeItemInto.map((item, index) => (
+                                        <ItemDiv key={`${index} active`} onClick={() => setActiveItem(item)} title={item.name}>
                                             <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
                                         </ItemDiv>
-                                        <AlignRow>
-                                            {
-                                                item.from &&
-                                                items.getByIds(item.from).map((item, index) => (
-                                                    <ItemDiv key={`${index} from2`} onClick={() => setActiveItem(item)} title={item.name}>
-                                                        <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                                    </ItemDiv>
-                                                ))
-                                            }
-                                        </AlignRow>
-                                    </ItemFromDiv>
-                                ))
-                            }
-                        </AlignRow>
-                        <ActiveItemInformations>
-                            <ItemDiv>
+                                    ))
+                                }
+    
+                            </BuildIntosAlign>
+                        </BuildsIntoDiv>
+                    }            
+                    {
+                        activeItem &&
+                        <ItemTreeContainer>
+                            <ItemDiv style={{
+                                alignSelf:'center'
+                                
+                            }}title={activeItem.name}>
                                 <Image src={`/item/${activeItem.image.full.replace('png', 'webp')}`} width="64" height="64"/>
                             </ItemDiv>
-                            <AlignColum>
-                                <ActiveItemName>{activeItem.name}</ActiveItemName>
-                                <ActiveItemPrice>${activeItem.gold.total}</ActiveItemPrice>
-                            </AlignColum>
-                        </ActiveItemInformations>
-                        <ItemDescriptionDiv>
-                            {
-                                activeItemDescription?.map((str, index) => (
-                                    <ActiveItemDescption key={`${index} descreption`}>{str}</ActiveItemDescption>
-                                ))
-                            }
-                        </ItemDescriptionDiv>
-
-                    </ItemTreeContainer>
-                    }
-            </ActiveItemContainer>
-        </ListItemContainer>
-    )
+                            <AlignRow>
+                                {
+                                    activeItemFrom?.map((item, index) => (
+                                        <ItemFromDiv key={`${index} from`}>
+                                            <ItemDiv onClick={() => setActiveItem(item)} title={item.name}>
+                                                <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                            </ItemDiv>
+                                            <AlignRow>
+                                                {
+                                                    item.from &&
+                                                    items.getByIds(item.from).map((item, index) => (
+                                                        <ItemDiv key={`${index} from2`} onClick={() => setActiveItem(item)} title={item.name}>
+                                                            <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                                        </ItemDiv>
+                                                    ))
+                                                }
+                                            </AlignRow>
+                                        </ItemFromDiv>
+                                    ))
+                                }
+                            </AlignRow>
+                            <ActiveItemInformations>
+                                <ItemDiv>
+                                    <Image src={`/item/${activeItem.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                </ItemDiv>
+                                <AlignColum>
+                                    <ActiveItemName>{activeItem.name}</ActiveItemName>
+                                    <ActiveItemPrice>${activeItem.gold.total}</ActiveItemPrice>
+                                </AlignColum>
+                            </ActiveItemInformations>
+                            <ItemDescriptionDiv>
+                                {
+                                    activeItemDescription?.map((str, index) => (
+                                        <ActiveItemDescption key={`${index} descreption`}>{str}</ActiveItemDescption>
+                                    ))
+                                }
+                            </ItemDescriptionDiv>
+    
+                        </ItemTreeContainer>
+                        }
+                </ActiveItemContainer>
+            </ListItemContainer>
+        )
+    }else{
+        return(
+            <LoadingPage/>
+        )
+    }
+   
 }
 export default ListAllItems
