@@ -1,21 +1,21 @@
 import React, {useContext, useState, useEffect, useRef} from 'react'
-import UserContext from '../../context/userContext'
+import UserContext from '../../../context/userContext'
 import { useRouter } from 'next/router'
-import LoadingPage from '../../components/LoadingPage'
-import SummonerLeague from '../../components/SummonerLeague'
-import SummonerMatch from '../../components/SummonerMatch'
-import SummonerExpBorder from '../../components/SummonerExpBorder'
-import champApi from '../../api/champs'
-import summonerApi from '../../api/summoner'
+import LoadingPage from '../../../components/LoadingPage'
+import SummonerLeague from '../../../components/SummonerLeague'
+import SummonerMatch from '../../../components/SummonerMatch'
+import SummonerExpBorder from '../../../components/SummonerExpBorder'
+import champApi from '../../../api/champs'
+import summonerApi from '../../../api/summoner'
 import { Circles  } from 'react-loading-icons'
 
-import champHelper from '../../helpers/champ'
+import champHelper from '../../../helpers/champ'
 
 import {
     Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage, RowAlign, ContainerProfileInfo, UpdateUserButton
-} from '../../components/nickname/styles'
+} from '../../../components/nickname/styles'
 import Head from 'next/head'
-import BottomBar from '../../components/bottomBar'
+import BottomBar from '../../../components/bottomBar'
 
 
 export default function Summoner() {

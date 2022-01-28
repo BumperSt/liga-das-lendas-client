@@ -11,6 +11,7 @@ export const Container = styled.div`
     padding: 0px;
     position: relative;
     max-height: auto;
+  
 `
 export const BackgroudImage = styled.div`
     -webkit-filter: brightness(60%);
@@ -26,7 +27,6 @@ export const BackgroudImage = styled.div`
     z-index: -1;
     transition: background-image 0.5s;
     background-color: ${theme.colors.backgroundColor};
-    
 `
 
 export const RowAlign = styled.div`

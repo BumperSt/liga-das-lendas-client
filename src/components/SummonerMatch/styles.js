@@ -8,6 +8,7 @@ export const Container = styled.div`
     max-height: 100vh;
     align-self: center;
     align-self: flex-end;
+    
 `;
 
 export const ScroolContainer = styled.div`

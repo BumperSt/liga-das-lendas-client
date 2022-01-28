@@ -7,6 +7,7 @@ export const Container = styled.div`
     position: relative;
     margin: 0px;
     padding: 0px;
+
 `
 export const BackgroudImage = styled.div`
     -webkit-filter: brightness(60%);
@@ -21,6 +22,7 @@ export const BackgroudImage = styled.div`
     background-size: cover;
     z-index: -1;
     transition: background-image 0.5s;
+    background-color: ${theme.colors.backgroundColor};
 `
 export const Top = styled.div`
     display: flex;

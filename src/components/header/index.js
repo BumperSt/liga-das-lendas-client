@@ -7,7 +7,8 @@ export default function Header({myUrl}){
     const router = useRouter()
     const buttons = [
         {'name': 'Home', 'Url': '/', 'id' : 1},
-        {'name' : 'Campeões', 'Url': '/-champions', 'id' : 2}
+        {'name' : 'Campeões', 'Url': '/champions', 'id' : 2},
+        {'name' : 'Items', 'Url' : '/items', 'id' : 2},
     ]
 
     const ClickSummoner = () => {
@@ -15,7 +16,7 @@ export default function Header({myUrl}){
         if(!lastSearchValue){
             lastSearchValue = 'ToxicMachine'
         }
-        router.push(lastSearchValue)
+        router.push(`summoner/${lastSearchValue}`)
     }
 
     return(
@@ -29,7 +30,7 @@ export default function Header({myUrl}){
                         <ButtonHeader  key={button.id}  onClick={() => router.push(button.Url)} active={myUrl == button.Url}>{button.name}</ButtonHeader>
                     ))
                 }   
-                <ButtonHeader active={myUrl != '/' && myUrl != '/-champions'} onClick={() => ClickSummoner()}>Summoner</ButtonHeader>
+                <ButtonHeader active={myUrl.includes('/summoner')} onClick={() => ClickSummoner()}>Summoner</ButtonHeader>
                 </ButtonDiv>
             
                 {

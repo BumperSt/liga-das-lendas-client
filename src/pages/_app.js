@@ -35,13 +35,15 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     let myUrl = window.location.pathname
     setMyUrl(myUrl)
-    if(myUrl != '/'&& myUrl  != '/-champions' && myUrl.split('/')[1] != '-item'){
+    if(myUrl.includes('/summoner')){
       setUserPage(true)
     }else{
       setUserPage(false)
     }
+
     setError(false)
     if (router.asPath !== router.route) {
+      
       setUser(null)
       window.localStorage.setItem('lastSearch', nickName)
       if(nickName){
