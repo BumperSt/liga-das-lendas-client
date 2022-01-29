@@ -109,13 +109,10 @@ export const ActiveItemContainer = styled.div`
     min-width: 40vw;
     max-width: 40vw;
     padding-inline: 3rem;
-    
     @media only screen and (max-width: 600px) {
         max-width: 100vw;
         padding-inline: 1rem;
-
     }
-
 `
 
 export const BuildsIntoDiv = styled.div`

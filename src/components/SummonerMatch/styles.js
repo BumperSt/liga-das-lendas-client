@@ -9,6 +9,7 @@ export const Container = styled.div`
     align-self: center;
     align-self: flex-end;
     
+    
 `;
 
 export const ScroolContainer = styled.div`
@@ -19,6 +20,7 @@ export const ScroolContainer = styled.div`
     max-height: 100vh;
     align-self: center;
     overflow-x: hidden;
+    min-width: 100%;
 
     @media only screen and (max-width: 900px) {
         width: 100%;
@@ -154,4 +156,26 @@ export const SummonerMarch = styled.h1`
     background-color:red;
     border-radius: 10px;
     width: 100%;
+`
+
+export const SelectTypeDiv = styled.div`
+    width: 100%;
+    display:flex;
+    padding-block:1rem;
+    justify-content: center;
+    
+`
+
+export const SelectType = styled.select`
+    width: 30%;
+    text-align: center;
+    font-size:1.5rem;
+    background-color:rgba(0,0,0,0.8);
+    color:white;
+    transition: all 0.2s;
+`
+
+export const TypeOption = styled.option`
+        background-color:black;
+
 `

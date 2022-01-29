@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect, useRef} from 'react'
-import {AlingRowSmallSizeScreen, ChampIcon, CharKill, CharNameAndLevel, ColumMatchContainer, Container, HeaderMatch, MatchContainer, OnlySmallScreen, ScroolContainer, SpellIncon, SummonerMarch, TypeTitle} from './styles'
+import {AlingRowSmallSizeScreen, ChampIcon, CharKill, CharNameAndLevel, ColumMatchContainer, Container, HeaderMatch, MatchContainer, OnlySmallScreen, ScroolContainer, SelectType, SelectTypeDiv, SpellIncon, SummonerMarch, TypeOption, TypeTitle} from './styles'
 import UserContext from '../../context/userContext'
 import summonerApi from '../../api/summoner'
 import MatchFunctions from '../MatchFunctions/index'
@@ -24,16 +24,17 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
     
     const [loadingMatchs, setLoadingMatchs] = useState(true)
 
+    const [matchType, setMatchType] = useState('')
+
+
+
     const [matchAuxIndex, setMatchAuxIndex] = useState(0)
 
     const [CallingMatch, setCallingMatch] = useState(false)
 
 
     let matchArray = []
-
     const matchGetSize = 10;
-
-    let getMatchNum = 0
     
     let preferencePosition = {}
     let wins = 0
@@ -41,9 +42,11 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
 
     const callGetMatch = () => {
         setLoadingMatchs(true)
+        console.log(matchAuxIndex)
         summonerApi.getMatchList({
             puuid : user.puuid,
-            startIndex: matchAuxIndex
+            startIndex: matchAuxIndex,
+            matchType: matchType
         })
         .then(({data}) => {
             setCallingMatch(false)
@@ -62,12 +65,13 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
         }
     }, [user])
 
-    useEffect(() => {
-        callGetMatch()            
-    }, [])
+
     
     useEffect(() => {
+
         if(matchList){
+            let getMatchNum = 0
+
             while(getMatchNum < matchGetSize){
                 MatchFunctions.getMatchById(matchList[getMatchNum], addMatch)     
                 getMatchNum++
@@ -81,12 +85,23 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
         }
     }, [matchs])
 
+    useEffect(() => {
+        setMatchAuxIndex(0)
+        setmatchList(null)
+        setMatchs([])
+    }, [matchType])
+
+    useEffect(() => {
+        if(matchAuxIndex == 0){
+            callGetMatch()
+        }
+    },[matchAuxIndex])
 
     const addMatch = (matchData) =>{
 
         let myParticipation = matchHelper.getParticipantID(matchData.info.participants, user.puuid)
 
-        let kda = `${myParticipation.kills}${myParticipation.deaths}${myParticipation.assists}`
+        let kda = [myParticipation.kills,myParticipation.deaths,myParticipation.assists]
 
         let kdaRatio = ((myParticipation.kills +  myParticipation.assists)/myParticipation.deaths).toFixed(2)
 
@@ -203,6 +218,13 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
             color: 'white',
             textAlign: 'center',
         }}>History</h1>
+        <SelectTypeDiv>
+            <SelectType onChange={(e) => setMatchType(e.target.value)}>
+                <TypeOption value=''>Modo de jogo</TypeOption>
+                <TypeOption value='normal'>Normal</TypeOption>
+                <TypeOption value='ranqueada'>Ranqueada</TypeOption>
+            </SelectType>
+        </SelectTypeDiv>
         <ScroolContainer onScroll={onScroll} ref={matchContainerRef}>
         {
                 matchs?.map((match) => (
