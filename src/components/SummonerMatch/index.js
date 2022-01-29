@@ -24,7 +24,7 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
     
     const [loadingMatchs, setLoadingMatchs] = useState(true)
 
-    const [matchType, setMatchType] = useState('')
+    const [matchType, setMatchType] = useState('default')
 
 
 
@@ -86,6 +86,7 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
     }, [matchs])
 
     useEffect(() => {
+        console.log(matchType)
         setMatchAuxIndex(0)
         setmatchList(null)
         setMatchs([])
@@ -220,9 +221,10 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
         }}>History</h1>
         <SelectTypeDiv>
             <SelectType onChange={(e) => setMatchType(e.target.value)}>
-                <TypeOption value=''>Modo de jogo</TypeOption>
+                <TypeOption value='default'>Modo de jogo</TypeOption>
                 <TypeOption value='normal'>Normal</TypeOption>
-                <TypeOption value='ranqueada'>Ranqueada</TypeOption>
+                <TypeOption value='ranked'>Ranqueada</TypeOption>
+
             </SelectType>
         </SelectTypeDiv>
         <ScroolContainer onScroll={onScroll} ref={matchContainerRef}>
