@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, ListItemByCategory,StyledLine,ActiveItemContainer, BuildsIntoDiv, BuildsIntoTitle, BuildIntosAlign, ItemFromDiv, ItemTreeContainer, AlignRow, ActiveItemInformations, ActiveItemName, ActiveItemPrice, AlignColum, ActiveItemDescption, ItemDescriptionDiv } from "./itemsPageStyle"
+import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, ListItemByCategory,StyledLine,ActiveItemContainer, BuildsIntoDiv, BuildsIntoTitle, BuildIntosAlign, ItemFromDiv, ItemTreeContainer, AlignRow, ActiveItemInformations, ActiveItemName, ActiveItemPrice, AlignColum, ActiveItemDescption, ItemDescriptionDiv, TopBorder } from "./itemsPageStyle"
 import items from '../../helpers/items'
 import { useEffect, useState } from "react"
 import LoadingPage from '../../components/LoadingPage'
@@ -101,12 +101,20 @@ const ListAllItems = () => {
 
                             </ItemDiv>
                             {
-                             activeItemFrom&&   
-                             <AlignRow border={activeItemFrom.length > 1}>
+                             activeItemFrom&&
+                             <AlignColum>
+                                {
+                                    activeItemFrom.length > 1 &&
+                                    <TopBorder/>   
+
+                                }
+                             <AlignRow center={activeItemFrom.length == 1}>
                                 {
                                     activeItemFrom.map((item, index) => (
                                         <ItemFromDiv key={`${index} from`}>
-                                                <ItemDiv onClick={() => setActiveItem(item)} title={item.name}>
+                                                <ItemDiv style={{
+                                                        marginInline: '0px'
+                                                }} onClick={() => setActiveItem(item)} title={item.name}>
                                                     <StyledLine/>
                                                     <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
                                                     {
@@ -124,6 +132,7 @@ const ListAllItems = () => {
                                     ))
                                 }
                             </AlignRow>
+                            </AlignColum>
                             }
                            
                            

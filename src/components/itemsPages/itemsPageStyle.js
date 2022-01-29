@@ -6,6 +6,9 @@ export const Container = styled.div`
     display:flex;
     background-color:${theme.colors.backgroundColor};
     padding: 1rem;
+    @media only screen and (max-width: 600px) {
+        padding: 0rem;
+    }
     *{
         ::-webkit-scrollbar {
             width: 12px;
@@ -78,7 +81,7 @@ export const ItemDiv = styled.div`
         transition:  all .2s ease-in-out;
         z-index:99;
     }
-    padding-inline: 1rem;
+    margin-inline:.5rem;
     :hover{
         cursor:pointer;
     }
@@ -89,8 +92,8 @@ export const ItemDiv = styled.div`
             transform:scale(1.2);
         }
     `}
-    min-width: 6rem;
-    max-width: 6rem;
+    min-width: 4rem;
+    max-width: 4rem;
 
 `
 
@@ -153,17 +156,20 @@ export const ItemFromDiv = styled.div`
 export const AlignRow = styled.div`
     display:flex;
     flex-direction:row;
-    justify-content:space-around; 
+    justify-content:space-between; 
     align-self: center;
-    position: relative;
-    ${({border})    => border && `
-        border-top: 3px solid ${theme.colors.douradoBrilhante};
+    ${({center}) => center && `
+        justify-content:center; 
     `}
-    width: 70%;
-    @media (max-width:600px){
-        width: 100%;
-    }
+    width: 100%;
+`
 
+export const TopBorder = styled.div`
+    background-color: ${theme.colors.douradoBrilhante};
+    height:3px;
+    align-self: center;
+    width: -webkit-calc(100% - 4rem);
+    margin-left: .5%;
 `
 
 
@@ -184,11 +190,15 @@ export const ActiveItemInformations = styled.div`
 export const AlignColum = styled.div`
     display:flex;
     flex-direction:column;
+    width: 70%;
+    @media (max-width:600px){
+        width: 100%;
+    }
+    align-self: center;
 `
 
 export const ActiveItemName = styled.h1`
     color:${theme.colors.douradoBrilhante};
-
 `
 
 export const ActiveItemPrice = styled.h1`
