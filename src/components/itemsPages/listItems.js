@@ -3,6 +3,7 @@ import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, List
 import items from '../../helpers/items'
 import { useEffect, useState } from "react"
 import LoadingPage from '../../components/LoadingPage'
+import { Input } from "../searchInput/styleSerachInput"
 
 const ListAllItems = () => {
 
@@ -11,8 +12,24 @@ const ListAllItems = () => {
     const [activeItemInto, setActiveItemInto] = useState(null)
     const [activeItemFrom, setActiveItemFrom] = useState(null)
     const [activeItemDescription, setActiveItemDescription] = useState(null)
+    const [filter, setFilter] = useState('')
+
+
     useEffect(() => {
-        setAllItems(items.getAll())
+        let array = items.getAll()
+        array.sort(function (a, b) {
+            console.log(a.gold.total)
+            if (a.gold.total > b.gold.total) {
+                return 1;
+            }
+            if (a.gold.total < b.gold.total) {
+                return -1;
+            }
+            // a must be equal to b
+            return 0;
+        })
+
+        setAllItems(array)
     },[])
 
     useEffect(() => {
@@ -34,11 +51,8 @@ const ListAllItems = () => {
                 index += 1
                 if(index < descripText.length){
                  
-                        atributesStr.push(`${str} ${descripText[index]}`)
-
-                    
+                        atributesStr.push(`${str} ${descripText[index]}`)                   
                 }
-     
             }
             setActiveItemDescription(atributesStr)
             console.log(atributesStr)
@@ -49,19 +63,38 @@ const ListAllItems = () => {
             }
             if(activeItem.from){
                 setActiveItemFrom(items.getByIds(activeItem.from))
-            }
-            
+            }            
         }
     }, [activeItem])
+
+
+    useEffect(() => {
+        if(filter != '' && allItems){
+            Object.keys(allItems).map(champIndex => {
+                for (let index = 1; index <= filter.length; index++) {
+                    if(filter.length == index ){
+                        if(allItems[champIndex].name.substring(0,index).toUpperCase() == filter.substring(0,index).toUpperCase()){
+                            setActiveItem(allItems[champIndex])
+                        }
+                    }
+                }
+             });
+        }
+    }, [filter])
+
+
 
     if(allItems){
         return(
             <ListItemContainer>
                 <ListItemByCategory>
                     <ListItemName>Todos os items</ListItemName>
+                    <Input value={filter}  name="itemSerch" onChange={(e) => setFilter(e.target.value)} style={{
+                        height:'1rem'
+                    }} placeholder="Pesquisar Item"/>
                     <ListItemsDiv>
                         {
-                            allItems?.map((item, index) => (
+                            allItems.map((item, index) => (
                                 <ItemDiv key={`${index} item`} active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
                                     <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
                                     <ItemPrice>${item.gold.total}</ItemPrice>
@@ -120,15 +153,15 @@ const ListAllItems = () => {
                                                 </ItemDiv>
                                                 {
                                                         item.from &&        
-                                                            item.from.length == 1 &&
+                                                          
                                                                 items.getByIds(item.from).map((item, index) => (
-                                                                    <>
+                                                                    <ItemDiv>
                                                                         <StyledLine/>
                                                                         <Image  src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                                                    </>
+                                                                    </ItemDiv>
                                                                 ))                                                        
                                                     }                
-                                                    {
+                                                    {/* {
                                                         item.from && 
                                                             item.from.length > 1 &&
                                                             <>
@@ -151,7 +184,7 @@ const ListAllItems = () => {
                                                                     }
                                                                 </AlignRow>
                                                             </>                                                            
-                                                    }                                  
+                                                    }                                   */}
                                         </ItemFromDiv>
                                     ))
                                 }

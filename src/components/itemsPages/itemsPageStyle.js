@@ -36,6 +36,7 @@ export const Container = styled.div`
 export const ListItemContainer = styled.div`
     display:flex;
     flex-direction:row;
+    
     @media only screen and (max-width: 600px) {
         flex-direction:column;
     }
@@ -81,7 +82,7 @@ export const ItemDiv = styled.div`
         transition:  all .2s ease-in-out;
         z-index:99;
     }
-    margin-inline:.5rem;
+    margin-inline:.8rem;
     :hover{
         cursor:pointer;
     }
@@ -229,5 +230,6 @@ export const StyledLine = styled.hr`
     margin-left: 50%;
     width:3px;
     z-index:0;
+    
     border: none;
 `
