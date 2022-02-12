@@ -34,6 +34,7 @@ export default function Summoner() {
     const [preferencePosition, setPreferencePositionsValue] = useState()
     const [error, setError] = useState(false)
     const [updateUser, setUpdateUser] = useState(false)
+    const [champSkin, setChampSkin] = useState(0)
 
     useEffect(() => {
         if(user){
@@ -45,7 +46,7 @@ export default function Summoner() {
             })
             .then(({data}) => {
                 let topChamp = champHelper.findChampById(data[0].championId)
-                setBackgroudUrl(`/splash/${topChamp.id}.webp`)
+                setBackgroudUrl(`/imagens/champions/centered/${topChamp.id}_${champSkin}.webp`)
                 setChampsMaestry(data)
             })
             .catch((error) => {

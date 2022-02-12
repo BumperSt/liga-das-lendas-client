@@ -1,10 +1,10 @@
-import react, { useEffect, useRef, useState } from "react";
-import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName, VideoUndefined, VideoBlitz, UndefinedTilte, HabilityDescreptionDiv} from "./DetailsChampionsStyle";
+import react, { useEffect, useState } from "react";
+import {ChampCardDiv, ChampionsCard, MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName, VideoUndefined, VideoBlitz, UndefinedTilte, HabilityDescreptionDiv, SkinsDiv, AlignSkinsRow} from "./DetailsChampionsStyle";
 import champions_json from '../../../public/champion.json'
 import axios from "axios";
 import Bars from "react-loading-icons/dist/components/bars";
 import theme from '../../../styles/theme.json'
-import useEventListener from '@use-it/event-listener'
+import Image from "next/image";
 
 export default function DetailsChampions({champActive}) {
     
@@ -139,7 +139,8 @@ export default function DetailsChampions({champActive}) {
                         }
                         
                         </HabillityDiv>
-                    
+                     
+
                 </>
                 :
                 <Bars stroke='black' fill={theme.colors.dourado}/>

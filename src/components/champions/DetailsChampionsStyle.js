@@ -90,6 +90,12 @@ export const HabillityDiv = styled.div`
 
     }
 `
+
+export const SkinsDiv = styled(HabillityDiv)`
+    justify-content: flex-start;
+    padding-inline:10rem;
+
+`
 export const HabillityVideoDiv = styled.div`
     min-width: 30rem;
     max-width: 30rem;
@@ -206,4 +212,46 @@ export const CollumAlign = styled.div`
         max-width: 100%;
 
     }
+`
+
+
+export const ChampCardDiv = styled.div`
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+    width: 5vw;
+    :hover{
+        transform: scale(1.3) translateY(8%);
+        cursor: pointer;
+        z-index:205;
+    }
+
+    ${props => props.active && `
+        transform: scale(1.3) translateY(8%); 
+        z-index:200;
+    `
+    }
+    transition: all 0.3s;
+    @media only screen and (max-width: 600px) {
+        width: 20vw;
+    }
+`
+
+
+export const ChampionsCard = styled.div`
+    margin-inline:0.2rem;
+    width: 5vw;
+    @media only screen and (max-width: 600px) {
+        width: 20vw;
+    }
+    span:first-child{
+        border-bottom: solid 3px ${theme.colors.dourado} !important;
+    }
+`
+
+export const AlignSkinsRow = styled.div`
+    display:flex;
+    flex-direction:row;
+    padding-block:5rem;
+
 `

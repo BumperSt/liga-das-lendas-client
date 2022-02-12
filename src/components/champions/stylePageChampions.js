@@ -67,14 +67,39 @@ export const ChampName = styled.h3`
 `
 
 export const ChampionsCard = styled.div`
+    
     margin-inline:0.2rem;
     width: 5vw;
     @media only screen and (max-width: 600px) {
         width: 20vw;
     }
-    span:first-child{
-        border-bottom: solid 3px ${theme.colors.dourado} !important;
-    }
     
+    ${({active}) => active&&`
+         transform:scale(1.2);
 
+    `}
+
+    ${({hover}) => hover?`
+        transition: all 0.2s;
+        margin-right:1rem;
+        border: solid 3px ${theme.colors.dourado} !important;
+
+        :hover{
+            transform:scale(1.2);
+            cursor: pointer;
+        }
+    `:
+    `
+        span:first-child{
+            border-bottom: solid 3px ${theme.colors.dourado} !important;
+        }
+    `
+
+}
+`
+
+export const AlignColum = styled.div`
+    display:flex;
+    flex-direction: column;
+    text-align:start;
 `

@@ -1,18 +1,19 @@
 import react, { useEffect, useRef, useState } from "react";
-import { ChampCardDiv, ChampionsCard, ChampName, Container, HorizonScroll, InputSerach } from "../../components/champions/stylePageChampions";
-import champions_json from '../../../public/champion.json'
+import { AlignColum, ChampCardDiv, ChampionsCard, ChampName, Container, HorizonScroll, InputSerach } from "../../components/champions/stylePageChampions";
+import champions_json from '../../../public/championFull.json'
 import DetailsChampions from "../../components/champions/DetailsChampions";
 import { BackgroudImage } from "../../components/nickname/styles";
 import LoadingPage from '../../components/LoadingPage'
 import { Input } from "../../components/searchInput/styleSerachInput";
 
-import { MaxHeigthDiv } from "../../components/champions/DetailsChampionsStyle";
+import { AlignSkinsRow, CollumAlign, HabilitysTitle, MaxHeigthDiv, SkinsDiv } from "../../components/champions/DetailsChampionsStyle";
 import Head from "next/head";
 import BottomBar from "../../components/bottomBar";
 import Image from "next/image";
 import useWindowDimensions from "../../helpers/screenSize";
 import { useSpring, animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
+import champ from "../../helpers/champ";
 
 
 export default function ChampionsPage ()  {
@@ -22,6 +23,7 @@ export default function ChampionsPage ()  {
     const [offSet, setOffset] = useState(393)
     const [lastIndex, setLastIndex] = useState(0)
     const [backgroudUrl, setBackgroudUrl] = useState('')
+    const [champSkin, setChampSkin] = useState(0)
     const [serachChampion, setSearchChampion] = useState('')
     const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
     const { height, width } = useWindowDimensions();
@@ -47,7 +49,7 @@ export default function ChampionsPage ()  {
 
 
     const setActive = (champ) => {
-
+        console.log(champ)
         setChampActive(champ.id)
         let actualIndex =  championsArray.indexOf(champ)
         let value = 0
@@ -58,9 +60,9 @@ export default function ChampionsPage ()  {
         }
         let calculeOffset  = (actualIndex-lastIndex)*-value
         setLastIndex(actualIndex)
-        setBackgroudUrl(`/splash/${champ.id}.webp`)
+        setBackgroudUrl(`/imagens/champions/centered/${champ.id}_${champSkin}.webp`)
         setOffset(offSet+calculeOffset)
-        
+        setChampSkin(0)
     }
     useEffect(() => {
         if(championsArray){
@@ -99,6 +101,12 @@ export default function ChampionsPage ()  {
         }
     }, [serachChampion])
     
+
+    useEffect(() => {
+        setBackgroudUrl(`/imagens/champions/centered/${champActive}_${champSkin}.webp`)
+        console.log(champSkin)
+    }, [champSkin])
+
     useEffect(() => {
         setChampionsArray(objectToArray(champions_json.data))
     }, [])
@@ -128,31 +136,51 @@ export default function ChampionsPage ()  {
 
                     
                 
-                <HorizonScroll  {...bind()} style={{
-                    transform: `transaletX(${x})`
-                }} onMouseMove={(e) => mouseMouve(e)} transaletX={offSet}>
-                    
+                    <HorizonScroll  {...bind()} style={{
+                        transform: `transaletX(${x})`
+                    }} onMouseMove={(e) => mouseMouve(e)} transaletX={offSet}>
+                        
+                        {
+                            championsArray?.map((champ) => (
+                                <ChampCardDiv key={champ.key} ref={cardDiv} active={champActive == champ.id}>
+                                    <ChampionsCard  onClick={() => 
+                                    {
+                                        setActive(champ) 
+                                        setSearchChampion('')}
+                                    }>
+                                        <Image priority={champActive == champ.id} width="310" height="560" src={`/imagens/champions/loading/${champ.id}_0.webp`}></Image>
+                                    </ChampionsCard>
+                                    <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
+                                </ChampCardDiv>
+                            ))
+                        }
+        
+                    </HorizonScroll>
                     {
-                        championsArray?.map((champ) => (
-                            <ChampCardDiv key={champ.key} ref={cardDiv} active={champActive == champ.id}>
-                                <ChampionsCard  onClick={() => 
-                                {
-                                    setActive(champ) 
-                                    setSearchChampion('')}
-                                }>
-                                    <Image priority={champActive == champ.id} width="310" height="560" src={`/loading/${champ.id}.webp`}></Image>
-                                </ChampionsCard>
-                                <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
-                            </ChampCardDiv>
-                        ))
+                        champActive&&
+                        <DetailsChampions champActive={champActive}/>
                     }
-    
-                </HorizonScroll>
-                {
-                    champActive&&
-                    <DetailsChampions champActive={champActive}/>
-                }
-                                </MaxHeigthDiv>
+                    {
+                        <SkinsDiv>
+                           <AlignColum>
+                               <HabilitysTitle>SKINS</HabilitysTitle>
+                               <AlignSkinsRow>
+                                   {
+                                    champActive&&
+                                        champ.findChampByName(champActive).skins.map((skin) => (
+                                            <ChampionsCard active={skin.num == champSkin} title={skin.name} hover={true} onClick={() => {
+                                                setChampSkin(skin.num)
+                                            }}>
+                                                <Image  width="310" height="560" src={`/imagens/champions/loading/${champActive}_${skin.num}.webp`}></Image>
+                                            </ChampionsCard>
+                                        ))
+                                   }
+                              </AlignSkinsRow>
+                           </AlignColum>
+                       </SkinsDiv>
+                    }
+
+                </MaxHeigthDiv>
 
                 <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
             </Container>

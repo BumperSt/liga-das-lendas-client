@@ -14,6 +14,7 @@ export default function HomePage({champs}) {
     const [backgroudUrl, setBackgroudUrl] = useState(null)
     const [activeChamp, setActiveChamp] = useState(null)
     const [activeChampObject, setActiveChampObject] = useState(null)
+    const [champSkin, setChampSkin] = useState(0)
 
     useEffect(() => {
         setActiveChamp(champs[0].id)
@@ -21,7 +22,7 @@ export default function HomePage({champs}) {
 
     useEffect(() => {
         if(activeChamp != ''){
-            setBackgroudUrl(`/splash/${activeChamp}.webp`)
+            setBackgroudUrl(`/imagens/champions/centered/${activeChamp}_${champSkin}.webp`)
             setActiveChampObject(champHelper.findChampByName(activeChamp))
         }
     }, [activeChamp])
@@ -51,7 +52,7 @@ export default function HomePage({champs}) {
                         champs.map((champ) => (
                         
                             <DivChampFace active={activeChamp === champ.id} key={champ.key}  title={champ.name} onClick={() => setActiveChamp(champ.id)} >
-                                <Image alt={champ.name} width="80" height="80" src={`/face/${champ.id}.webp`} />
+                                <Image alt={champ.name} width="80" height="80" src={`/imagens/champions/tiles/${champ.id}_0.webp`} />
                             </DivChampFace>
                             
                         ))
