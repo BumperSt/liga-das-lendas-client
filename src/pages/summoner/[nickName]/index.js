@@ -38,7 +38,7 @@ export default function Summoner() {
 
     useEffect(() => {
         if(user){
-            setProfileIcon("/profileicon/" + user.profileIconId + ".webp")
+            setProfileIcon("/imagens/profileicon/" + user.profileIconId + ".webp")
             setNickInPage(user.name)
             setLevel(user.summonerLevel)
             champApi.getChampsMaestry({
