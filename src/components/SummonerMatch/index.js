@@ -248,7 +248,7 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                             </ColumMatchContainer>
                             <ColumMatchContainer center={true}>
                                 <CharNameAndLevel>Nivel {match.myParticipation.champLevel}</CharNameAndLevel>
-                                <ChampIcon title={champJson.data[match.myParticipation.championName].title} src={`/imagens/champions/tiles/${match.myParticipation.championName}_0.webp`}/>
+                                <ChampIcon title={champJson.data[match.myParticipation.championName]?.title} src={`/imagens/champions/tiles/${match.myParticipation.championName}_0.webp`}/>
                                 <CharNameAndLevel>{match.myParticipation.championName}</CharNameAndLevel>
                             </ColumMatchContainer>
                             <ColumMatchContainer center={true}  marginInline={'0px'}>

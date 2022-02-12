@@ -253,15 +253,20 @@ export const ChampionsCard = styled.div`
     }
 `
 
+export const AlignSkinCollum = styled.div`
+    background-color:rgba(0,0,0,0.5);
+    display:'flex';
+    flex-direction:'collum';
+    
+`
+
 export const AlignSkinsRow = styled.div`
     display:flex;
     flex-direction:row;
-    margin-block:2.5rem;
     padding:3rem;
     max-width: 100vw;
     overflow-x: auto;
     overflow-y: hidden;
-    background-color:rgba(0,0,0,0.5);
     width: 100%;
     ::-webkit-scrollbar {
         width: 12px;

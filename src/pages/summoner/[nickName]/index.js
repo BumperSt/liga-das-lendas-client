@@ -16,6 +16,7 @@ import {
 } from '../../../components/nickname/styles'
 import Head from 'next/head'
 import BottomBar from '../../../components/bottomBar'
+import SelectSkinInPage from '../../../components/selectSkin/selectSkin'
 
 
 export default function Summoner() {
@@ -35,7 +36,7 @@ export default function Summoner() {
     const [error, setError] = useState(false)
     const [updateUser, setUpdateUser] = useState(false)
     const [champSkin, setChampSkin] = useState(0)
-
+    const [topChamp, setTopChamp] = useState(null)
     useEffect(() => {
         if(user){
             setProfileIcon("/imagens/profileicon/" + user.profileIconId + ".webp")
@@ -46,6 +47,7 @@ export default function Summoner() {
             })
             .then(({data}) => {
                 let topChamp = champHelper.findChampById(data[0].championId)
+                setTopChamp(topChamp)
                 setBackgroudUrl(`/imagens/champions/centered/${topChamp.id}_${champSkin}.webp`)
                 setChampsMaestry(data)
             })
@@ -55,6 +57,15 @@ export default function Summoner() {
             })    
         }
     }, [user])
+
+
+    useEffect(() => {
+        if(topChamp){
+            setBackgroudUrl(`/imagens/champions/centered/${topChamp.id}_${champSkin}.webp`)
+
+        }
+
+    }, [champSkin])
 
     const UpdateUser = () => {
         setUpdateUser(true)
@@ -123,7 +134,9 @@ export default function Summoner() {
                 <UserLevel>{level}</UserLevel>
     
                 <NickName>{nickInPage}</NickName>
-                <UpdateUserButton onClick={UpdateUser}>Atualizar</UpdateUserButton>
+                
+                <SelectSkinInPage champSkin={champSkin} setChampSkin={setChampSkin} topChamp={topChamp}/>
+
                 {
                     updateUser &&
                     <Circles speed={.75} stroke='#8c6c36' fill='black'  fillOpacity='0.8'/>
