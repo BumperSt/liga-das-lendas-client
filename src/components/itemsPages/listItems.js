@@ -18,7 +18,7 @@ const ListAllItems = () => {
     useEffect(() => {
         if(allItems){
             console.log(allItems)
-            setActiveItem(allItems[180])
+            setActiveItem(allItems[190])
         }
     },[allItems])
 
@@ -116,34 +116,49 @@ const ListAllItems = () => {
                                                         marginInline: '0px'
                                                 }} onClick={() => setActiveItem(item)} title={item.name}>
                                                     <StyledLine/>
-                                                    <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                                    {
-                                                    item.from &&
-                                                        items.getByIds(item.from).map((item, index) => (
-                                                            <>
-                                                                <StyledLine/>
-                                                                <Image  src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                                            </>
-                                                        ))
-                                                    }
+                                                    <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>                                                     
                                                 </ItemDiv>
-                                                
+                                                {
+                                                        item.from &&        
+                                                            item.from.length == 1 &&
+                                                                items.getByIds(item.from).map((item, index) => (
+                                                                    <>
+                                                                        <StyledLine/>
+                                                                        <Image  src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                                                    </>
+                                                                ))                                                        
+                                                    }                
+                                                    {
+                                                        item.from && 
+                                                            item.from.length > 1 &&
+                                                            <>
+                                                                <StyledLine style={{
+                                                                    marginLeft:'0',
+                                                                    
+
+                                                                }}/>
+                                                                <TopBorder/>   
+                                                                <AlignRow >
+                                                                    {
+                                                                        items.getByIds(item.from).map((item, index) => (
+                                                                            <ItemDiv style={{
+                                                                                marginInline: '10px'
+                                                                            }} onClick={() => setActiveItem(item)} title={item.name}>
+                                                                                <StyledLine/>
+                                                                                <Image  src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                                                            </ItemDiv>
+                                                                        ))                                                                 
+                                                                    }
+                                                                </AlignRow>
+                                                            </>                                                            
+                                                    }                                  
                                         </ItemFromDiv>
                                     ))
                                 }
                             </AlignRow>
                             </AlignColum>
                             }
-                           
-                           
-
-
-
-
-
-
-
-
+                        
 
                             <ActiveItemInformations>
                                 <ItemDiv>

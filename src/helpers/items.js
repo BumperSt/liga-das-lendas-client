@@ -8,13 +8,15 @@ const objectToArray = (objects) => {
 
 let allItemsArray = objectToArray(items_json.data)
 
+
+
 export default {
     getAll: () => {
         return allItemsArray
     },
     getByIds: (itemsIds) => {
         let tempArray = []
-
+        console.log(itemsIds)
         itemsIds.map((id) => {
             tempArray.push(items_json.data[id])
         })

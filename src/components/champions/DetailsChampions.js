@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import react, { useEffect, useRef, useState } from "react";
 import { MaxHeigthDiv, Container , ChampName, ChampTitle, ChampHistory, SpellImg, SpellDiv, VideoHability, HabillityDiv, CollumAlign, HabilitysTitle, HabillityVideoDiv, HabilityKey, HabilityDescreption, HabilityName, VideoUndefined, VideoBlitz, UndefinedTilte, HabilityDescreptionDiv} from "./DetailsChampionsStyle";
 import champions_json from '../../../public/champion.json'
 import axios from "axios";
@@ -10,6 +10,10 @@ export default function DetailsChampions({champActive}) {
     
     const [champInfo, setChampInfo] = useState(null)
     const [spellSelected, setSpellSelected] = useState(null)
+    const [videoLoad, setVideoLoad] = useState(true)
+    const [errorLoad, setErrorLoad] = useState(true)
+    const [videoResponse, setResponse] = useState(null)
+
     const SkillArray = ['Q', 'W', 'E', 'R']
 
     useEffect(() => {
@@ -34,7 +38,36 @@ export default function DetailsChampions({champActive}) {
             setChampInfo(champInfo)
             setSpellSelected({...champInfo.passive, passive:true})
         })
-    }                                                   
+    }     
+    
+    
+    useEffect(() => {
+        if(spellSelected){
+            setVideoLoad(true)
+            setErrorLoad(false)
+
+            if(spellSelected.passive){
+                axios.get(`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.mp4`).then((response) => {
+
+                }).catch((error) => {
+                    setErrorLoad(true)
+                })
+    
+            }else{
+                axios.get(`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.mp4`).then((response) => {
+
+                }).catch((error) => {
+                    setErrorLoad(true)
+                })
+    
+            }
+        }
+      
+    }, [spellSelected])
+
+
+
+
     return(
         <Container>
 
@@ -78,23 +111,30 @@ export default function DetailsChampions({champActive}) {
                         {
                             <HabillityVideoDiv>
                                 {   
-                                    spellSelected? 
-                                    spellSelected?.passive?
-                                    <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.mp4` || 'blitz.webp'}></VideoHability>
-                                    :
-                                    <VideoHability loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.mp4`}></VideoHability>
-                                    :
-                                    <Bars stroke='black' fill={theme.colors.dourado}/> 
+                                    videoLoad&&
+                                        errorLoad?
+                                        <>
+                                            <VideoUndefined  src={'/rifts.webp'}/>
+                                            <VideoBlitz src={'blitz.webp'}/>
+                                            <UndefinedTilte>VÍDEO NÃO DISPONIVEL.</UndefinedTilte>
+                                        </>
+                                        :
+                                        <Bars style={{
+                                            position: "absolute",
+                                            top:"50%",
+                                            transform: "translateY(-50%) translateX(-50%)",
+                                            left:"50%",
+                                        }} stroke='black' fill={theme.colors.dourado}/> 
                                 }
                                 {
                                     spellSelected&&
-                                    <>
-                                        <VideoUndefined  src={'/rifts.webp'}/>
-                                        <VideoBlitz src={'blitz.webp'}/>
-                                        <UndefinedTilte>VÍDEO NÃO DISPONIVEL.</UndefinedTilte>
-                                    </>
+                                    spellSelected?.passive?
+                                    <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.mp4`}  onLoadedData={() => setVideoLoad(false)}/>
+                                    :
+                                    <VideoHability loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.mp4`} onLoadedData={() => setVideoLoad(false)}/>                                  
                                 }
-                            
+                          
+
                             </HabillityVideoDiv>
                         }
                         

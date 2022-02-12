@@ -145,6 +145,7 @@ export const ItemTreeContainer = styled.div`
 
 export const ItemFromDiv = styled.div`
     display:flex;
+    
     flex-direction:column;
     align-items:center;
     
@@ -155,6 +156,7 @@ export const AlignRow = styled.div`
     flex-direction:row;
     justify-content:space-between; 
     align-self: center;
+    
     ${({center}) => center && `
         justify-content:center; 
     `}
