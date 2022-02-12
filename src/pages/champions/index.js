@@ -1,5 +1,5 @@
 import react, { useEffect, useRef, useState } from "react";
-import { AlignColum, ChampCardDiv, ChampionsCard, ChampName, Container, HorizonScroll, InputSerach } from "../../components/champions/stylePageChampions";
+import { AlignColum, AlignSkinColum, ChampCardDiv, ChampionsCard, ChampName, Container, HorizonScroll, InputSerach } from "../../components/champions/stylePageChampions";
 import champions_json from '../../../public/championFull.json'
 import DetailsChampions from "../../components/champions/DetailsChampions";
 import { BackgroudImage } from "../../components/nickname/styles";
@@ -168,11 +168,17 @@ export default function ChampionsPage ()  {
                                    {
                                     champActive&&
                                         champ.findChampByName(champActive).skins.map((skin) => (
-                                            <ChampionsCard active={skin.num == champSkin} title={skin.name} hover={true} onClick={() => {
-                                                setChampSkin(skin.num)
-                                            }}>
-                                                <Image  width="310" height="560" src={`/imagens/champions/loading/${champActive}_${skin.num}.webp`}></Image>
-                                            </ChampionsCard>
+                                            <AlignSkinColum  title={skin.name} active={skin.num == champSkin}>
+                                                <ChampionsCard  hover={true} onClick={() => {
+                                                    setChampSkin(skin.num)
+                                                }}>
+                                                    <Image  width="310" height="560" src={`/imagens/champions/loading/${champActive}_${skin.num}.webp`}></Image>
+                                                </ChampionsCard>
+                                                <ChampName style={{
+                                                    marginTop:'1rem',
+                                                    marginBottom:'0rem',
+                                                }} active={skin.num == champSkin}>{skin.num == 0 ? champActive : skin.name}</ChampName>
+                                            </AlignSkinColum>
                                         ))
                                    }
                               </AlignSkinsRow>

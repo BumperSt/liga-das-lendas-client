@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from '../../../styles/theme.json'
 
 export const Container = styled.div`
-    margin-top: 1rem;
+    margin-top: 2.5rem;
     display: flex;
     text-align:center;
     justify-content:center;
@@ -281,5 +281,10 @@ export const AlignSkinsRow = styled.div`
     }
     ::-webkit-scrollbar-thumb:window-inactive {
         background: rgba(140, 108, 54,0.4); 
+    }
+    @media (max-width: 768px){
+        padding-inline:2rem;
+        padding-block:1.5rem;
+
     }
 `
