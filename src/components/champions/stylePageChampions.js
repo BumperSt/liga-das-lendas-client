@@ -102,5 +102,5 @@ export const AlignColum = styled.div`
     display:flex;
     flex-direction: column;
     text-align:start;
-    width: 100%;
+    min-width: 100%;
 `
