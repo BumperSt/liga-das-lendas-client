@@ -43,7 +43,7 @@ export const SummonersInMatchView = ({match}) => {
             {
                 myTeam?.map((participant) => (
                     <AlingChampImgAndName key={participant.summonerId} onClick={() => router.push(participant.summonerName)}>
-                        <ChampImg title={participant.championName} src={`/imagens/champions/tiles/${participant.championName}_0.webp`}/>
+                        <ChampImg title={participant.championName} src={`/imagens/champions/face/${participant.championName}.webp`}/>
                         <SummonerName>{participant.summonerName}</SummonerName>
 
                     </AlingChampImgAndName>
@@ -54,7 +54,7 @@ export const SummonersInMatchView = ({match}) => {
             {
                 enemyTeam?.map((participant) => (
                     <AlingChampImgAndName key={participant.summonerId} onClick={() => router.push(participant.summonerName)}>
-                        <ChampImg title={participant.championName} src={`/imagens/champions/tiles/${participant.championName}_0.webp`}/>
+                        <ChampImg title={participant.championName} src={`/imagens/champions/face/${participant.championName}.webp`}/>
                         <SummonerName>{participant.summonerName}</SummonerName>
 
                     </AlingChampImgAndName>

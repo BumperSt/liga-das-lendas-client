@@ -5,6 +5,7 @@ import axios from "axios";
 import Bars from "react-loading-icons/dist/components/bars";
 import theme from '../../../styles/theme.json'
 import Image from "next/image";
+import { AlignColum } from "./stylePageChampions";
 
 export default function DetailsChampions({champActive}) {
     
@@ -139,7 +140,7 @@ export default function DetailsChampions({champActive}) {
                         }
                         
                         </HabillityDiv>
-                     
+                       
 
                 </>
                 :

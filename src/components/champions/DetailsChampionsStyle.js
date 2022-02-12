@@ -79,12 +79,14 @@ export const MaxHeigthDiv = styled.div`
 export const HabillityDiv = styled.div`
     margin-top:3rem;
     background-color:rgba(0,0,0,0.3);
-    justify-content: space-around;
     padding: 1rem;
+    padding-inline:10rem;
     align-items: center;
     display:flex;
     flex-direction: row;
     min-width:100vw;
+    border-top: 3px ${theme.colors.dourado} solid;
+    justify-content: space-between;
     @media (max-width: 768px) {
         flex-direction: column;
 
@@ -94,6 +96,9 @@ export const HabillityDiv = styled.div`
 export const SkinsDiv = styled(HabillityDiv)`
     justify-content: flex-start;
     padding-inline:10rem;
+    margin-top:0rem;
+    border-bottom:0px;
+    max-width:100vw;
 
 `
 export const HabillityVideoDiv = styled.div`
@@ -203,7 +208,6 @@ export const CollumAlign = styled.div`
     text-align: left;
     position:relative;
     min-height:25rem;
-    max-height:25rem;
     min-width: 40%;
     max-width: 40%;
     @media only screen and (max-width: 768px) {
@@ -252,6 +256,30 @@ export const ChampionsCard = styled.div`
 export const AlignSkinsRow = styled.div`
     display:flex;
     flex-direction:row;
-    padding-block:5rem;
-
+    margin-block:2.5rem;
+    padding:3rem;
+    max-width: 100vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color:rgba(0,0,0,0.5);
+    width: 100%;
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: rgba(140, 108, 54,0.8); 
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba(140, 108, 54,0.4); 
+    }
 `

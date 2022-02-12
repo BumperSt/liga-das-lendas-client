@@ -71,7 +71,7 @@ export const ChampionsCard = styled.div`
     margin-inline:0.2rem;
     width: 5vw;
     @media only screen and (max-width: 600px) {
-        width: 20vw;
+        min-width: 20vw;
     }
     
     ${({active}) => active&&`
@@ -83,7 +83,7 @@ export const ChampionsCard = styled.div`
         transition: all 0.2s;
         margin-right:1rem;
         border: solid 3px ${theme.colors.dourado} !important;
-
+        min-width: 5vw;
         :hover{
             transform:scale(1.2);
             cursor: pointer;
@@ -102,4 +102,5 @@ export const AlignColum = styled.div`
     display:flex;
     flex-direction: column;
     text-align:start;
+    width: 100%;
 `
