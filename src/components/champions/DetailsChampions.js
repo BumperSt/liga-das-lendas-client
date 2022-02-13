@@ -47,21 +47,21 @@ export default function DetailsChampions({champActive}) {
             setVideoLoad(true)
             setErrorLoad(false)
 
-            if(spellSelected.passive){
-                axios.get(`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.mp4`).then((response) => {
+            // if(spellSelected.passive){
+            //     axios.get(`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.mp4`).then((response) => {
 
-                }).catch((error) => {
-                    setErrorLoad(true)
-                })
+            //     }).catch((error) => {
+            //         setErrorLoad(true)
+            //     })
     
-            }else{
-                axios.get(`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.mp4`).then((response) => {
+            // }else{
+            //     axios.get(`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.mp4`).then((response) => {
 
-                }).catch((error) => {
-                    setErrorLoad(true)
-                })
+            //     }).catch((error) => {
+            //         setErrorLoad(true)
+            //     })
     
-            }
+            // }
         }
       
     }, [spellSelected])
@@ -130,9 +130,9 @@ export default function DetailsChampions({champActive}) {
                                 {
                                     spellSelected&&
                                     spellSelected?.passive?
-                                    <VideoHability  loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.mp4`}  onLoadedData={() => setVideoLoad(false)}/>
+                                    <VideoHability onError={() => setErrorLoad(true)} loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_P1.mp4`}  onLoadedData={() => setVideoLoad(false)}/>
                                     :
-                                    <VideoHability loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.mp4`} onLoadedData={() => setVideoLoad(false)}/>                                  
+                                    <VideoHability onError={() => setErrorLoad(true)} loop autoPlay muted  src={`https://d28xe8vt774jo5.cloudfront.net/champion-abilities/${champInfo.idFormated}/ability_${champInfo.idFormated}_${SkillArray[champInfo.spells.indexOf(spellSelected)]}1.mp4`} onLoadedData={() => setVideoLoad(false)}/>                                  
                                 }
                           
 

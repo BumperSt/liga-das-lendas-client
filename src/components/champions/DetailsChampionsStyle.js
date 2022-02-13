@@ -149,7 +149,6 @@ export const VideoHability = styled.video`
     position: relative;
     width: 100%;
     z-index:10;
-
 `
 
 export const HabilitysTitle= styled.h1`

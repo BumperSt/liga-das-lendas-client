@@ -28,7 +28,7 @@ export default function ChampionsPage ()  {
     const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
     const { height, width } = useWindowDimensions();
     const [firstLoad, setFirstLoad] = useState(true)
-
+    const [actualIndex ,setActualIndex] = useState(0)
     const cardDiv = useRef(null);
     const horizonScrollRef = useRef(null);
 
@@ -38,20 +38,21 @@ export default function ChampionsPage ()  {
     }  
 
     useEffect(() => {
-        if(firstLoad){
+        if(championsArray){
             if(width <= 600){
-                setOffset(offSet*4)
+                setOffset(1570 - (actualIndex*20))
+            }else{
+                setOffset(393 - (actualIndex*5))
             }
-            setFirstLoad(false)
-        }
-      
-    }, [width])
+        }      
+    }, [width, champActive])
 
 
     const setActive = (champ) => {
         console.log(champ)
         setChampActive(champ.id)
         let actualIndex =  championsArray.indexOf(champ)
+        setActualIndex(actualIndex)
         let value = 0
         if(width <= 600){
             value = 20
@@ -64,6 +65,7 @@ export default function ChampionsPage ()  {
         setOffset(offSet+calculeOffset)
         setChampSkin(0)
     }
+    
     useEffect(() => {
         if(championsArray){
             setActive(championsArray[0])
