@@ -7,8 +7,10 @@ export const Container = styled.div`
     border-radius:6px;
     align-self: center;
     justify-self: center;
-    @media (max-width: 900px) {
+    @media only screen and (max-width: 900px) {
+        padding:.5rem;
     }
+
 `
 
 export const AlignItems = styled.div`
@@ -26,11 +28,7 @@ export const ItemContainer = styled.img`
     border-radius: 9px;
     background-color:#ffffff33;
     margin-inline: .2rem;
-    @media only screen and (max-width: 900px) {
-        width:1.5rem;
-        height:1.5rem;
-        border-radius: 6px;
-    }
+
     :hover{
         cursor: pointer;
         border: solid 2px ${theme.colors.dourado};

@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme.json'
+import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
     max-height: 100vh;
+    width: 100%;
     align-self: center;
     align-self: flex-end;
     
@@ -51,13 +53,15 @@ export const MatchContainer = styled.div`
     flex-direction: row;
     margin-block:.5rem;
     padding:.5rem;
-    width: 100%;
+    transition: all .3s ;
+
     @media only screen and (max-width: 600px) {
         flex-direction: column;
+        width: 100%;
     }
     border-left: 8px solid ${props => props.win ? 'rgba(0,255,0,0.5)' :'rgba(255,0,0,0.5)'};
     background-color: ${props => props.win ? 'rgba(0,255,0,0.2)' :'rgba(255,0,0,0.2)'};
-        -webkit-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
     box-shadow: 10px 8px 13px 8px rgba(0,0,0,0.75);
 `
@@ -66,8 +70,6 @@ export const MatchContainer = styled.div`
 export const ColumMatchContainer = styled.div`
     display: flex;
     flex-direction:column;
-    min-height:100%;
-
     margin-inline: ${props => props.marginInline ? `${props.marginInline}` : '.5rem'};
     @media only screen and (max-width: 600px) {
         margin-inline: .1rem;
@@ -76,17 +78,19 @@ export const ColumMatchContainer = styled.div`
 `
 
 export const HeaderMatch = styled(ColumMatchContainer)`
+        justify-content: space-around;
     @media only screen and (max-width: 600px) {
         width: 100%;
         flex-direction: row;
-        justify-content:flex-start;
         margin-inline:0px;
     }
 `
 
 
 export const AlingRowSmallSizeScreen = styled.div`
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     @media only screen and (max-width: 600px) {
         display:flex;
         flex-direction: row;
@@ -114,7 +118,7 @@ export const SpellIncon = styled.img`
     @media only screen and (max-width: 600px) {
         margin-left: 0;
         align-self:center;
-        width:1rem;
+        width:1.5rem;
 
     }
 `
@@ -122,7 +126,7 @@ export const SpellIncon = styled.img`
 export const OnlySmallScreen = styled.div`
     display:flex;
     flex-direction:row;
-    align-items: center;
+    justify-content: space-around;
     width: 100%;
     
 `
@@ -178,4 +182,25 @@ export const SelectType = styled.select`
 export const TypeOption = styled.option`
         background-color:black;
 
+`
+
+export const RowDivAlingSpeels = styled.div`
+    display:flex;
+    flex-direction:row;
+`
+
+
+export const UpArrow = styled(IoIosArrowUp)`
+    align-self: flex-end;
+`
+
+
+export const DownArrow = styled(IoIosArrowDown)`
+    align-self: flex-end;
+`
+
+export const AlingColumCenter = styled.div`
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 `

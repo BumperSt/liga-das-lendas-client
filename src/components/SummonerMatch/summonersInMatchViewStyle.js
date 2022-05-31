@@ -3,9 +3,7 @@ import theme from '../../../styles/theme.json'
 export const Container = styled.div`
     display:flex;
     flex-direction:row;
-    @media (max-width: 800px){
-        display: none;
-    }
+
 `
 
 export const AlignTeam = styled.div`

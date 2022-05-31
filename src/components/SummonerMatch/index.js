@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect, useRef} from 'react'
-import {AlingRowSmallSizeScreen, ChampIcon, CharKill, CharNameAndLevel, ColumMatchContainer, Container, HeaderMatch, MatchContainer, OnlySmallScreen, ScroolContainer, SelectType, SelectTypeDiv, SpellIncon, SummonerMarch, TypeOption, TypeTitle} from './styles'
+import {AlingColumCenter, AlingRowSmallSizeScreen, ChampIcon, CharKill, CharNameAndLevel, ColumMatchContainer, Container, DownArrow, HeaderMatch, MatchContainer, OnlySmallScreen, RowDivAlingSpeels, ScroolContainer, SelectType, SelectTypeDiv, SpellIncon, SummonerMarch, TypeOption, TypeTitle, UpArrow} from './styles'
 import UserContext from '../../context/userContext'
 import summonerApi from '../../api/summoner'
 import MatchFunctions from '../MatchFunctions/index'
@@ -10,6 +10,7 @@ import champJson from '../../../public/champion.json'
 import { Bars } from 'react-loading-icons'
 import theme from '../../../styles/theme.json'
 import { SummonersInMatchView } from './summonersInMatchView'
+import useWindowDimensions from '../../helpers/screenSize'
 
 export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsValue, SetPreferencePositions}){
 
@@ -17,6 +18,8 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
     const matchContainerRef = useRef();
 
     const {user} = useContext(UserContext)
+
+    const [showMoreMobile, setShowMoreMobile] = useState(false)
 
     const [matchList, setmatchList] = useState(null)
     
@@ -26,7 +29,7 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
 
     const [matchType, setMatchType] = useState('default')
 
-
+    const { height, width } = useWindowDimensions();
 
     const [matchAuxIndex, setMatchAuxIndex] = useState(0)
 
@@ -232,64 +235,101 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                 matchs?.map((match) => (
                     <MatchContainer key={match.info.gameId} win={match.myParticipation.win} style={{color:'white'}}>
                         <HeaderMatch center={true}>
-                            <TypeTitle title={matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}>{matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}.</TypeTitle>
+                            <TypeTitle style={{
+                                margin:'0px'
+                            }} title={matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}>{matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}.</TypeTitle>
                             <TypeTitle title={getFormatedDate(match.info.gameCreation)}>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
                             <TypeTitle title={match.gameDuration}>{match.gameDuration} Minutos</TypeTitle> 
                         </HeaderMatch>
                         <OnlySmallScreen>
-                            <ColumMatchContainer center={true} marginInline={'0px'}>
-                            {   
-                                    match.runes.map((rune) => (
-                                        <SpellIncon key={rune.id} title={rune.name} src={`/${rune.icon.replace('png', 'webp')}`}/>
+                            <RowDivAlingSpeels>
 
-                                    ))
-                                }
                             
-                            </ColumMatchContainer>
-                            <ColumMatchContainer center={true}>
-                                <CharNameAndLevel>Nivel {match.myParticipation.champLevel}</CharNameAndLevel>
-                                <ChampIcon title={champJson.data[match.myParticipation.championName]?.title} src={`/imagens/champions/tiles/${match.myParticipation.championName}_0.webp`}/>
-                                <CharNameAndLevel>{match.myParticipation.championName}</CharNameAndLevel>
-                            </ColumMatchContainer>
-                            <ColumMatchContainer center={true}  marginInline={'0px'}>
+                                <ColumMatchContainer center={true} marginInline={'0px'}>
                                 {   
-                                    match.spells.map((spell) => (
-                                        <SpellIncon key={spell.id} title={spell.name} src={`/spell/${spell.id}.webp`}/>
+                                        match.runes.map((rune) => (
+                                            <SpellIncon key={rune.id} title={rune.name} src={`/${rune.icon.replace('png', 'webp')}`}/>
 
-                                    ))
-                                }
-                            </ColumMatchContainer>
-                            <AlingRowSmallSizeScreen>
+                                        ))
+                                    }
+                                
+                                </ColumMatchContainer>
+                                <ColumMatchContainer center={true}>
+                                    <CharNameAndLevel>Nivel {match.myParticipation.champLevel}</CharNameAndLevel>
+                                    <ChampIcon title={champJson.data[match.myParticipation.championName]?.title} src={`/imagens/champions/tiles/${match.myParticipation.championName}_0.webp`}/>
+                                    <CharNameAndLevel>{match.myParticipation.championName}</CharNameAndLevel>
+                                </ColumMatchContainer>
+                                <ColumMatchContainer center={true}  marginInline={'0px'}>
+                                    {   
+                                        match.spells.map((spell) => (
+                                            <SpellIncon key={spell.id} title={spell.name} src={`/spell/${spell.id}.webp`}/>
 
-                            <ColumMatchContainer center={true}>
+                                        ))
+                                    }
+                                </ColumMatchContainer>
+                            </RowDivAlingSpeels>
+
+                                <ColumMatchContainer center={true}>
 
                                     <CharNameAndLevel>{match.kda[0]}/<CharKill>{match.kda[1]}</CharKill>/{match.kda[2]}</CharNameAndLevel>
                                     <CharNameAndLevel>{match.kdaRatio} KDA</CharNameAndLevel>
+
+
+                            </ColumMatchContainer>
+                                <ColumMatchContainer center={true}>
+                                    <CharNameAndLevel>{match.killedMinionsPorMin} ({match.killedMinions}) CS</CharNameAndLevel>
+                                    <CharNameAndLevel>Control Wards {match.myParticipation.visionWardsBoughtInGame}</CharNameAndLevel>
                                     {
                                         match.killsSequences&&
                                         <SummonerMarch>{match.killsSequences}</SummonerMarch>
                                     }
+                                    {
+                                        width <= 600 &&
+                                        <>
+                                        {
+                                            showMoreMobile ?
+                                            <UpArrow onClick={() => setShowMoreMobile(!showMoreMobile)} size={25}/>
+                                            :
+                                            <DownArrow onClick={() => setShowMoreMobile(!showMoreMobile)} size={25}/>
 
-                                    </ColumMatchContainer>
-                                    <ColumMatchContainer center={true}>
+                                        }
+                                        </>
+                                          
+                                        
+                                    }
+                                </ColumMatchContainer>
 
-                                    <CharNameAndLevel>{match.killedMinionsPorMin} ({match.killedMinions}) CS</CharNameAndLevel>
-                                    <CharNameAndLevel>Control Wards {match.myParticipation.visionWardsBoughtInGame}</CharNameAndLevel>
-                                    </ColumMatchContainer>
-
-                            </AlingRowSmallSizeScreen>
 
 
                            
-
-                            <ColumMatchContainer center={true}>
-                                <MatchItems myParticipation={match.myParticipation}/>
-                            </ColumMatchContainer>
-                            <ColumMatchContainer>
-                                <SummonersInMatchView match={match}/>
-                            </ColumMatchContainer>
-                        </OnlySmallScreen>
+                            {
+                                width > 600 &&
+                                <>
+                                    <ColumMatchContainer center={true}>
+                                        <MatchItems myParticipation={match.myParticipation}/>
+                                    </ColumMatchContainer>
+                                    <ColumMatchContainer>
+                                        <SummonersInMatchView match={match}/>
+                                    </ColumMatchContainer>
+                                </>
+                            }
+       
                             
+               
+
+
+                        </OnlySmallScreen>
+                        {
+                            showMoreMobile && width <= 600 &&
+                            <AlingColumCenter>
+                                <ColumMatchContainer center={true}>
+                                    <MatchItems myParticipation={match.myParticipation}/>
+                                </ColumMatchContainer>
+                                <ColumMatchContainer>
+                                    <SummonersInMatchView match={match}/>
+                                </ColumMatchContainer>
+                            </AlingColumCenter>
+                        }
                     </MatchContainer>
                 ))
         }
