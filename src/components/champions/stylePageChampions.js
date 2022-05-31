@@ -15,49 +15,65 @@ export const InputSerach = styled.div`
     align-self: center;
 `
 
-export const HorizonScroll = styled.div`
-    margin-top:.5rem;
-    display:flex;
-    flex-direction: row;
-    overflow: visible;
-    align-self: center;
+export const ScrollDrag = styled(ScrollContainer)`
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
     transition: all 2s;
-    transform: ${props => props.transaletX && `TranslateX(${props.transaletX}vw)`};
-    margin-bottom: 1rem;
+    scroll-behavior: smooth;
+    overflow: hidden !important;
+    overflow-x: scroll !important;
+    margin-block: 1rem;
     z-index:99;
-    
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+    }
 `
+
+export const ScrollSection = styled.section`
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    transition: all 2s;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+    width: 100%;
+    align-items: center;
+    @media only screen and (max-width: 1280px) {
+        padding-bottom: 3rem;
+
+    }
+`
+
 export const ChampCardDiv = styled.div`
     position: relative;
     box-sizing: border-box;
+    scroll-snap-align: start;
     text-align: center;
-    width: 5vw;
+    align-items: center;
     :hover{
         transform: scale(1.3) translateY(8%);
         cursor: pointer;
         z-index:205;
     }
-
     ${props => props.active && `
         transform: scale(1.3) translateY(8%); 
         z-index:200;
     `
     }
     transition: all 0.3s;
-    @media only screen and (max-width: 600px) {
-        width: 20vw;
-    }
+
+
 `
 
 export const ChampName = styled.h3`
     transition: all 0.2s;
     bottom: 0;
     left:50%;
+    margin-top: .5rem;
     color:white;
-
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 1280px) {
         font-size:.8rem;
-        margin-bottom: 1rem;
     }
     ${props => props.active && `
         color: #ffa000; 
@@ -66,22 +82,25 @@ export const ChampName = styled.h3`
 `
 
 export const ChampionsCard = styled.div`
-    
+    position: relative;
+    width: 6vw;
+    height: 12rem;
     margin-inline:0.2rem;
-    @media only screen and (max-width: 600px) {
-        min-width: 20vw;
-    }
-    
-
-
     ${({hover}) => !hover&&
     `
         span:first-child{
             border-bottom: solid 3px ${theme.colors.dourado} !important;
         }
-    `
+    `}
 
-}
+    @media only screen and (max-width: 1280px) {
+        width: 7vw;
+        height: 10rem;
+    }
+    @media only screen and (max-width: 600px) {
+        width: 25vw;
+
+    }
 `
 
 export const AlignColum = styled.div`
@@ -95,11 +114,10 @@ export const AlignColum = styled.div`
 export const AlignSkinColum = styled.div`
     display:flex;
     flex-direction: column;
+    width: 10rem;
     text-align:center;
-    margin-right:1rem;
+    align-items: center;
     transition: all 0.5s;
-    min-width: 10rem;
-    max-width: 10rem;
     height: 100%;
     ${({active}) => active&&`
          transform:scale(1.2);
@@ -109,8 +127,8 @@ export const AlignSkinColum = styled.div`
         cursor:pointer;
     }
     @media (max-width:600px){
-        min-width: 5rem;
-        max-width: 5rem;
+        margin-inline: .5rem;
+
     }
 
 `

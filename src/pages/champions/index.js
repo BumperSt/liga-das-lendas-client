@@ -1,5 +1,5 @@
 import react, { useEffect, useRef, useState } from "react";
-import { AlignColum, AlignSkinColum, ChampCardDiv, ChampionsCard, ChampName, Container, HorizonScroll, InputSerach } from "../../components/champions/stylePageChampions";
+import { AlignColum, AlignSkinColum, ChampCardDiv, ChampionsCard, ChampName, Container, HorizonScroll, InputSerach, ScrollDrag, ScrollSection } from "../../components/champions/stylePageChampions";
 import champions_json from '../../../public/championFull.json'
 import DetailsChampions from "../../components/champions/DetailsChampions";
 import { BackgroudImage } from "../../components/nickname/styles";
@@ -12,57 +12,27 @@ import BottomBar from "../../components/bottomBar";
 import Image from "next/image";
 import useWindowDimensions from "../../helpers/screenSize";
 import { useSpring, animated } from '@react-spring/web'
-import { useDrag } from '@use-gesture/react'
 import champ from "../../helpers/champ";
+import { createRef } from "react/cjs/react.production.min";
 
 
 export default function ChampionsPage ()  {
-
+    const scrollDragRef = useRef()
     const [championsArray, setChampionsArray] = useState(null)
     const [champActive, setChampActive] = useState('')
-    const [offSet, setOffset] = useState(393)
-    const [lastIndex, setLastIndex] = useState(0)
     const [backgroudUrl, setBackgroudUrl] = useState('')
     const [champSkin, setChampSkin] = useState(0)
     const [serachChampion, setSearchChampion] = useState('')
-    const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
     const { height, width } = useWindowDimensions();
-    const [firstLoad, setFirstLoad] = useState(true)
-    const [actualIndex ,setActualIndex] = useState(0)
-    const cardDiv = useRef(null);
-    const horizonScrollRef = useRef(null);
-
+    
     const objectToArray = (objects) => {
         let array = Object.keys(objects).map((key) => objects[key])
         return array
     }  
 
-    useEffect(() => {
-        if(championsArray){
-            if(width <= 600){
-                setOffset(1570 - (actualIndex*20))
-            }else{
-                setOffset(393 - (actualIndex*5))
-            }
-        }      
-    }, [width, champActive])
-
-
     const setActive = (champ) => {
-        console.log(champ)
         setChampActive(champ.id)
-        let actualIndex =  championsArray.indexOf(champ)
-        setActualIndex(actualIndex)
-        let value = 0
-        if(width <= 600){
-            value = 20
-        }else{
-            value = 5
-        }
-        let calculeOffset  = (actualIndex-lastIndex)*-value
-        setLastIndex(actualIndex)
         setBackgroudUrl(`/imagens/champions/centered/${champ.id}_${champSkin}.webp`)
-        setOffset(offSet+calculeOffset)
         setChampSkin(0)
     }
     
@@ -72,38 +42,34 @@ export default function ChampionsPage ()  {
         }
     }, [championsArray])
 
-    const mouseMouve = (evt) => {
-        // let mousePosX = evt.pageX
-        // if(mousePosX <= 50){
-        //     setInterval(() => {
-
-        //     }, 500)
-        //     console.log("Voltar")
-        // }else if(mousePosX >= (width-50)){
-        //     setInterval(() => {
-
-        //     }, 500)
-        //     console.log("Avançar")
-        // }
-        // console.log(width)
-        // console.log(evt.pageX)
-    }
-
++
     useEffect(() => {
+        let value = 0
+        if(width <= 600){
+            value = 100
+        }else if (width <= 1280){
+            value = 90
+        }else{
+            value = 115
+        }
         if(serachChampion != '' && championsArray){
-            Object.keys(championsArray).map(champIndex => {
-                for (let index = 1; index <= serachChampion.length; index++) {
-                    if(serachChampion.length == index ){
-                        if(championsArray[champIndex].id.substring(0,index).toUpperCase() == serachChampion.substring(0,index).toUpperCase()){
-                            setActive(championsArray[champIndex])
+            const waitSearch = setTimeout(() => {
+                Object.keys(championsArray).map(champIndex => {
+                    for (let index = 1; index <= serachChampion.length; index++) {
+                        if(serachChampion.length == index ){
+                            if(championsArray[champIndex].id.substring(0,index).toUpperCase() == serachChampion.substring(0,index).toUpperCase()){
+                                setActive(championsArray[champIndex])
+                                scrollDragRef.current.scrollLeft =  champIndex*value
+                            }
                         }
                     }
-                }
-             });
+                });
+            }, 250)
         }
+
+        return () => clearTimeout(waitSearch)
     }, [serachChampion])
     
-
     useEffect(() => {
         setBackgroudUrl(`/imagens/champions/centered/${champActive}_${champSkin}.webp`)
     }, [champSkin])
@@ -114,49 +80,44 @@ export default function ChampionsPage ()  {
 
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
 
-    const bind = useDrag(({ down, movement: [mx, my] }) => {
-        console.log(mx)
-        api.start({ x: down ? mx : 0, y: down ? my : 0, immediate: down })
-    })
-    
+    const scrollRef = createRef();
+
+
+    const enableKeyboardCursorToScroll = () => {
+      if (scrollRef.current) {
+        scrollRef.current.focus();
+      }
+    };
+
     if(championsArray){
         return(
             <Container>
-                
                 <Head>
                     <title>{champActive} Detalhes</title>
                     <meta name="description" content={"League Of Legends, Habilidades Campeões, Skills Campeões"} />
                 </Head>
                 <InputSerach>
                     <Input value={serachChampion} onChange={(evt) => setSearchChampion(evt.target.value)} placeholder="Busque um campeão"></Input>
-
                 </InputSerach>
-                <MaxHeigthDiv>
-
-
-
-                    
-                
-                    <HorizonScroll  {...bind()} style={{
-                        transform: `transaletX(${x})`
-                    }} onMouseMove={(e) => mouseMouve(e)} transaletX={offSet}>
-                        
+                <MaxHeigthDiv>     
+                    <ScrollDrag innerRef={scrollDragRef} horizontal={true} vertical={false} >
+                        <ScrollSection className="tiles" onFocus={enableKeyboardCursorToScroll} ref={scrollRef}>
                         {
-                            championsArray?.map((champ) => (
-                                <ChampCardDiv key={champ.key} ref={cardDiv} active={champActive == champ.id}>
-                                    <ChampionsCard  onClick={() => 
-                                    {
-                                        setActive(champ) 
-                                        setSearchChampion('')}
-                                    }>
-                                        <Image priority={champActive == champ.id} width="310" height="560" src={`/imagens/champions/loading/${champ.id}_0.webp`}></Image>
-                                    </ChampionsCard>
-                                    <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
-                                </ChampCardDiv>
-                            ))
-                        }
-        
-                    </HorizonScroll>
+                                championsArray?.map((champ) => (
+                                    <ChampCardDiv key={champ.key} active={champActive == champ.id}>
+                                        <ChampionsCard  onClick={() => 
+                                        {
+                                            setActive(champ) 
+                                            setSearchChampion('')}
+                                        }>
+                                            <Image priority={champActive == champ.id} layout="fill" src={`/imagens/champions/loading/${champ.id}_0.webp`}></Image>
+                                        </ChampionsCard>
+                                        <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
+                                    </ChampCardDiv>
+                                ))
+                            }
+                        </ScrollSection>
+                    </ScrollDrag>                               
                     {
                         champActive&&
                         <DetailsChampions champActive={champActive}/>
@@ -168,11 +129,7 @@ export default function ChampionsPage ()  {
                              
                                 <HabilitysTitle>SKINS</HabilitysTitle>
                                 <AlignSkinCollum>
-                                <HabilitysTitle style={{
-                                    textAlign: 'end',
-                                    paddingInline:'5rem',
-                                    paddingBlock:'1rem',
-                                }}>Total de {champ.findChampByName(champActive).skins.length} skins</HabilitysTitle>
+                                <HabilitysTitle>Total de {champ.findChampByName(champActive).skins.length} skins</HabilitysTitle>
 
                                 <AlignSkinsRow>
                                 
@@ -189,6 +146,7 @@ export default function ChampionsPage ()  {
                                                         <ChampName style={{
                                                             marginTop:'1rem',
                                                             marginBottom:'0rem',
+                                                            maxWidth:'50%'
                                                         }} active={skin.num == champSkin}>{skin.num == 0 ? champActive : skin.name}</ChampName>
                                                     </AlignSkinColum>
                                                 ))

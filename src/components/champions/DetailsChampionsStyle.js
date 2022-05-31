@@ -2,7 +2,6 @@ import styled from "styled-components";
 import theme from '../../../styles/theme.json'
 
 export const Container = styled.div`
-    margin-top: 2.5rem;
     display: flex;
     text-align:center;
     justify-content:center;
@@ -94,6 +93,7 @@ export const HabillityDiv = styled.div`
 `
 
 export const SkinsDiv = styled(HabillityDiv)`
+    
     justify-content: flex-start;
     padding-inline:10rem;
     margin-top:0rem;
@@ -184,12 +184,9 @@ export const HabilityKey = styled.h1`
 export const HabilityDescreption = styled.h1`
     font-size:1.2rem;
     overflow: hidden;
-    max-width: 90%;
-
-
-    @media (max-width: 768px){
+    max-width: 100%;
+    @media (max-width: 1280px){
         font-size:.8rem;
-        max-width: 90%;
 
     }
 
@@ -256,6 +253,7 @@ export const AlignSkinCollum = styled.div`
     background-color:rgba(0,0,0,0.5);
     display:'flex';
     flex-direction:'collum';
+    padding:1rem;
     
 `
 

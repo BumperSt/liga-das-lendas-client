@@ -8,14 +8,11 @@ import SummonerExpBorder from '../../../components/SummonerExpBorder'
 import champApi from '../../../api/champs'
 import summonerApi from '../../../api/summoner'
 import { Circles  } from 'react-loading-icons'
-
 import champHelper from '../../../helpers/champ'
-
 import {
     Container, Top, NickName, ProfileIcon, UserLevel, LeagueDiv, BackgroudImage, RowAlign, ContainerProfileInfo, UpdateUserButton
 } from '../../../components/nickname/styles'
 import Head from 'next/head'
-import BottomBar from '../../../components/bottomBar'
 import SelectSkinInPage from '../../../components/selectSkin/selectSkin'
 
 

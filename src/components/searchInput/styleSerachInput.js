@@ -10,13 +10,13 @@ export const DivInput = styled.div`
 export const Input = styled.input`
     font-size: 1.3rem;
     color: white;
-    padding: 1rem;
     border: ${theme.colors.dourado} solid 2px;
     background-color:black;
     height: 3rem;
     width: 100%;
     outline: none;
-    text-align: center;
+    text-align: start;
+    padding-inline: .5rem;
     :-webkit-autofill,
    
     :-webkit-autofill:hover,
@@ -28,6 +28,7 @@ export const Input = styled.input`
     }
     @media only screen and (max-width: 600px) {
         height: 1rem;
+        padding:1rem;
 
 
     }

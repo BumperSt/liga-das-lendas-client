@@ -39,7 +39,6 @@ export default function Header({myUrl}){
                     <InputSerchDiv>
                         <SearchInput inputStyle={{
                             height:'2rem',
-                            padding: '0rem',
                         }}/>
 
                     </InputSerchDiv>
