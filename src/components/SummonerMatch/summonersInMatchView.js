@@ -10,7 +10,9 @@ export const SummonersInMatchView = ({match}) => {
     const router = useRouter()
 
     useEffect(() => {
+        
         if(match){
+            console.log(match.myParticipation)
             setParticipants(match.info.participants)
         }
     },[match])
@@ -42,9 +44,9 @@ export const SummonersInMatchView = ({match}) => {
             <AlignTeam>
             {
                 myTeam?.map((participant) => (
-                    <AlingChampImgAndName key={participant.summonerId} onClick={() => router.push(participant.summonerName)}>
+                    <AlingChampImgAndName active={match.myParticipation.summonerName == participant.summonerName} key={participant.summonerId} onClick={() => router.push(participant.summonerName)}>
                         <ChampImg title={participant.championName} src={`/imagens/champions/face/${participant.championName}.webp`}/>
-                        <SummonerName>{participant.summonerName}</SummonerName>
+                        <SummonerName title={participant.summonerName}>{participant.summonerName}</SummonerName>
 
                     </AlingChampImgAndName>
                 ))
@@ -55,7 +57,7 @@ export const SummonersInMatchView = ({match}) => {
                 enemyTeam?.map((participant) => (
                     <AlingChampImgAndName key={participant.summonerId} onClick={() => router.push(participant.summonerName)}>
                         <ChampImg title={participant.championName} src={`/imagens/champions/face/${participant.championName}.webp`}/>
-                        <SummonerName>{participant.summonerName}</SummonerName>
+                        <SummonerName title={participant.summonerName}>{participant.summonerName}</SummonerName>
 
                     </AlingChampImgAndName>
                 ))

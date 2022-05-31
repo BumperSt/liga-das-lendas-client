@@ -13,7 +13,6 @@ const SelectSkinInPage = ({topChamp, setChampSkin, champSkin}) => {
 
     const clickOutModal = (e) => {
         if (!ref.current.contains(e.target)) {
-            console.log("oooo")
             setOpen(false);
         }
     };

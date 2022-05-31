@@ -10,6 +10,10 @@ export const Container = styled.div`
     @media only screen and (max-width: 900px) {
         padding:.5rem;
     }
+    @media only screen and (max-width: 600px) {
+        padding:.25rem;
+
+    }
 
 `
 
@@ -28,7 +32,10 @@ export const ItemContainer = styled.img`
     border-radius: 9px;
     background-color:#ffffff33;
     margin-inline: .2rem;
-
+    @media (max-width: 600px) {
+        width:1.5rem;
+        height:1.5rem;
+    }
     :hover{
         cursor: pointer;
         border: solid 2px ${theme.colors.dourado};

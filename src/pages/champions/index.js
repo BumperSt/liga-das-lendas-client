@@ -134,24 +134,24 @@ export default function ChampionsPage ()  {
                                 <AlignSkinsRow>
                                 
 
-                                            {
-                                            
-                                                champ.findChampByName(champActive).skins.map((skin) => (
-                                                    <AlignSkinColum  title={skin.name} active={skin.num == champSkin}>
-                                                        <ChampionsCard  hover={true} onClick={() => {
-                                                            setChampSkin(skin.num)
-                                                        }}>
-                                                            <Image  width="310" height="560" src={`/imagens/champions/loading/${champActive}_${skin.num}.webp`}></Image>
-                                                        </ChampionsCard>
-                                                        <ChampName style={{
-                                                            marginTop:'1rem',
-                                                            marginBottom:'0rem',
-                                                            maxWidth:'50%'
-                                                        }} active={skin.num == champSkin}>{skin.num == 0 ? champActive : skin.name}</ChampName>
-                                                    </AlignSkinColum>
-                                                ))
-                                            }
-                                                                            
+                                    {
+                                    
+                                        champ.findChampByName(champActive).skins.map((skin) => (
+                                            <AlignSkinColum  title={skin.name} active={skin.num == champSkin}>
+                                                <ChampionsCard  hover={true} onClick={() => {
+                                                    setChampSkin(skin.num)
+                                                }}>
+                                                    <Image  width="310" height="560" src={`/imagens/champions/loading/${champActive}_${skin.num}.webp`}></Image>
+                                                </ChampionsCard>
+                                                <ChampName style={{
+                                                    marginTop:'1rem',
+                                                    marginBottom:'0rem',
+                                                    maxWidth:'50%'
+                                                }} active={skin.num == champSkin}>{skin.num == 0 ? champActive : skin.name}</ChampName>
+                                            </AlignSkinColum>
+                                        ))
+                                    }
+                                                                    
 
                                 </AlignSkinsRow>
                               </AlignSkinCollum>

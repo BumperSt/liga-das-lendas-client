@@ -51,10 +51,15 @@ export const ScroolContainer = styled.div`
 export const MatchContainer = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     margin-block:.5rem;
     padding:.5rem;
+    min-width: 65%;
     transition: all .3s ;
-
+    position: relative;
+    @media only screen and (min-width: 1280px) {
+        border-right: 3rem solid ${props => props.win ? 'rgb(99 163 99 / 50%)' :'rgb(126 18 18 / 50%)'};
+    }
     @media only screen and (max-width: 600px) {
         flex-direction: column;
         width: 100%;
@@ -78,8 +83,10 @@ export const ColumMatchContainer = styled.div`
 `
 
 export const HeaderMatch = styled(ColumMatchContainer)`
-        justify-content: space-around;
+    justify-content: space-around;
+    position: relative;
     @media only screen and (max-width: 600px) {
+        justify-content: flex-start;
         width: 100%;
         flex-direction: row;
         margin-inline:0px;
@@ -132,6 +139,10 @@ export const OnlySmallScreen = styled.div`
 `
 
 export const TypeTitle = styled.h1`
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    max-width: 8rem;
     font-size:1rem;
 
     @media only screen and (max-width: 600px) {
@@ -191,12 +202,38 @@ export const RowDivAlingSpeels = styled.div`
 
 
 export const UpArrow = styled(IoIosArrowUp)`
-    align-self: flex-end;
+    :hover{
+        cursor:pointer;
+    }
+    right: 0;
+    transform: translateX(150%);
+    bottom: 20%;
+    position: absolute;
+    @media only screen and (max-width: 600px) {
+        right: -.3rem;
+        transform: translateX(0%);
+        top: -.5rem;
+
+        background-color:${props => props.win ? 'rgb(99 163 99 / 50%)' :'rgb(126 18 18 / 50%)'}
+    }
+
 `
 
 
 export const DownArrow = styled(IoIosArrowDown)`
-    align-self: flex-end;
+    :hover{
+        cursor:pointer;
+    }
+    right: 0;
+    transform: translateX(150%);
+    bottom: 20%;
+    position: absolute;
+    @media only screen and (max-width: 600px) {
+        right: -.3rem;
+        transform: translateX(0%);
+        top: -.5rem;
+        background-color:${props => props.win ? 'rgb(99 163 99 / 50%)' :'rgb(126 18 18 / 50%)'}
+    }
 `
 
 export const AlingColumCenter = styled.div`

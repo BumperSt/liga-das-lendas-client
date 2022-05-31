@@ -16,6 +16,13 @@ export const AlingChampImgAndName = styled.div`
     flex-direction:row;
     align-items:center;
     margin-block: .2rem;
+    ${props => props.active && `
+        cursor: pointer;
+        color:${theme.colors.dourado};
+        img{
+            border: 2px solid ${theme.colors.dourado};
+        }
+    `}
     :hover{
         cursor: pointer;
         color:${theme.colors.dourado};

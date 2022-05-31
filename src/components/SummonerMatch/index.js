@@ -19,7 +19,7 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
 
     const {user} = useContext(UserContext)
 
-    const [showMoreMobile, setShowMoreMobile] = useState(false)
+    const [showMoreMobile, setShowMoreMobile] = useState('')
 
     const [matchList, setmatchList] = useState(null)
     
@@ -214,6 +214,10 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
         }
     }
 
+    useEffect(() => {
+        console.log(showMoreMobile)
+    }, [showMoreMobile])
+
 
     return(
 
@@ -238,8 +242,14 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                             <TypeTitle style={{
                                 margin:'0px'
                             }} title={matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}>{matchHelper.findQueueById(match.info.queueId).name? matchHelper.findQueueById(match.info.queueId).name: matchHelper.findQueueById(match.info.queueId).description}.</TypeTitle>
-                            <TypeTitle title={getFormatedDate(match.info.gameCreation)}>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
                             <TypeTitle title={match.gameDuration}>{match.gameDuration} Minutos</TypeTitle> 
+                            <TypeTitle title={getFormatedDate(match.info.gameCreation)}>{getFormatedDate(match.info.gameCreation)}</TypeTitle>
+                            {
+                                width <= 600 && showMoreMobile && showMoreMobile == match.info.gameId ?
+                                <UpArrow win={match.myParticipation.win} onClick={() => setShowMoreMobile(false)} size={25}/>
+                                :
+                                <DownArrow win={match.myParticipation.win} onClick={() => setShowMoreMobile(match.info.gameId ) } size={25}/>                  
+                            }
                         </HeaderMatch>
                         <OnlySmallScreen>
                             <RowDivAlingSpeels>
@@ -254,7 +264,9 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                                     }
                                 
                                 </ColumMatchContainer>
-                                <ColumMatchContainer center={true}>
+                                <ColumMatchContainer style={{
+                                    minWidth:'50%'
+                                }}center={true}>
                                     <CharNameAndLevel>Nivel {match.myParticipation.champLevel}</CharNameAndLevel>
                                     <ChampIcon title={champJson.data[match.myParticipation.championName]?.title} src={`/imagens/champions/tiles/${match.myParticipation.championName}_0.webp`}/>
                                     <CharNameAndLevel>{match.myParticipation.championName}</CharNameAndLevel>
@@ -269,12 +281,9 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                                 </ColumMatchContainer>
                             </RowDivAlingSpeels>
 
-                                <ColumMatchContainer center={true}>
-
+                            <ColumMatchContainer center={true}>
                                     <CharNameAndLevel>{match.kda[0]}/<CharKill>{match.kda[1]}</CharKill>/{match.kda[2]}</CharNameAndLevel>
                                     <CharNameAndLevel>{match.kdaRatio} KDA</CharNameAndLevel>
-
-
                             </ColumMatchContainer>
                                 <ColumMatchContainer center={true}>
                                     <CharNameAndLevel>{match.killedMinionsPorMin} ({match.killedMinions}) CS</CharNameAndLevel>
@@ -283,52 +292,45 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                                         match.killsSequences&&
                                         <SummonerMarch>{match.killsSequences}</SummonerMarch>
                                     }
-                                    {
-                                        width <= 600 &&
-                                        <>
-                                        {
-                                            showMoreMobile ?
-                                            <UpArrow onClick={() => setShowMoreMobile(!showMoreMobile)} size={25}/>
-                                            :
-                                            <DownArrow onClick={() => setShowMoreMobile(!showMoreMobile)} size={25}/>
 
-                                        }
-                                        </>
-                                          
-                                        
-                                    }
                                 </ColumMatchContainer>
 
 
-
+                                <ColumMatchContainer center={true}>
+                                        <MatchItems myParticipation={match.myParticipation}/>
+                                </ColumMatchContainer>
+  
                            
                             {
                                 width > 600 &&
-                                <>
-                                    <ColumMatchContainer center={true}>
-                                        <MatchItems myParticipation={match.myParticipation}/>
-                                    </ColumMatchContainer>
-                                    <ColumMatchContainer>
-                                        <SummonersInMatchView match={match}/>
-                                    </ColumMatchContainer>
-                                </>
+                                <ColumMatchContainer>
+                                <SummonersInMatchView match={match}/>
+                            </ColumMatchContainer>
+                                    
                             }
-       
+
                             
                
 
 
                         </OnlySmallScreen>
                         {
-                            showMoreMobile && width <= 600 &&
-                            <AlingColumCenter>
-                                <ColumMatchContainer center={true}>
-                                    <MatchItems myParticipation={match.myParticipation}/>
-                                </ColumMatchContainer>
+                            showMoreMobile == match.info.gameId && 
+                            <AlingColumCenter>                            
                                 <ColumMatchContainer>
                                     <SummonersInMatchView match={match}/>
                                 </ColumMatchContainer>
                             </AlingColumCenter>
+                        }
+                        
+                        
+                        {
+                            width >= 1280 && <>
+                            {showMoreMobile == match.info.gameId ?
+                            <UpArrow onClick={() => setShowMoreMobile(false)} size={25}/>
+                            :
+                            <DownArrow onClick={() => setShowMoreMobile(match.info.gameId ) } size={25}/>          }
+                            </>        
                         }
                     </MatchContainer>
                 ))
