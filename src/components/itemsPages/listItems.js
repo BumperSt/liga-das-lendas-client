@@ -6,6 +6,7 @@ import { Input } from "../searchInput/styleSerachInput"
 import axios from "axios"
 import LanguageContext from "../../context/languageContext"
 import { useRouter } from "next/router"
+import SearchInput from "../searchInput"
 
 const ListAllItems = () => {
 
@@ -129,10 +130,18 @@ const ListAllItems = () => {
             <ListItemContainer>
                 <ListItemByCategory>
                     <ListItemName>Todos os items</ListItemName>
-                    <Input value={filter}  name="itemSerch" onChange={(e) => setFilter(e.target.value)} style={{
-                        height:'2rem',
-                        marginBlock:'1rem'
-                    }} placeholder="Pesquisar Item"/>
+                    <div style={{
+                    display:'flex',
+                    flexDirection:'column',
+                    paddingBlock:'1rem'
+                }}>
+                <SearchInput placeholder="Pesquisar Item" value={filter} setValue={setFilter} name="search Champ" style={{
+                    width:'60%',	
+                    alignSelf:'center',
+
+                }}/>
+                </div>    
+
                     <ListItemsDiv>
                         {
                             allItems.map((item, index) => (

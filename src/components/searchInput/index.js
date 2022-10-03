@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { ButtonLupa, DivInput, Input } from "./styleSerachInput"
 import Image from 'next/image'
 
-export default function SearchInput({inputStyle, style, value, setValue, name}) {
+export default function SearchInput({inputStyle, style, value, setValue, name, placeholder}) {
     const router = useRouter()
 
     const [nickName, setNickName] = useState('')
@@ -30,7 +30,7 @@ export default function SearchInput({inputStyle, style, value, setValue, name}) 
     }else{
         return(
             <DivInput style={style ? style : {}}>
-                <Input style={inputStyle} name={name} onChange={(evt) => setValue(evt.target.value)} placeholder="Digite seu usuário, invocador"></Input>
+                <Input style={inputStyle} name={name} onChange={(evt) => setValue(evt.target.value)} placeholder={placeholder}></Input>
                 <ButtonLupa name="search">
                     <Image alt="lupa" src="/svg/lupa.svg" width="32" height="32"></Image>
                 </ButtonLupa>

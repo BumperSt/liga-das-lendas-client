@@ -102,12 +102,17 @@ export default function ChampionsPage ()  {
                     <title>{champActive} Detalhes</title>
                     <meta name="description" content={"League Of Legends, Habilidades Campeões, Skills Campeões"} />
                 </Head>
-                <SearchInput value={serachChampion} setValue={setSearchChampion} name="search Champ" style={{
+                <div style={{
+                    display:'flex',
+                    flexDirection:'column',
+                    paddingTop:'2rem'
+                }}>
+                <SearchInput placeholder="Busque um campeão" value={serachChampion} setValue={setSearchChampion} name="search Champ" style={{
                     width:'60%',	
                     alignSelf:'center',
 
                 }}/>
-                {/* <InputSerach>
+                </div>                {/* <InputSerach>
                     <Input value={serachChampion} onChange={(evt) => setSearchChampion(evt.target.value)} placeholder="Busque um campeão"></Input>
                 </InputSerach> */}
                 <MaxHeigthDiv>     

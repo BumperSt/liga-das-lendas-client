@@ -4,6 +4,7 @@ import theme from '../../../styles/theme.json'
 export const DivInput = styled.div`
     position:relative;
     width: 100%;
+    
 `
 
 
