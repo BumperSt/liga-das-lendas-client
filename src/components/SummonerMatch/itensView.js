@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AlignItems, Container, ItemContainer } from "./styleItems";
 import matchHelper from '../../helpers/match'
 import itens_json from '../../../public/item.json'
+import Link from "next/link";
 const MatchItems = ({myParticipation}) => {
 
     const [arrayItems, setArrayItems] = useState([])
@@ -21,6 +22,7 @@ const MatchItems = ({myParticipation}) => {
             arrayItemsTemp.push(item)
         });
         setArrayItems(arrayItemsTemp)
+        console.log(arrayItemsTemp)
     }, [myParticipation])
 
     return(
@@ -34,7 +36,11 @@ const MatchItems = ({myParticipation}) => {
                         
                       
                         item?
-                        <ItemContainer key={index} title={item.name} src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/item/${item.image.full}`}/>
+                        <Link href={`/items?itemId=${item.image.full.replace('.png', '')}`}>
+                        <a>
+                            <ItemContainer key={index} title={item.name} src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/item/${item.image.full}`}/>
+                            </a>
+                        </Link>
                         :
                         <ItemContainer key={index} src="/undefinedItem.webp"/>
 
@@ -51,7 +57,11 @@ const MatchItems = ({myParticipation}) => {
                     arrayItems.slice(3, 6).map((item, index) => (
                 
                         item?
+                        <Link href={`/items?itemId=${item.image.full.replace('.png', '')}`}>
+                        <a>
                         <ItemContainer key={index} title={item.name}  src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/item/${item.image.full}`}/>
+                            </a>
+                        </Link>
                         :
                         <ItemContainer key={index}   src="/undefinedItem.webp"/>
 

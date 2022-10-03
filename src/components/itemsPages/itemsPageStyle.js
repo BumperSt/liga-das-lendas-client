@@ -38,7 +38,7 @@ export const ListItemContainer = styled.div`
     flex-direction:row;
     
     @media only screen and (max-width: 600px) {
-        flex-direction:column;
+        flex-direction:column-reverse;
     }
 `
 
@@ -185,7 +185,10 @@ export const ActiveItemInformations = styled.div`
     border-top: solid 1px ${theme.colors.douradoBrilhante};
     width: 100%;
     @media only screen and (max-width: 600px) {
-        width:100%;
+        width:90%;
+        gap:20px;
+        border:none;
+        
     }
     margin-top: 1rem;
     align-self: center;
@@ -204,11 +207,15 @@ export const AlignColum = styled.div`
 export const ActiveItemName = styled.h1`
     color:${theme.colors.douradoBrilhante};
     font-size: 2rem;
+    @media (max-width: 600px){
+        font-size:1.5rem;
+    }
     
 `
 
 export const ActiveItemPrice = styled.h1`
     font-size: 1.7rem;
+    align-self: center;
 `
 
 export const ItemDescriptionDiv = styled.div`
@@ -238,4 +245,13 @@ export const StyledLine = styled.hr`
     z-index:0;
     
     border: none;
+`
+
+
+export const FormatItemStyledInMobile = styled.div`
+    display:flex;
+    flex-direction: column;
+    @media only screen and (max-width: 600px) {
+        flex-direction: column-reverse;
+    }
 `

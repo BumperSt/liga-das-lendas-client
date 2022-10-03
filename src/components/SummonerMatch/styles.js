@@ -7,7 +7,6 @@ export const Container = styled.div`
     align-items: center;
     overflow-y: auto;
     max-height: 100vh;
-    width: 100%;
     align-self: center;
     align-self: flex-end;
     

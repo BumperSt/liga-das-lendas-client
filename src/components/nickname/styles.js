@@ -31,13 +31,15 @@ export const BackgroudImage = styled.div`
 
 export const RowAlign = styled.div`
     display:flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-inline: 2.5%;
     width: 100%;
     align-self: center;
     @media only screen and (max-width: 600px) {
         flex-direction:column;
         justify-content: center;
         width: 100%;
+        padding-inline: 0%;
         text-align: center;
 
     }

@@ -3,6 +3,7 @@ import react, { useEffect, useStatem, useContext, useState } from "react"
 import { useRouter } from "next/router";
 import SearchInput from '../../components/searchInput'
 import LanguageContext from '../../context/languageContext'
+import Link from "next/link";
 
 export default function Header({myUrl}){  
     const router = useRouter()
@@ -13,7 +14,7 @@ export default function Header({myUrl}){
         {'name' : 'Items', 'Url' : '/items', 'id' : 3},
     ]
     const { language, setLanguage } = useContext(LanguageContext)
-
+    const [lastSearch, setLastSearch] = useState('')
     useEffect(() => {
         console.log(language)
         if(language == null){
@@ -22,6 +23,10 @@ export default function Header({myUrl}){
 
         }
     }, [language])
+
+    useEffect(() => {
+        setLastSearch(window.localStorage.getItem('lastSearch'))
+    }, [])
     const languageJson = [
         "en_US",
         "cs_CZ",
@@ -84,13 +89,7 @@ export default function Header({myUrl}){
       }
     }, [lastScrollY]);
 
-    const ClickSummoner = () => {
-        let lastSearchValue = window.localStorage.getItem('lastSearch')
-        if(!lastSearchValue){
-            lastSearchValue = 'ToxicMachine'
-        }
-        router.push(`summoner/${lastSearchValue}`)
-    }
+
 
     return(
         <div style={{
@@ -104,16 +103,22 @@ export default function Header({myUrl}){
                     top: '0',
                 } : 
                 {
-                    top: '-8vh',
+                    top: '-100%',
                 }
             }>
                 <ButtonDiv>
                 {
                     buttons.map((button) => (
-                        <ButtonHeader  key={button.id}  onClick={() => router.push(button.Url)} active={myUrl == button.Url}>{button.name}</ButtonHeader>
+                        <Link href={button.Url}  key={button.id}>
+                            <a>
+
+                        <ButtonHeader  active={myUrl == button.Url}>{button.name}</ButtonHeader>
+                        </a>
+                        </Link>
                     ))
                 }   
-                <ButtonHeader active={myUrl.includes('/summoner')} onClick={() => ClickSummoner()}>Summoner</ButtonHeader>
+
+              
                 {/* <SelectLanguage onChange={(e) => changeLangugage(e)}>
                     {languageJson.map((languageHere, index) => (
                         <OptionLanguage key={index} selected={languageHere == language}>{languageHere}</OptionLanguage>

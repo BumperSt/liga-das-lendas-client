@@ -1,10 +1,11 @@
 import Image from "next/image"
-import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, ListItemByCategory,StyledLine,ActiveItemContainer, BuildsIntoDiv, BuildsIntoTitle, BuildIntosAlign, ItemFromDiv, ItemTreeContainer, AlignRow, ActiveItemInformations, ActiveItemName, ActiveItemPrice, AlignColum, ActiveItemDescption, ItemDescriptionDiv, TopBorder } from "./itemsPageStyle"
+import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, ListItemByCategory,StyledLine,ActiveItemContainer, BuildsIntoDiv, BuildsIntoTitle, BuildIntosAlign, ItemFromDiv, ItemTreeContainer, AlignRow, ActiveItemInformations, ActiveItemName, ActiveItemPrice, AlignColum, ActiveItemDescption, ItemDescriptionDiv, TopBorder, FormatItemStyledInMobile } from "./itemsPageStyle"
 import { useContext, useEffect, useState } from "react"
 import LoadingPage from '../../components/LoadingPage'
 import { Input } from "../searchInput/styleSerachInput"
 import axios from "axios"
 import LanguageContext from "../../context/languageContext"
+import { useRouter } from "next/router"
 
 const ListAllItems = () => {
 
@@ -16,10 +17,8 @@ const ListAllItems = () => {
     const [activeItemDescription, setActiveItemDescription] = useState(null)
     const [filter, setFilter] = useState('')
     const { language, setLanguage } = useContext(LanguageContext)
-
-
-
-
+    const router = useRouter()
+    const {itemId} = router.query
 
     
     useEffect(() => {
@@ -53,10 +52,23 @@ const ListAllItems = () => {
 
     useEffect(() => {
         if(allItems){
-            console.log(allItems)
-            setActiveItem(allItems[190])
+            
+            if(itemId){
+                console.log(itemId)
+
+                allItems.filter((item) => {
+                    if(item.image.full.replace('.png', '') == itemId){
+                        console.log(item)
+
+                        setActiveItem(item)
+                    }
+                })
+            }else{
+                setActiveItem(allItems[190])
+            }
+            
         }
-    },[allItems])
+    },[allItems, itemId])
 
     useEffect(() => {
         if(activeItem){
@@ -127,7 +139,7 @@ const ListAllItems = () => {
                                 <>
                                 {
                                     item.depth < 4 &&
-                                    <ItemDiv key={`${index} item`} active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
+                                    <ItemDiv key={`${index}`} active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
                                         <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>
                                         <ItemPrice>${item.gold.total}</ItemPrice>
                                     </ItemDiv>
@@ -141,7 +153,7 @@ const ListAllItems = () => {
                 </ListItemByCategory>
                 <ActiveItemContainer>
                     {
-
+                        activeItemInto != null && activeItemInto.length > 0 &&
                         <BuildsIntoDiv>
                             <BuildsIntoTitle>Pode construir:</BuildsIntoTitle>
                             <BuildIntosAlign>
@@ -181,63 +193,71 @@ const ListAllItems = () => {
                         activeItem &&
                         
                         <ItemTreeContainer>
-            
-                            <ItemDiv style={{alignSelf:'center'}}title={activeItem.name}>
-                                <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${activeItem.image.full}`} width="64" height="64"/>
-                                {
-                                    activeItem.from &&
-                                    activeItem.from.length > 1  &&
-                                    <StyledLine/>
-
-                                }
-
-                            </ItemDiv>
+                        <FormatItemStyledInMobile>
+                        <div style={{
+                            display:'flex',
+                            flexDirection:'column',
+                        }}>
+                        <ItemDiv style={{alignSelf:'center'}}title={activeItem.name}>
+                            <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${activeItem.image.full}`} width="64" height="64"/>
                             {
-                             activeItemFrom&&
-                             <AlignColum>
-                                {
-                                    activeItemFrom.length > 1 &&
-                                    <TopBorder/>   
+                                activeItem.from &&
+                                activeItem.from.length > 1  &&
+                                <StyledLine/>
 
-                                }
-                             <AlignRow center={activeItemFrom.length == 1}>
-                                {
-                                    activeItemFrom.map((item, index) => (
-                                        <ItemFromDiv key={`${index} from`}>
-                                                <ItemDiv style={{
-                                                        marginInline: '0px'
-                                                }} onClick={() => setActiveItem(item)} title={item.name}>
-                                                    <StyledLine/>
-                                                    <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>                                                     
-                                                </ItemDiv>
-                                                {
-                                                        item.from &&        
-                                                          
-                                                                getByIds(item.from).map((item, index) => (
-                                                                    <ItemDiv>
-                                                                        <StyledLine/>
-                                                                        <Image  src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>
-                                                                    </ItemDiv>
-                                                                ))                                                        
-                                                    }                
-                                                
-                                        </ItemFromDiv>
-                                    ))
-                                }
-                            </AlignRow>
-                            </AlignColum>
                             }
-                        
+
+                        </ItemDiv>
+                        {
+                            activeItemFrom&&
+                            <AlignColum>
+                            {
+                                activeItemFrom.length > 1 &&
+                                <TopBorder/>   
+
+                            }
+                            <AlignRow center={activeItemFrom.length == 1}>
+                            {
+                                activeItemFrom.map((item, index) => (
+                                    <ItemFromDiv key={`${index} from`}>
+                                            <ItemDiv style={{
+                                                    marginInline: '0px'
+                                            }} onClick={() => setActiveItem(item)} title={item.name}>
+                                                <StyledLine/>
+                                                <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>                                                     
+                                            </ItemDiv>
+                                            {
+                                                    item.from &&        
+                                                        
+                                                            getByIds(item.from).map((item, index) => (
+                                                                <ItemDiv>
+                                                                    <StyledLine/>
+                                                                    <Image  src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>
+                                                                </ItemDiv>
+                                                            ))                                                        
+                                                }                
+                                            
+                                    </ItemFromDiv>
+                                ))
+                            }
+                        </AlignRow>
+                        </AlignColum>
+                        }
+                        </div>
                         <ActiveItemInformations>
                                 <ItemDiv>
                                     <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${activeItem.image.full}` } width="64" height="64"/>
                                 </ItemDiv>
-                                <AlignColum>
+                                <div style={{
+                                    display:'flex',
+                                    flexDirection:'column',
+                                    textAlign:'center'
+                                }}>
                                     <ActiveItemName>{activeItem.name}</ActiveItemName>
                                     <ActiveItemPrice>${activeItem.gold.total}</ActiveItemPrice>
-                                </AlignColum>
+                                </div>
                             </ActiveItemInformations>
-                          
+                            </FormatItemStyledInMobile>
                             <ItemDescriptionDiv>
                                 {
                                     activeItemDescription?.map((str, index) => (

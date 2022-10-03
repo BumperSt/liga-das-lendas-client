@@ -324,14 +324,14 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                         }
                         
                         
-                        {
+                        {/* {
                             width >= 1280 && <>
                             {showMoreMobile == match.info.gameId ?
                             <UpArrow onClick={() => setShowMoreMobile(false)} size={25}/>
                             :
                             <DownArrow onClick={() => setShowMoreMobile(match.info.gameId ) } size={25}/>          }
                             </>        
-                        }
+                        } */}
                     </MatchContainer>
                 ))
         }

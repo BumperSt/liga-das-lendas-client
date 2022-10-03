@@ -15,6 +15,7 @@ import champ from "../../helpers/champ";
 import { createRef } from "react/cjs/react.production.min";
 import axios from "axios";
 import LanguageContext from '../../context/languageContext'
+import SearchInput from "../../components/searchInput";
 
 
 export default function ChampionsPage ()  {
@@ -54,7 +55,7 @@ export default function ChampionsPage ()  {
         }else{
             value = 115
         }
-        if(serachChampion != '' && championsArray){
+        if(serachChampion != '' && championsArray ){
             const waitSearch = setTimeout(() => {
                 Object.keys(championsArray).map(champIndex => {
                     for (let index = 1; index <= serachChampion.length; index++) {
@@ -101,9 +102,14 @@ export default function ChampionsPage ()  {
                     <title>{champActive} Detalhes</title>
                     <meta name="description" content={"League Of Legends, Habilidades Campeões, Skills Campeões"} />
                 </Head>
-                <InputSerach>
+                <SearchInput value={serachChampion} setValue={setSearchChampion} name="search Champ" style={{
+                    width:'60%',	
+                    alignSelf:'center',
+
+                }}/>
+                {/* <InputSerach>
                     <Input value={serachChampion} onChange={(evt) => setSearchChampion(evt.target.value)} placeholder="Busque um campeão"></Input>
-                </InputSerach>
+                </InputSerach> */}
                 <MaxHeigthDiv>     
                     <ScrollDrag innerRef={scrollDragRef} horizontal={true} vertical={false} >
                         <ScrollSection className="tiles" onFocus={enableKeyboardCursorToScroll} ref={scrollRef}>
