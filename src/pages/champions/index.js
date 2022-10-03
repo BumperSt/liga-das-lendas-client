@@ -5,7 +5,6 @@ import DetailsChampions from "../../components/champions/DetailsChampions";
 import { BackgroudImage } from "../../components/nickname/styles";
 import LoadingPage from '../../components/LoadingPage'
 import { Input } from "../../components/searchInput/styleSerachInput";
-
 import { AlignSkinCollum, AlignSkinsRow, CollumAlign, HabilitysTitle, MaxHeigthDiv, SkinsDiv } from "../../components/champions/DetailsChampionsStyle";
 import Head from "next/head";
 import BottomBar from "../../components/bottomBar";
@@ -162,7 +161,6 @@ export default function ChampionsPage ()  {
 
                 </MaxHeigthDiv>
 
-                <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}/>
             </Container>
         )
     }else{

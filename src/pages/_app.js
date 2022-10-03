@@ -11,13 +11,16 @@ import Analytics from '../components/analytics/analystics'
 import Head from 'next/head'
 import { Html } from 'next/document'
 import NotFoundPage from '../components/NotFound/notFound'
+import LanguageContext from '../context/languageContext'
 
 
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter()
   const [user, setUser] = useState(null)
+  const [language, setLanguage] = useState('pt_BR')
   const userContextValue = {user, setUser}
+  const languageContextValue = {language, setLanguage}
   const { nickName } = router.query
   const [error, setError] = useState(false)
   const [userPage ,setUserPage] = useState(false)
@@ -40,10 +43,8 @@ function MyApp({ Component, pageProps }) {
     }else{
       setUserPage(false)
     }
-
     setError(false)
     if (router.asPath !== router.route) {
-      
       setUser(null)
       window.localStorage.setItem('lastSearch', nickName)
       if(nickName){
@@ -83,34 +84,37 @@ function MyApp({ Component, pageProps }) {
 
 
   return (
-    
-      <UserContext.Provider value={userContextValue}>
-        {/* <head>
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147" crossorigin="anonymous"></script>        
-        </head> */}
-        <Head>
-    
-          <link rel="icon" href="/logo.ico"/>
-          <meta name="keywords" content="LOL Campeões, Repetição, Resultados, Gráficos, lol mundial, Calculadora, lol brasil, LolKing, LOLNexus"/>
-          <meta name="description" content="Perfil LoL - Verifique seus KDA, Resultados dos jogos, Estatísticas, Campeões, Perfil e mais. Busca seu nome de invocadores agora!" />
-        </Head>
-        <Header myUrl={myUrl}/>
-        {
-    
-          !error ?
-            userPage?
-              user ?
-              <Component {...pageProps} />
-              :
-              <PageLoading/>
-            :
-            <Component {...pageProps} />
+        <UserContext.Provider value={userContextValue}>
+                <LanguageContext.Provider value={languageContextValue}>
 
-          :
-          <NotFoundPage/>
-        }
-        <Analytics/>
-      </UserContext.Provider>
+          {/* <head>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7080721819896147" crossorigin="anonymous"></script>        
+          </head> */}
+          <Head>
+      
+            <link rel="icon" href="/logo.ico"/>
+            <meta name="keywords" content="LOL Campeões, Repetição, Resultados, Gráficos, lol mundial, Calculadora, lol brasil, LolKing, LOLNexus"/>
+            <meta name="description" content="Perfil LoL - Verifique seus KDA, Resultados dos jogos, Estatísticas, Campeões, Perfil e mais. Busca seu nome de invocadores agora!" />
+          </Head>
+          <Header myUrl={myUrl}/>
+          {
+      
+            !error ?
+              userPage?
+                user ?
+                <Component {...pageProps} />
+                :
+                <PageLoading/>
+              :
+              <Component {...pageProps} />
+
+            :
+            <NotFoundPage/>
+          }
+          <Analytics/>
+          </LanguageContext.Provider>
+
+        </UserContext.Provider>
     
  )
 }

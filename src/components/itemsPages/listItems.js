@@ -1,35 +1,54 @@
 import Image from "next/image"
 import { ItemDiv, ItemPrice, ListItemContainer, ListItemName, ListItemsDiv, ListItemByCategory,StyledLine,ActiveItemContainer, BuildsIntoDiv, BuildsIntoTitle, BuildIntosAlign, ItemFromDiv, ItemTreeContainer, AlignRow, ActiveItemInformations, ActiveItemName, ActiveItemPrice, AlignColum, ActiveItemDescption, ItemDescriptionDiv, TopBorder } from "./itemsPageStyle"
-import items from '../../helpers/items'
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import LoadingPage from '../../components/LoadingPage'
 import { Input } from "../searchInput/styleSerachInput"
+import axios from "axios"
+import LanguageContext from "../../context/languageContext"
 
 const ListAllItems = () => {
 
     const [allItems, setAllItems] = useState(null)
+    const [allItemsJson, setAllItemsJson] = useState(null)
     const [activeItem, setActiveItem] = useState(null)
     const [activeItemInto, setActiveItemInto] = useState(null)
     const [activeItemFrom, setActiveItemFrom] = useState(null)
     const [activeItemDescription, setActiveItemDescription] = useState(null)
     const [filter, setFilter] = useState('')
+    const { language, setLanguage } = useContext(LanguageContext)
 
 
+
+
+
+    
     useEffect(() => {
-        let array = items.getAll()
-        array.sort(function (a, b) {
-            console.log(a.gold.total)
-            if (a.gold.total > b.gold.total) {
-                return 1;
+        axios.get(`https://ddragon.leagueoflegends.com/cdn/12.12.1/data/${language}/item.json`).then((data) => {
+            const objectToArray = (objects) => {
+                let array = Object.keys(objects).map((key) => objects[key])
+                return array
             }
-            if (a.gold.total < b.gold.total) {
-                return -1;
-            }
-            // a must be equal to b
-            return 0;
-        })
+            setAllItemsJson(data.data)
+            let array = objectToArray(data.data.data)
+            array.sort(function (a, b) {
+                if (a.gold.total > b.gold.total) {
+                    return 1;
+                }
+                if (a.gold.total < b.gold.total) {
+                    return -1;
+                }
+                // a must be equal to b
+                return 0;
+            })
+            setAllItems(array)
 
-        setAllItems(array)
+        }).catch((err) => {
+            console.log(err)
+        })
+        
+        
+
+        
     },[])
 
     useEffect(() => {
@@ -41,6 +60,7 @@ const ListAllItems = () => {
 
     useEffect(() => {
         if(activeItem){
+            console.log(activeItem)
             setActiveItemInto(null)
             setActiveItemFrom(null)
             let atributesStr = []
@@ -58,11 +78,11 @@ const ListAllItems = () => {
             console.log(atributesStr)
 
             if(activeItem.into){
-                setActiveItemInto( items.getByIds(activeItem.into))
-                
+                setActiveItemInto(getByIds(activeItem.into))                        
             }
             if(activeItem.from){
-                setActiveItemFrom(items.getByIds(activeItem.from))
+              
+                setActiveItemFrom(getByIds(activeItem.from))
             }            
         }
     }, [activeItem])
@@ -82,6 +102,14 @@ const ListAllItems = () => {
         }
     }, [filter])
 
+    const getByIds = (itemsIds) => {
+        let tempArray = []
+        itemsIds.map((id) => {
+            tempArray.push(allItemsJson.data[id])
+        })
+        return tempArray
+    }
+
 
 
     if(allItems){
@@ -90,31 +118,60 @@ const ListAllItems = () => {
                 <ListItemByCategory>
                     <ListItemName>Todos os items</ListItemName>
                     <Input value={filter}  name="itemSerch" onChange={(e) => setFilter(e.target.value)} style={{
-                        height:'1rem'
+                        height:'2rem',
+                        marginBlock:'1rem'
                     }} placeholder="Pesquisar Item"/>
                     <ListItemsDiv>
                         {
                             allItems.map((item, index) => (
-                                <ItemDiv key={`${index} item`} active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
-                                    <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                    <ItemPrice>${item.gold.total}</ItemPrice>
-                                </ItemDiv>
+                                <>
+                                {
+                                    item.depth < 4 &&
+                                    <ItemDiv key={`${index} item`} active={activeItem == item} onClick={() => setActiveItem(item)} title={item.name}>
+                                        <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>
+                                        <ItemPrice>${item.gold.total}</ItemPrice>
+                                    </ItemDiv>
+                                }
+                                </>
+                                
+                               
                             ))
                         }
                     </ListItemsDiv>
                 </ListItemByCategory>
                 <ActiveItemContainer>
                     {
-                        activeItemInto &&
+
                         <BuildsIntoDiv>
                             <BuildsIntoTitle>Pode construir:</BuildsIntoTitle>
                             <BuildIntosAlign>
                                 {
+                                    activeItemInto != null && activeItemInto.length > 0 ?
                                     activeItemInto.map((item, index) => (
-                                        <ItemDiv key={`${index} active`} onClick={() => setActiveItem(item)} title={item.name}>
-                                            <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                        </ItemDiv>
+                                        <>
+                                        {
+                                            item.depth < 4 ?
+                                            <ItemDiv key={`${index} active`} onClick={() => setActiveItem(item)} title={item.name}>
+                                                <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>
+                                            </ItemDiv>
+                                            :
+                                            <ItemDiv style={{
+                                                cursor: "default"
+                                            }} key={`${index} active`}  title={'Sem item'}>
+                                                <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/7050.png`} width="64" height="64"/>
+                                            </ItemDiv>
+                                        }
+                                        </>
+
                                     ))
+                                    :
+                             
+                                        <ItemDiv style={{
+                                            cursor: "default"
+                                        }}  title={'Sem item'}>
+                                            <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/7050.png`} width="64" height="64"/>
+                                        </ItemDiv>
+                            
                                 }
     
                             </BuildIntosAlign>
@@ -122,9 +179,11 @@ const ListAllItems = () => {
                     }            
                     {
                         activeItem &&
+                        
                         <ItemTreeContainer>
+            
                             <ItemDiv style={{alignSelf:'center'}}title={activeItem.name}>
-                                <Image src={`/item/${activeItem.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${activeItem.image.full}`} width="64" height="64"/>
                                 {
                                     activeItem.from &&
                                     activeItem.from.length > 1  &&
@@ -149,42 +208,19 @@ const ListAllItems = () => {
                                                         marginInline: '0px'
                                                 }} onClick={() => setActiveItem(item)} title={item.name}>
                                                     <StyledLine/>
-                                                    <Image src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>                                                     
+                                                    <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>                                                     
                                                 </ItemDiv>
                                                 {
                                                         item.from &&        
                                                           
-                                                                items.getByIds(item.from).map((item, index) => (
+                                                                getByIds(item.from).map((item, index) => (
                                                                     <ItemDiv>
                                                                         <StyledLine/>
-                                                                        <Image  src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                                                        <Image  src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${item.image.full}`} width="64" height="64"/>
                                                                     </ItemDiv>
                                                                 ))                                                        
                                                     }                
-                                                    {/* {
-                                                        item.from && 
-                                                            item.from.length > 1 &&
-                                                            <>
-                                                                <StyledLine style={{
-                                                                    marginLeft:'0',
-                                                                    
-
-                                                                }}/>
-                                                                <TopBorder/>   
-                                                                <AlignRow >
-                                                                    {
-                                                                        items.getByIds(item.from).map((item, index) => (
-                                                                            <ItemDiv style={{
-                                                                                marginInline: '10px'
-                                                                            }} onClick={() => setActiveItem(item)} title={item.name}>
-                                                                                <StyledLine/>
-                                                                                <Image  src={`/item/${item.image.full.replace('png', 'webp')}`} width="64" height="64"/>
-                                                                            </ItemDiv>
-                                                                        ))                                                                 
-                                                                    }
-                                                                </AlignRow>
-                                                            </>                                                            
-                                                    }                                   */}
+                                                
                                         </ItemFromDiv>
                                     ))
                                 }
@@ -192,16 +228,16 @@ const ListAllItems = () => {
                             </AlignColum>
                             }
                         
-
-                            <ActiveItemInformations>
+                        <ActiveItemInformations>
                                 <ItemDiv>
-                                    <Image src={`/item/${activeItem.image.full.replace('png', 'webp')}`} width="64" height="64"/>
+                                    <Image src={`https://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/${activeItem.image.full}` } width="64" height="64"/>
                                 </ItemDiv>
                                 <AlignColum>
                                     <ActiveItemName>{activeItem.name}</ActiveItemName>
                                     <ActiveItemPrice>${activeItem.gold.total}</ActiveItemPrice>
                                 </AlignColum>
                             </ActiveItemInformations>
+                          
                             <ItemDescriptionDiv>
                                 {
                                     activeItemDescription?.map((str, index) => (

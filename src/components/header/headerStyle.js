@@ -24,6 +24,7 @@ export const Container = styled.div`
 export const ButtonDiv = styled.div`
     display:flex;
     justify-self: flex-start;
+    align-items: center;
     @media only screen and (max-width: 600px) {
         justify-content: center;
 
@@ -47,6 +48,10 @@ export const ButtonHeader = styled.button`
         color:${theme.colors.douradoBrilhante};
     `
     }
+    :hover{
+        color:${theme.colors.douradoBrilhante};
+
+    }
 `
 
 export const InputSerchDiv = styled.div`
@@ -59,5 +64,23 @@ export const InputSerchDiv = styled.div`
         width: 80%;
         margin-top: 1rem;
 
+    }
+`
+
+export const SelectLanguage = styled.select`
+    background-color: black;
+    color:${theme.colors.douradoBrilhante};
+    border-color:${theme.colors.douradoBrilhante};
+    padding-inline: .5rem;
+    font-size: .8rem;
+    height: 1.5rem;
+
+
+`
+
+export const OptionLanguage = styled.option`
+    color:white;
+    :focus{
+        border-color:${theme.colors.douradoBrilhante};
     }
 `

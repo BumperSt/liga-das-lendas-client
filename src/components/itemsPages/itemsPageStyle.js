@@ -83,8 +83,10 @@ export const ItemDiv = styled.div`
         z-index:99;
     }
     margin-inline:.8rem;
+
     :hover{
         cursor:pointer;
+
     }
     ${({active}) => active && `
         span{
@@ -129,7 +131,7 @@ export const BuildIntosAlign = styled.div`
     display:flex;
     flex-direction:row;
     overflow:auto;
-    padding-block:.5rem;
+    padding-block:1rem;
     ::-webkit-scrollbar {
            height:10px;
     }
@@ -140,6 +142,7 @@ export const ItemTreeContainer = styled.div`
     flex-direction:column;
     justify-content:center;
     margin-top: 1rem;
+
 
 `
 
@@ -179,11 +182,12 @@ export const ActiveItemInformations = styled.div`
     flex-direction:row;
     padding: 1rem;
     align-items: center;
-    border-bottom: solid 1px ${theme.colors.douradoBrilhante};
-    width: 80%;
+    border-top: solid 1px ${theme.colors.douradoBrilhante};
+    width: 100%;
     @media only screen and (max-width: 600px) {
         width:100%;
     }
+    margin-top: 1rem;
     align-self: center;
 `
 
@@ -199,6 +203,8 @@ export const AlignColum = styled.div`
 
 export const ActiveItemName = styled.h1`
     color:${theme.colors.douradoBrilhante};
+    font-size: 2rem;
+    
 `
 
 export const ActiveItemPrice = styled.h1`
@@ -210,7 +216,7 @@ export const ItemDescriptionDiv = styled.div`
     flex-direction: column;
     max-height:100%;
     overflow:auto;
-    margin-top: 5rem;
+    margin-top: 1rem;
 `
 
 export const ActiveItemDescption = styled.p`

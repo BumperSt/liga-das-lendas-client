@@ -1,18 +1,10 @@
+import axios from 'axios'
 import items_json from '../../public/item.json'
-
-const objectToArray = (objects) => {
-    let array = Object.keys(objects).map((key) => objects[key])
-
-    return array
-}
-
-let allItemsArray = objectToArray(items_json.data)
-
 
 
 export default {
     getAll: () => {
-        return allItemsArray
+        return getItens()
     },
     getByIds: (itemsIds) => {
         let tempArray = []
