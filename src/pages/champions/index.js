@@ -97,6 +97,7 @@ export default function ChampionsPage ()  {
 
     if(championsArray){
         return(
+            <>
             <Container>
                 <Head>
                     <title>{champActive} Detalhes</title>
@@ -177,9 +178,11 @@ export default function ChampionsPage ()  {
                     }
 
                 </MaxHeigthDiv>
-                <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
 
             </Container>
+            <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
+
+            </>
         )
     }else{
         return(
