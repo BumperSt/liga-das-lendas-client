@@ -34,7 +34,7 @@ const SelectSkinInPage = ({topChamp, setChampSkin, champSkin}) => {
                             <ChampionsCard  hover={true} onClick={() => {
                                 setChampSkin(skin.num)
                             }}>
-                                <Image  width="310" height="560" src={`/imagens/champions/loading/${topChamp.name}_${skin.num}.webp`}></Image>
+                                <Image  width="310" height="560" src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${topChamp.name}_${skin.num}.jpg`}></Image>
                             </ChampionsCard>
                             <ChampName style={{
                                 marginTop:'1rem',

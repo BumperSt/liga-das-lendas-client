@@ -268,13 +268,13 @@ export default function SummonerMatch({onScrollSummonerPage , setWinsAndLostsVal
                                     minWidth:'50%'
                                 }}center={true}>
                                     <CharNameAndLevel>Nivel {match.myParticipation.champLevel}</CharNameAndLevel>
-                                    <ChampIcon title={champJson.data[match.myParticipation.championName]?.title} src={`/imagens/champions/tiles/${match.myParticipation.championName}_0.webp`}/>
+                                    <ChampIcon title={champJson.data[match.myParticipation.championName]?.title} src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/${match.myParticipation.championName}.png`}/>
                                     <CharNameAndLevel>{match.myParticipation.championName}</CharNameAndLevel>
                                 </ColumMatchContainer>
                                 <ColumMatchContainer center={true}  marginInline={'0px'}>
                                     {   
                                         match.spells.map((spell) => (
-                                            <SpellIncon key={spell.id} title={spell.name} src={`/spell/${spell.id}.webp`}/>
+                                            <SpellIncon key={spell.id} title={spell.name} src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/spell/${spell.id}.png`}/>
 
                                         ))
                                     }

@@ -45,7 +45,7 @@ export default function Summoner() {
             .then(({data}) => {
                 let topChamp = champHelper.findChampById(data[0].championId)
                 setTopChamp(topChamp)
-                setBackgroudUrl(`/imagens/champions/centered/${topChamp.id}_${champSkin}.webp`)
+                setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${topChamp.id}_${champSkin}.jpg`)
                 setChampsMaestry(data)
             })
             .catch((error) => {
@@ -58,10 +58,8 @@ export default function Summoner() {
 
     useEffect(() => {
         if(topChamp){
-            setBackgroudUrl(`/imagens/champions/centered/${topChamp.id}_${champSkin}.webp`)
-
+            setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${topChamp.id}_${champSkin}.jpg`)
         }
-
     }, [champSkin])
 
     const UpdateUser = () => {

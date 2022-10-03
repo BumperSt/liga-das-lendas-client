@@ -1,4 +1,4 @@
-import react, { useEffect, useRef, useState } from "react";
+import react, { useContext, useEffect, useRef, useState } from "react";
 import { AlignColum, AlignSkinColum, ChampCardDiv, ChampionsCard, ChampName, Container, HorizonScroll, InputSerach, ScrollDrag, ScrollSection } from "../../components/champions/stylePageChampions";
 import champions_json from '../../../public/championFull.json'
 import DetailsChampions from "../../components/champions/DetailsChampions";
@@ -13,6 +13,8 @@ import useWindowDimensions from "../../helpers/screenSize";
 import { useSpring, animated } from '@react-spring/web'
 import champ from "../../helpers/champ";
 import { createRef } from "react/cjs/react.production.min";
+import axios from "axios";
+import LanguageContext from '../../context/languageContext'
 
 
 export default function ChampionsPage ()  {
@@ -22,6 +24,7 @@ export default function ChampionsPage ()  {
     const [backgroudUrl, setBackgroudUrl] = useState('')
     const [champSkin, setChampSkin] = useState(0)
     const [serachChampion, setSearchChampion] = useState('')
+    const { language } = useContext(LanguageContext)
     const { height, width } = useWindowDimensions();
     
     const objectToArray = (objects) => {
@@ -31,7 +34,7 @@ export default function ChampionsPage ()  {
 
     const setActive = (champ) => {
         setChampActive(champ.id)
-        setBackgroudUrl(`/imagens/champions/centered/${champ.id}_${champSkin}.webp`)
+        setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champ.id}_${champSkin}.jpg`)
         setChampSkin(0)
     }
     
@@ -70,12 +73,15 @@ export default function ChampionsPage ()  {
     }, [serachChampion])
     
     useEffect(() => {
-        setBackgroudUrl(`/imagens/champions/centered/${champActive}_${champSkin}.webp`)
+        setBackgroudUrl(`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champActive}_${champSkin}.jpg`)
     }, [champSkin])
 
     useEffect(() => {
-        setChampionsArray(objectToArray(champions_json.data))
-    }, [])
+        axios.get(`https://ddragon.leagueoflegends.com/cdn/12.18.1/data/${language}/champion.json`).then((response) => {
+            setChampionsArray(objectToArray(response.data.data))
+        })
+    }, [language])
+
 
     const [{ x, y }, api] = useSpring(() => ({ x: 0, y: 0 }))
 
@@ -109,7 +115,7 @@ export default function ChampionsPage ()  {
                                             setActive(champ) 
                                             setSearchChampion('')}
                                         }>
-                                            <Image priority={champActive == champ.id} layout="fill" src={`/imagens/champions/loading/${champ.id}_0.webp`}></Image>
+                                            <Image priority={champActive == champ.id} layout="fill" src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champ.id}_0.jpg`}></Image>
                                         </ChampionsCard>
                                         <ChampName active={champActive == champ.id}>{champ.id}</ChampName>
                                     </ChampCardDiv>
@@ -135,12 +141,12 @@ export default function ChampionsPage ()  {
 
                                     {
                                     
-                                        champ.findChampByName(champActive).skins.map((skin) => (
+                                        champ.findChampByName(champActive).skins?.map((skin) => (
                                             <AlignSkinColum  title={skin.name} active={skin.num == champSkin}>
                                                 <ChampionsCard  hover={true} onClick={() => {
                                                     setChampSkin(skin.num)
                                                 }}>
-                                                    <Image  width="310" height="560" src={`/imagens/champions/loading/${champActive}_${skin.num}.webp`}></Image>
+                                                    <Image  width="310" height="560" src={`https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champActive}_${skin.num}.jpg`}></Image>
                                                 </ChampionsCard>
                                                 <ChampName style={{
                                                     marginTop:'1rem',
@@ -160,6 +166,7 @@ export default function ChampionsPage ()  {
                     }
 
                 </MaxHeigthDiv>
+                <BackgroudImage style={{ backgroundImage: `url(${backgroudUrl})` }}></BackgroudImage>
 
             </Container>
         )

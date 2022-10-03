@@ -23,7 +23,7 @@ export default function DetailsChampions({champActive}) {
 
     
     const GetChampInfo = () => {
-        axios.get(`/jsons/${champActive}.json`).then((response) => {
+        axios.get(`https://ddragon.leagueoflegends.com/cdn/12.18.1/data/en_US/champion/${champActive}.json`).then((response) => {
             let champInfo = response.data.data[champActive]
             let champKey = champInfo.key
 
@@ -82,11 +82,11 @@ export default function DetailsChampions({champActive}) {
                                 <HabilitysTitle>HABILIDADES</HabilitysTitle>
 
                                 <SpellDiv>
-                                    <SpellImg active={spellSelected?.passive} onClick={() => setSpellSelected({...champInfo.passive, passive:true})} src={`/passive/${champInfo.passive.image.full.replace('png', 'webp')}`}/>
+                                    <SpellImg active={spellSelected?.passive} onClick={() => setSpellSelected({...champInfo.passive, passive:true})} src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/passive/${champInfo.passive.image.full}`}/>
 
                                     {
                                     champInfo.spells.map((spell) => (
-                                        <SpellImg key={spell.id} active={spellSelected == spell} onClick={() => setSpellSelected(spell)} src={`/spell/${spell.id}.webp`}/>
+                                        <SpellImg key={spell.id} active={spellSelected == spell} onClick={() => setSpellSelected(spell)} src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/spell/${spell.id}.png`}/>
                                     ))
                                     
                                     }

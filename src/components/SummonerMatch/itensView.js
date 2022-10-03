@@ -34,7 +34,7 @@ const MatchItems = ({myParticipation}) => {
                         
                       
                         item?
-                        <ItemContainer key={index} title={item.name} src={`/item/${item.image.full.replace("png", "webp")}`}/>
+                        <ItemContainer key={index} title={item.name} src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/item/${item.image.full}`}/>
                         :
                         <ItemContainer key={index} src="/undefinedItem.webp"/>
 
@@ -42,7 +42,7 @@ const MatchItems = ({myParticipation}) => {
                        
                     ))
                 }
-                <ItemContainer  title={arrayItems[6].name} src={`/item/${arrayItems[6].image.full.replace("png", "webp")}`}/>
+                <ItemContainer  title={arrayItems[6].name} src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/item/${arrayItems[6].image.full}`}/>
 
             
             </AlignItems>
@@ -51,7 +51,7 @@ const MatchItems = ({myParticipation}) => {
                     arrayItems.slice(3, 6).map((item, index) => (
                 
                         item?
-                        <ItemContainer key={index} title={item.name}  src={`/item/${item.image.full.replace("png", "webp")}`}/>
+                        <ItemContainer key={index} title={item.name}  src={`https://ddragon.leagueoflegends.com/cdn/12.18.1/img/item/${item.image.full}`}/>
                         :
                         <ItemContainer key={index}   src="/undefinedItem.webp"/>
 
