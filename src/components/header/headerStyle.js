@@ -4,7 +4,10 @@ import theme from '../../../styles/theme.json'
 export const Container = styled.div`
     width: 100%;
     display:flex;
-    position: sticky;
+    position: fixed;
+    z-index: 100;
+    transition: top 0.3s;
+    top:0;
     flex-direction:row;
     background-color:rgba(0,0,0,0.8);
     border-bottom: 1px solid ${theme.colors.douradoBrilhante};

@@ -15,15 +15,11 @@ export default function HomePage({champs}) {
     const [activeChamp, setActiveChamp] = useState(null)
     const [activeChampObject, setActiveChampObject] = useState(null)
     const [champSkin, setChampSkin] = useState(0)
-    const [champRotation, setChampRotation] = useState([])
 
     useEffect(() => {
         setActiveChamp(champs[0].id)
 
-        axios.get(`https://ddragon.leagueoflegends.com/cdn/12.18.1/data/${language}/champion.json`).then((response) => {
-            setChampRotation(response.data)
 
-            })
     }, [])
 
     useEffect(() => {
@@ -92,7 +88,7 @@ export async function getStaticProps(context) {
 
     let {data} = await champApi.getChampsRotation()
     
-    let champs = champHelper.filterRotationChamps(data.freeChampionIds, champRotation)
+    let champs = champHelper.filterRotationChamps(data.freeChampionIds)
     
     return {
         revalidate:3600*24,

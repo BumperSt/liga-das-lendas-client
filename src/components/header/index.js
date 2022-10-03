@@ -1,5 +1,5 @@
 import { ButtonDiv, ButtonHeader, Container, InputSerchDiv, OptionLanguage, SelectLanguage } from "./headerStyle";
-import react, { useEffect, useStatem, useContext } from "react"
+import react, { useEffect, useStatem, useContext, useState } from "react"
 import { useRouter } from "next/router";
 import SearchInput from '../../components/searchInput'
 import LanguageContext from '../../context/languageContext'
@@ -57,6 +57,33 @@ export default function Header({myUrl}){
         window.localStorage.setItem('selectLanguage', e.target.value)
     }
 
+    const [show, setShow] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+  
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') { 
+        if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+          setShow(false); 
+        } else { // if scroll up show the navbar
+          setShow(true);  
+        }
+  
+        // remember current page location to use in the next move
+        setLastScrollY(window.scrollY); 
+      }
+    };
+  
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        window.addEventListener('scroll', controlNavbar);
+  
+        // cleanup function
+        return () => {
+          window.removeEventListener('scroll', controlNavbar);
+        };
+      }
+    }, [lastScrollY]);
+
     const ClickSummoner = () => {
         let lastSearchValue = window.localStorage.getItem('lastSearch')
         if(!lastSearchValue){
@@ -67,9 +94,19 @@ export default function Header({myUrl}){
 
     return(
         <div style={{
-            backgroundColor: 'black'
-        }}>
-            <Container>
+            backgroundColor: 'black',
+            position:'relative',
+            height: '8vh',
+            transition: 'all 0.5s ease-in-out',
+        } }>
+            <Container style={
+                show ? {
+                    top: '0',
+                } : 
+                {
+                    top: '-8vh',
+                }
+            }>
                 <ButtonDiv>
                 {
                     buttons.map((button) => (

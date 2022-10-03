@@ -97,6 +97,7 @@ function MyApp({ Component, pageProps }) {
             <meta name="description" content="Perfil LoL - Verifique seus KDA, Resultados dos jogos, Estatísticas, Campeões, Perfil e mais. Busca seu nome de invocadores agora!" />
           </Head>
           <Header myUrl={myUrl}/>
+          <div >
           {
       
             !error ?
@@ -111,6 +112,7 @@ function MyApp({ Component, pageProps }) {
             :
             <NotFoundPage/>
           }
+          </div>
           <Analytics/>
           </LanguageContext.Provider>
 
