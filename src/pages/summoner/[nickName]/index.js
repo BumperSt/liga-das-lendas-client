@@ -36,7 +36,7 @@ export default function Summoner() {
     const [topChamp, setTopChamp] = useState(null)
     useEffect(() => {
         if(user){
-            setProfileIcon("/imagens/profileicon/" + user.profileIconId + ".webp")
+            setProfileIcon(`https://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/${user.profileIconId}.png`)            
             setNickInPage(user.name)
             setLevel(user.summonerLevel)
             champApi.getChampsMaestry({
@@ -120,8 +120,8 @@ export default function Summoner() {
                     <title>{nickInPage} Status</title>
                     <meta name="description" content={`${nickInPage}/ / Lv.${level}`} />
                 </Head>
-                <Top >
-
+                <Top >                    
+                                
                 <ProfileIcon src={profileIcon}></ProfileIcon>
                 
                 <SummonerExpBorder level={level}></SummonerExpBorder>

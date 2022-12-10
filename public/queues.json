@@ -15,7 +15,6 @@
         "queueId": 4,
         "map": "Summoner's Rift",
         "description": "5v5 Ranked Solo games",
-        "name": "Ranqueada Solo/Duo",
         "notes": "Deprecated in favor of queueId 420"
     },
     {
@@ -196,8 +195,6 @@
         "queueId": 100,
         "map": "Butcher's Bridge",
         "description": "5v5 ARAM games",
-        "name": "ARAM",
-
         "notes": null
     },
     {
@@ -270,16 +267,12 @@
         "queueId": 440,
         "map": "Summoner's Rift",
         "description": "5v5 Ranked Flex games",
-        "name": "Ranqueada Flexivel",
-
         "notes": null
     },
     {
         "queueId": 450,
         "map": "Howling Abyss",
         "description": "5v5 ARAM games",
-        "name": "ARAM",
-
         "notes": null
     },
     {
@@ -292,8 +285,6 @@
         "queueId": 470,
         "map": "Twisted Treeline",
         "description": "3v3 Ranked Flex games",
-        "name": "Ranqueada Flexivel",
-
         "notes": "Deprecated in patch 9.23"
     },
     {
@@ -353,7 +344,7 @@
     {
         "queueId": 900,
         "map": "Summoner's Rift",
-        "description": "URF games",
+        "description": "ARURF games",
         "notes": null
     },
     {
@@ -486,6 +477,12 @@
         "queueId": 1400,
         "map": "Summoner's Rift",
         "description": "Ultimate Spellbook games",
+        "notes": null
+    },
+    {
+        "queueId": 1900,
+        "map": "Summoner's Rift",
+        "description": "Pick URF games",
         "notes": null
     },
     {
