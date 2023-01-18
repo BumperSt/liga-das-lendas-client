@@ -53,11 +53,13 @@ export const MatchContainer = styled.div`
     justify-content: space-around;
     margin-block:.5rem;
     padding:.5rem;
-    min-width: 65%;
+    min-width: 100%;
+    max-width: 100%;
+
     transition: all .3s ;
     position: relative;
     @media only screen and (min-width: 1280px) {
-        border-right: 3rem solid ${props => props.win ? 'rgb(99 163 99 / 50%)' :'rgb(126 18 18 / 50%)'};
+        border-right: 2rem solid ${props => props.win ? 'rgb(99 163 99 / 50%)' :'rgb(126 18 18 / 50%)'};
     }
     @media only screen and (max-width: 600px) {
         flex-direction: column;
